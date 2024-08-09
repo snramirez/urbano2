@@ -1,124 +1,307 @@
 const data = [
-    {
-        nombre: "SERVICIO DE MANTENIMIENTO INTEGRAL Y RESIEMBRA DE CÉSPED DEL CAMPO DE GOLF JUAN BAUTISTA SEGURA",
-        num_proceso: "9611-0442-LPU21",
-        expediente: "EX-2021-10378435- -GCABA-DGTALAVJG",
-        area: "SEC. DEPORTES",
-        modalidad: "SIN MODALIDAD",
-        tipo_contrato: "LICITACION PUBLICA",
-        estado: "Ejecucion",
-        plazo: "32 meses",
-        inicio: "2021-05-29T00:00:00.000+00:00",
-        vencimiento: "2021-05-29T00:00:00.000+00:00",
-        monto: 29641104.00,
-        pliego_ingreso: "",
-        pliego_egreso: "",
-        salida_pg1: "",
-        vuelta_pg2: "",
-        fecha_llamado: "2021-12-04T00:00:00.000+00:00",
-        apertura_ofertas: "DI-2021-15-DGID",
-        fecha_acta_preadjudicacion: "2021-05-27T00:00:00.000+00:00",
-        acta_preadjudicacion: "DI-2021-16155231- -DGID",
-        salida_pg2: "",
-        vuelta_pg2: "",
-        fecha_aprobatoria: "",
-        aprobatoria: "",
-        renglon: [{
-            descripcion: "",
-            monto: 29641104.00,
-            orden_compra: {
-                num_orden: "353-9605-OC23",
-                monto: "",
-                tipo: "",
-                prorroga: [],
-                ampliatoria: [],
-                orden_compra: [],
-                extension: [],
-                control: [
-                    {
-                        num_certificado: "1",
-                        periodo: "2024-04-20T00:00:00.000+00:00",
-                        SPR: "No aplica",
-                        PRD: "227878-23",
-                        monto_ejecutado: "2470092",
-                        estado: "EJECUTADO"
-                    },
-                    {
-                        num_certificado: "2",
-                        periodo: "2024-05-20T00:00:00.000+00:00",
-                        SPR: "No aplica",
-                        PRD: "227878-23",
-                        monto_ejecutado: "2470092",
-                        estado: "EJECUTADO"
-                    },
-                    {
-                        num_certificado: "3",
-                        periodo: "2024-06-20T00:00:00.000+00:00",
-                        SPR: "No aplica",
-                        PRD: "227878-23",
-                        monto_ejecutado: "2470092",
-                        estado: "EJECUTADO"
-                    },
-                    {
-                        num_certificado: "4",
-                        periodo: "2024-07-20T00:00:00.000+00:00",
-                        SPR: "No aplica",
-                        PRD: "227878-23",
-                        monto_ejecutado: "2470092",
-                        estado: "EJECUTADO"
-                    },
-                    {
-                        num_certificado: "5",
-                        periodo: "2024-08-20T00:00:00.000+00:00",
-                        SPR: "No aplica",
-                        PRD: "227878-23",
-                        monto_ejecutado: "2470092",
-                        estado: "NO EJECUTADO"
-                    },
-                    {
-                        num_certificado: "5",
-                        periodo: "2024-09-20T00:00:00.000+00:00",
-                        SPR: "No aplica",
-                        PRD: "227878-23",
-                        monto_ejecutado: "2470092",
-                        estado: "NO EJECUTADO"
-                    },
-                    {
-                        num_certificado: "5",
-                        periodo: "2024-10-20T00:00:00.000+00:00",
-                        SPR: "No aplica",
-                        PRD: "227878-23",
-                        monto_ejecutado: "2470092",
-                        estado: "NO EJECUTADO"
-                    },
-                    {
-                        num_certificado: "5",
-                        periodo: "2024-11-20T00:00:00.000+00:00",
-                        SPR: "No aplica",
-                        PRD: "227878-23",
-                        monto_ejecutado: "2470092",
-                        estado: "NO EJECUTADO"
-                    },
-                    
-
-                ]   
-
+  {
+    nombre:
+      "SERVICIO DE MANTENIMIENTO INTEGRAL Y RESIEMBRA DE CÉSPED DEL CAMPO DE GOLF JUAN BAUTISTA SEGURA",
+    num_proceso: "9611-0442-LPU21",
+    expediente: "EX-2021-10378435- -GCABA-DGTALAVJG",
+    area: "SEC. DEPORTES",
+    modalidad: "SIN MODALIDAD",
+    tipo_contrato: "LICITACION PUBLICA",
+    estado: "Ejecucion",
+    plazo: "32 meses",
+    inicio: "2021-05-29T00:00:00.000+00:00",
+    vencimiento: "2021-05-29T00:00:00.000+00:00",
+    monto: 29641104.0,
+    pliego_ingreso: "",
+    pliego_egreso: "",
+    salida_pg1: "",
+    vuelta_pg2: "",
+    fecha_llamado: "2021-12-04T00:00:00.000+00:00",
+    apertura_ofertas: "DI-2021-15-DGID",
+    fecha_acta_preadjudicacion: "2021-05-27T00:00:00.000+00:00",
+    acta_preadjudicacion: "DI-2021-16155231- -DGID",
+    salida_pg2: "",
+    vuelta_pg2: "",
+    fecha_aprobatoria: "",
+    aprobatoria: "",
+    renglon: [
+      {
+        descripcion: "RESIEMBRA DEL PREDIO ESTE",
+        monto: 29641104.0,
+        orden_compra: {
+          num_orden: "353-9605-OC23",
+          monto: "",
+          tipo: "",
+          prorroga: [],
+          ampliatoria: [],
+          orden_compra: [],
+          extension: [],
+          control: [
+            {
+              num_certificado: "1",
+              periodo: "2024-04-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "EJECUTADO",
             },
-            oferta:[{
-                monto_ofertado: "25000000",
-                observacion: "Por todo",
-                ganador: true,
-                documentacion: true,
-                beneficiario: [{
-                    razon_social: "CULTIVOS HORIKAWA S.A.",
-                    cuit: "33-69644625-9"
-                }] 
-            }]
-            
-        }
+            {
+              num_certificado: "2",
+              periodo: "2024-05-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "EJECUTADO",
+            },
+            {
+              num_certificado: "3",
+              periodo: "2024-06-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "EJECUTADO",
+            },
+            {
+              num_certificado: "4",
+              periodo: "2024-07-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "EJECUTADO",
+            },
+            {
+              num_certificado: "5",
+              periodo: "2024-08-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "NO EJECUTADO",
+            },
+            {
+              num_certificado: "6",
+              periodo: "2024-09-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "NO EJECUTADO",
+            },
+            {
+              num_certificado: "7",
+              periodo: "2024-10-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "NO EJECUTADO",
+            },
+            {
+              num_certificado: "8",
+              periodo: "2024-11-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "NO EJECUTADO",
+            },
+          ],
+        },
+        oferta: [
+          {
+            monto_ofertado: "25000000",
+            observacion: "Por todo",
+            ganador: true,
+            documentacion: true,
+            beneficiario: [
+              {
+                razon_social: "CULTIVOS HORIKAWA S.A.",
+                cuit: "33-69644625-9",
+              },
+            ],
+          },
         ],
+      },
+    ],
+  },
+  {
+    nombre:
+      "SERVICIO DE MANTENIMIENTO INTEGRAL Y RESIEMBRA DE CÉSPED DEL CAMPO DE GOLF JUAN BAUTISTA SEGURA",
+    num_proceso: "9611-0442-LPU21",
+    expediente: "EX-2021-10378435- -GCABA-DGTALAVJG",
+    area: "SEC. DEPORTES",
+    modalidad: "SIN MODALIDAD",
+    tipo_contrato: "LICITACION PUBLICA",
+    estado: "Ejecucion",
+    plazo: "32 meses",
+    inicio: "2021-05-29T00:00:00.000+00:00",
+    vencimiento: "2021-05-29T00:00:00.000+00:00",
+    monto: 29641104.0,
+    pliego_ingreso: "",
+    pliego_egreso: "",
+    salida_pg1: "",
+    vuelta_pg2: "",
+    fecha_llamado: "2021-12-04T00:00:00.000+00:00",
+    apertura_ofertas: "DI-2021-15-DGID",
+    fecha_acta_preadjudicacion: "2021-05-27T00:00:00.000+00:00",
+    acta_preadjudicacion: "DI-2021-16155231- -DGID",
+    salida_pg2: "",
+    vuelta_pg2: "",
+    fecha_aprobatoria: "",
+    aprobatoria: "",
+    renglon: [
+      {
+        descripcion: "PREDIO ESTE",
+        monto: 29641104.0,
+        orden_compra: {
+          num_orden: "353-9605-OC25",
+          monto: "",
+          tipo: "",
+          prorroga: [],
+          ampliatoria: [],
+          orden_compra: [],
+          extension: [],
+          control: [
+            {
+              num_certificado: "1",
+              periodo: "2024-04-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "EJECUTADO",
+            },
+            {
+              num_certificado: "2",
+              periodo: "2024-05-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "EJECUTADO",
+            },
+            {
+              num_certificado: "3",
+              periodo: "2024-06-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "EJECUTADO",
+            },
+            {
+              num_certificado: "4",
+              periodo: "2024-07-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "NO EJECUTADO",
+            },
+          ],
+        },
+        oferta: [
+          {
+            monto_ofertado: "25000000",
+            observacion: "Por todo",
+            ganador: true,
+            documentacion: true,
+            beneficiario: [
+              {
+                razon_social: "CULTIVOS HORIKAWA S.A.",
+                cuit: "33-69644625-9",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        descripcion: "PREDIO OESTE",
+        monto: 29641104.0,
+        orden_compra: {
+          num_orden: "353-9605-OC23",
+          monto: "",
+          tipo: "",
+          prorroga: [],
+          ampliatoria: [],
+          orden_compra: [],
+          extension: [],
+          control: [
+            {
+              num_certificado: "1",
+              periodo: "2024-04-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "EJECUTADO",
+            },
+            {
+              num_certificado: "2",
+              periodo: "2024-05-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "EJECUTADO",
+            },
+            {
+              num_certificado: "3",
+              periodo: "2024-06-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "EJECUTADO",
+            },
+            {
+              num_certificado: "4",
+              periodo: "2024-07-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "NO EJECUTADO",
+            },
+            {
+              num_certificado: "5",
+              periodo: "2024-08-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "NO EJECUTADO",
+            },
+            {
+              num_certificado: "5",
+              periodo: "2024-09-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "NO EJECUTADO",
+            },
+            {
+              num_certificado: "5",
+              periodo: "2024-10-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "NO EJECUTADO",
+            },
+            {
+              num_certificado: "5",
+              periodo: "2024-11-20T00:00:00.000+00:00",
+              SPR: "No aplica",
+              PRD: "227878-23",
+              monto_ejecutado: "2470092",
+              estado: "NO EJECUTADO",
+            },
+          ],
+        },
+        oferta: [
+          {
+            monto_ofertado: "25000000",
+            observacion: "Por todo",
+            ganador: true,
+            documentacion: true,
+            beneficiario: [
+              {
+                razon_social: "CULTIVOS HORIKAWA S.A.",
+                cuit: "33-69644625-9",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
 
-    },
-]
-
-export default data
+export default data;
