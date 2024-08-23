@@ -1,13 +1,28 @@
 <template>
     <div>
-        <v-container>
-            <p>Licitaciones</p>
-            <p>Licitaciones</p>
-            <p>Licitaciones</p>
-            <p>Licitaciones</p>
-            <p>Licitaciones</p>
-            <p>Licitaciones</p>
-            <p>Licitaciones</p>
+        <v-container class="">
+            <v-card cols="12">
+                <v-card-title class="d-flex justify-center">Titulo</v-card-title>
+                <v-row class="my-2 mx-2">
+                    <v-col cols="6">
+                        <p>Licitacion</p>
+                        <p>Licitacion</p>
+                        <p>Licitacion</p>
+                        <p>Licitacion</p>
+                        <p>Licitacion</p>
+                        <p>Licitacion</p>
+                    </v-col>
+
+                    <v-col cols="6">
+                        <p>Licitacion</p>
+                        <p>Licitacion</p>
+                        <p>Licitacion</p>
+                        <p>Licitacion</p>
+                        <p>Licitacion</p>
+                        <p>Licitacion</p>
+                    </v-col>
+                </v-row>
+            </v-card>
         </v-container>
     </div>
 </template>
