@@ -5,51 +5,52 @@
                 <v-card-title class="d-flex justify-center">Proceso</v-card-title>
                 <v-row class="my-2 mx-2">
                     <v-col cols="12" md="6">
-                        <v-list lines="two">
+                        <v-list>
                             <v-list-item
                             title="Nombre"
-                            :subtitle="data[0].nombre"
-                            ></v-list-item>
+                            >
+                            <v-list-item-subtitle v-html="data[1].nombre" class="wrap-text"></v-list-item-subtitle>
+                        </v-list-item>
                             <v-list-item
                             title="Numero Proceso"
-                            :subtitle="data[0].num_proceso"
+                            :subtitle="data[1].num_proceso"
                             ></v-list-item>
                             <v-list-item
                             title="Expediente"
-                            :subtitle="data[0].expediente"
+                            :subtitle="data[1].expediente"
                             ></v-list-item>
                             <v-list-item
                             title="Area"
-                            :subtitle="data[0].area"
+                            :subtitle="data[1].area"
                             ></v-list-item>
                             <v-list-item
                             title="Modalidad"
-                            :subtitle="data[0].modalidad"
+                            :subtitle="data[1].modalidad"
                             ></v-list-item>
                         </v-list>
                     </v-col>
                     
                     <v-col cols="12" md="6">
-                        <v-list lines="two">
+                        <v-list>
                             <v-list-item
                             title="Tipo Contrato"
-                            :subtitle="data[0].tipo_contrato"
+                            :subtitle="data[1].tipo_contrato"
                             ></v-list-item>
                             <v-list-item
                             title="Estado"
-                            :subtitle="data[0].estado"
+                            :subtitle="data[1].estado"
                             ></v-list-item>
                             <v-list-item
                             title="Plazo"
-                            :subtitle="data[0].plazo"
+                            :subtitle="data[1].plazo"
                             ></v-list-item>
                             <v-list-item
                             title="Inicio"
-                            :subtitle="fortmatDate.formatDate(data[0].inicio)"
+                            :subtitle="fortmatDate.formatDate(data[1].inicio)"
                             ></v-list-item>
                             <v-list-item
                             title="Vencimiento"
-                            :subtitle="fortmatDate.formatDate(data[0].vencimiento)"
+                            :subtitle="fortmatDate.formatDate(data[1].vencimiento)"
                             ></v-list-item>
                         </v-list>
                     </v-col>
@@ -60,59 +61,59 @@
                 <v-card-title class="d-flex justify-center">Licitacion</v-card-title>
                 <v-row class="my-2 mx-2">
                     <v-col cols="6">
-                        <v-list lines="two">
+                        <v-list>
                             <v-list-item
                             title="Ingresos de los Pliego"
-                            :subtitle="fortmatDate.formatDate(data[0].pliego_ingreso)"
+                            :subtitle="fortmatDate.formatDate(data[1].pliego_ingreso)"
                             ></v-list-item>
                             <v-list-item
                             title="Egresos de los Pliegos"
-                            :subtitle="fortmatDate.formatDate(data[0].pliego_egreso)"
+                            :subtitle="fortmatDate.formatDate(data[1].pliego_egreso)"
                             ></v-list-item>
                             <v-list-item
                             title="Salida PG"
-                            :subtitle="fortmatDate.formatDate(data[0].salida_pg1)"
+                            :subtitle="fortmatDate.formatDate(data[1].salida_pg1)"
                             ></v-list-item>
                             <v-list-item
                             title="Vuelta PG"
-                            :subtitle="fortmatDate.formatDate(data[0].vuelta_pg2)"
+                            :subtitle="fortmatDate.formatDate(data[1].vuelta_pg2)"
                             ></v-list-item>
                             <v-list-item
                             title="Fecha de Llamado"
-                            :subtitle="fortmatDate.formatDate(data[0].fecha_llamado)"
+                            :subtitle="fortmatDate.formatDate(data[1].fecha_llamado)"
                             ></v-list-item>
                             <v-list-item
                             title="Apertura de Ofertas"
-                            :subtitle="fortmatDate.formatDate(data[0].apertura_ofertas)"
+                            :subtitle="fortmatDate.formatDate(data[1].apertura_ofertas)"
                             ></v-list-item>
                         </v-list>
                     </v-col>
 
                     <v-col cols="6">
-                        <v-list lines="two">
+                        <v-list>
                             <v-list-item
                             title="Fecha Acta Preadjudicacion"
-                            :subtitle="fortmatDate.formatDate(data[0].fecha_acta_preadjudicacion)"
+                            :subtitle="fortmatDate.formatDate(data[1].fecha_acta_preadjudicacion)"
                             ></v-list-item>
                             <v-list-item
                             title="Acta Preadjudicacion"
-                            :subtitle="data[0].acta_preadjudicacion"
+                            :subtitle="data[1].acta_preadjudicacion"
                             ></v-list-item>
                             <v-list-item
                             title="Salida PG2"
-                            :subtitle="fortmatDate.formatDate(data[0].salida_pg2)"
+                            :subtitle="fortmatDate.formatDate(data[1].salida_pg2)"
                             ></v-list-item>
                             <v-list-item
                             title="Vuelta PG2"
-                            :subtitle="fortmatDate.formatDate(data[0].vuelta_pg2)"
+                            :subtitle="fortmatDate.formatDate(data[1].vuelta_pg2)"
                             ></v-list-item>
                             <v-list-item
                             title="Fecha Aprobatoria"
-                            :subtitle="fortmatDate.formatDate(data[0].fecha_aprobatoria)"
+                            :subtitle="fortmatDate.formatDate(data[1].fecha_aprobatoria)"
                             ></v-list-item>
                             <v-list-item
                             title="Aprobatoria"
-                            :subtitle="data[0].aprobatoria"
+                            :subtitle="data[1].aprobatoria"
                             ></v-list-item>
                         </v-list>
                     </v-col>
@@ -120,7 +121,7 @@
             </v-card>
 
             <v-card cols="12">
-                <tabs :renglon="data[0].renglon"/>
+                <tabs :renglones="data[1].renglon"/>
             </v-card>
 
             <v-card cols="12">
@@ -160,4 +161,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+.wrap-text {
+  -webkit-line-clamp: unset !important;
+}
+</style>

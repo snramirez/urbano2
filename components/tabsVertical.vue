@@ -1,21 +1,42 @@
 <template>
     <div class="d-flex flex-row">
         <v-tabs v-model="tab" direction="vertical">
-            <v-tab value="1">Oferta 1</v-tab>
-            <v-tab value="2">Oferta 2</v-tab>
-            <v-tab value="3">Oferta 3</v-tab>
+            <v-tab v-for="(oferta, index) in ofertas" :key="oferta" :value="index">Oferta {{ index + 1 }}</v-tab>
         </v-tabs>
 
         <v-tabs-window v-model="tab">
-            <v-tabs-window-item value="1">
+            <v-tabs-window-item v-for="(oferta, index) in ofertas" :key="oferta" :value="index">
                 <v-card flat>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi quibusdam optio nemo vero adipisci deleniti quisquam esse aliquid hic veniam, eaque molestias illum autem magni voluptas ea aspernatur consectetur at? Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero sit ipsum corporis quos ullam ab fugit exercitationem maiores, laborum beatae earum quis tempore cum. Officia aliquam nulla fugiat dolorum voluptates!</p>
+                    <v-row class="my-2 mx-2">
+                        <v-col cols="12" md="6">
+                            <v-list>
+                                <v-list-item title="Monto Ofertado" :subtitle="oferta.monto_ofertado"></v-list-item>
+                                <v-list-item title="Observacion" >
+                                    <v-list-item-subtitle v-html="oferta.observacion" class="wrap-text"></v-list-item-subtitle>
+                                </v-list-item>
+                                <v-list-item title="Estado Oferta" :subtitle="oferta.ganador ? 'OFERTA GANADORA' : ''"></v-list-item>
+                            </v-list>
+                        </v-col>
+
+                        <v-col cols="12" md="6">
+                            <v-list>
+                                <v-list-item title="Documentacion" :subtitle="oferta.documentacion ? 'PRESENTADA':'NO PRESENTADA'"></v-list-item>
+                                <v-list-item v-for="(item, index) in oferta.beneficiario" :key="item">
+                                    <v-list-item-title>Beneficiario {{ index + 1 }}</v-list-item-title>
+                                    <v-list-item-subtitle class="wrap-text">
+                                        <p>{{ item.razon_social }}</p>
+                                        <p>{{ item.cuit }}</p>
+                                    </v-list-item-subtitle>
+                                </v-list-item>
+                            </v-list>
+                        </v-col>
+                    </v-row>
                 </v-card>
             </v-tabs-window-item>
 
             <v-tabs-window-item value="2">
                 <v-card>
-                    <p>Cosas de Ofertas</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui perspiciatis tempore asperiores harum doloribus. Ratione, corrupti laudantium expedita voluptate sed odio? Reprehenderit sed molestiae quod consequatur obcaecati autem harum officiis.</p>
                 </v-card>
             </v-tabs-window-item>
 
@@ -32,8 +53,15 @@
 export default {
     data: () => ({
         tab: null
-    })
+    }),
+    props:{
+        ofertas: Array
+    }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+.wrap-text {
+  -webkit-line-clamp: unset !important;
+}
+</style>

@@ -1,79 +1,29 @@
 <template>
     <div>
         <v-tabs v-model="tab">
-            <v-tab value="1">Renglon 1</v-tab>
-            <v-tab value="2">Renglon 2</v-tab>
-            <v-tab value="3">Renglon 3</v-tab>
+            <v-tab v-for="(renglon, index) in renglones" :key="renglon" :value="index">Renglon {{ index + 1 }}</v-tab>
         </v-tabs>
 
         <v-tabs-window v-model="tab">
-            <v-tabs-window-item value="1">
+            <v-tabs-window-item v-for="(renglon, index) in renglones" :key="index" :value="index">
                 <v-card>
                     <v-row class="my-2 mx-2">
-                        <v-col cols="6">
-                            <p>Info Renglon</p>
-                            <p>Info Renglon</p>
-                            <p>Info Renglon</p>
-                            <p>Info Renglon</p>
-                            <p>Info Renglon</p>
-                            <p>Info Renglon</p>
+                        <v-col cols="12" md="6">
+                            <v-list>
+                                <v-list-item title="Descripcion" :subtitle="renglon.descripcion"></v-list-item>
+                            </v-list>
                         </v-col>
 
-                        <v-col cols="6">
-                            <p>Info Renglon</p>
-                            <p>Info Renglon</p>
-                            <p>Info Renglon</p>
-                            <p>Info Renglon</p>
-                            <p>Info Renglon</p>
-                            <p>Info Renglon</p>
+                        <v-col cols="12" md="6">
+                            <v-list>
+                                <v-list-item title="Monto" :subtitle="renglon.monto"></v-list-item>
+                            </v-list>
                         </v-col>
                     </v-row>
-                    <tabsVertical/>
+                    <tabsVertical :ofertas="renglon.oferta"/>
                 </v-card>
 
 
-            </v-tabs-window-item>
-            <v-tabs-window-item value="2">
-                <v-row class="my-2 mx-2">
-                    <v-col cols="6">
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                    </v-col>
-
-                    <v-col cols="6">
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                    </v-col>
-                </v-row>
-            </v-tabs-window-item>
-            <v-tabs-window-item value="3">
-                <v-row class="my-2 mx-2">
-                    <v-col cols="6">
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                    </v-col>
-
-                    <v-col cols="6">
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                        <p>Info Renglon</p>
-                    </v-col>
-                </v-row>
             </v-tabs-window-item>
         </v-tabs-window>
     </div>
@@ -81,13 +31,13 @@
 
 <script>
 export default {
-    data(){
-        return{
+    data() {
+        return {
             tab: null
         }
     },
-    props:{
-        renglon: Array,
+    props: {
+        renglones: Array,
     }
 }
 </script>

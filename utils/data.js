@@ -195,13 +195,33 @@ const data = [
         oferta: [
           {
             monto_ofertado: "25000000",
-            observacion: "Por todo",
+            observacion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui perspiciatis tempore asperiores harum doloribus. Ratione, corrupti laudantium expedita voluptate sed odio? Reprehenderit sed molestiae quod consequatur obcaecati autem harum officiis.",
             ganador: true,
             documentacion: true,
             beneficiario: [
               {
                 razon_social: "CULTIVOS HORIKAWA S.A.",
                 cuit: "33-69644625-9",
+              },
+              {
+                razon_social: "CULTIVOS GARDESUR SRL",
+                cuit: "33-54811545-9",
+              },
+            ],
+          },
+          {
+            monto_ofertado: "25000000",
+            observacion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui perspiciatis tempore asperiores harum doloribus. Ratione, corrupti laudantium expedita voluptate sed odio? Reprehenderit sed molestiae quod consequatur obcaecati autem harum officiis.",
+            ganador: false,
+            documentacion: true,
+            beneficiario: [
+              {
+                razon_social: "AGROINDUSTRIAS LA MANIFIESTO S.A.",
+                cuit: "33-42654789-9",
+              },
+              {
+                razon_social: "MONZONSANTO SRL",
+                cuit: "33-24658963-9",
               },
             ],
           },
