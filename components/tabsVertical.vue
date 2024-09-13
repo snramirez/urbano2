@@ -14,7 +14,7 @@
                                 <v-list-item title="Observacion" >
                                     <v-list-item-subtitle v-html="oferta.observacion" class="wrap-text"></v-list-item-subtitle>
                                 </v-list-item>
-                                <v-list-item title="Estado Oferta" :subtitle="oferta.ganador ? 'OFERTA GANADORA' : ''"></v-list-item>
+                                <v-list-item title="Estado Oferta" :subtitle="oferta.ganador ? 'OFERTA GANADORA' : 'EN REVISION'"></v-list-item>
                             </v-list>
                         </v-col>
 

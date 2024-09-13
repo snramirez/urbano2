@@ -155,7 +155,13 @@ const data = [
           tipo: "",
           prorroga: [],
           ampliatoria: [],
-          orden_compra: [],
+          orden_compra: [{
+            num_orden: "353-9605-OC25-22222",
+            monto: "546465",
+            tipo: "5645",
+            prorroga: [],
+            ampliatoria: [],
+          }],
           extension: [],
           control: [
             {
