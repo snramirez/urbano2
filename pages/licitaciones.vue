@@ -96,14 +96,14 @@
 </template>
 
 <script>
-import Data from "../utils/data";
+import data from "../utils/data";
 import format from "../utils/formatText";
 
 export default {
     data() {
         return {
             tab: null,
-            data: Data,
+            data: data.datos,
             fortmatDate: format,
             allOC: []
         }

@@ -28,8 +28,8 @@
             </template>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-title> Certificaciones </v-list-item-title>
+          <v-list-item :to="'/cargarLicitacion'">
+            <v-list-item-title> Carga </v-list-item-title>
             <template v-slot:prepend>
               <v-icon icon="mdi-file-certificate"></v-icon>
             </template>

@@ -12,7 +12,8 @@ export default defineNuxtConfig({
         locale: 'es',
         fallback: 'en'
       },
-      localeMessages: ['es', 'en']
+      localeMessages: ['es', 'en'],
+      labComponents: true
     }
   }
 })

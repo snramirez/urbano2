@@ -1,4 +1,4 @@
-const data = [
+const datos = [
   {
     nombre:
       "SERVICIO DE MANTENIMIENTO INTEGRAL Y RESIEMBRA DE CÉSPED DEL CAMPO DE GOLF JUAN BAUTISTA SEGURA",
@@ -15,7 +15,7 @@ const data = [
     pliego_ingreso: "",
     pliego_egreso: "",
     salida_pg1: "",
-    vuelta_pg2: "",
+    vuelta_pg1: "",
     fecha_llamado: "2021-12-04T00:00:00.000+00:00",
     apertura_ofertas: "2021-12-04T00:00:00.000+00:00",
     fecha_acta_preadjudicacion: "2021-05-27T00:00:00.000+00:00",
@@ -136,7 +136,7 @@ const data = [
     pliego_ingreso: "",
     pliego_egreso: "",
     salida_pg1: "",
-    vuelta_pg2: "",
+    vuelta_pg1: "",
     fecha_llamado: "2021-12-04T00:00:00.000+00:00",
     apertura_ofertas: "2021-12-04T00:00:00.000+00:00",
     fecha_acta_preadjudicacion: "2021-05-27T00:00:00.000+00:00",
@@ -344,7 +344,7 @@ const data = [
     pliego_ingreso: "",
     pliego_egreso: "",
     salida_pg1: "",
-    vuelta_pg2: "",
+    vuelta_pg1: "",
     fecha_llamado: "2021-12-04T00:00:00.000+00:00",
     apertura_ofertas: "DI-2021-15-DGID",
     fecha_acta_preadjudicacion: "2021-05-27T00:00:00.000+00:00",
@@ -465,7 +465,7 @@ const data = [
     pliego_ingreso: "",
     pliego_egreso: "",
     salida_pg1: "",
-    vuelta_pg2: "",
+    vuelta_pg1: "",
     fecha_llamado: "2021-12-04T00:00:00.000+00:00",
     apertura_ofertas: "DI-2021-15-DGID",
     fecha_acta_preadjudicacion: "2021-05-27T00:00:00.000+00:00",
@@ -571,5 +571,88 @@ const data = [
     ],
   },
 ];
+
+const empyData = {
+  nombre: '',
+  num_proceso: "",
+  expediente: "",
+  area: "",
+  modalidad: "",
+  tipo_contrato: "",
+  estado: "",
+  plazo: "",
+  inicio: "",
+  vencimiento: "",
+  monto: "",
+  pliego_ingreso: null,
+  pliego_egreso: null,
+  salida_pg1: null,
+  vuelta_pg1: null,
+  fecha_llamado:null,
+  apertura_ofertas:null,
+  fecha_acta_preadjudicacion:null,
+  acta_preadjudicacion: "",
+  salida_pg2:null,
+  vuelta_pg2:null,
+  fecha_aprobatoria:null,
+  aprobatoria: "",
+  renglon: [
+      {
+          descripcion: "",
+          monto: "",
+          orden_compra: {
+              num_orden: "",
+              monto: "",
+              tipo: "",
+              prorroga: [],
+              ampliatoria: [],
+              orden_compra: [],
+              extension: [],
+              control: [
+                  {
+                      num_certificado: "1",
+                      periodo:null,
+                      SPR: "",
+                      PRD: "",
+                      monto_ejecutado: "",
+                      estado: "",
+                  },
+                  {
+                      num_certificado: "2",
+                      periodo:null,
+                      SPR: "",
+                      PRD: "",
+                      monto_ejecutado: "",
+                      estado: "",
+                  },
+                  {
+                      num_certificado: "",
+                      periodo:null,
+                      SPR: "",
+                      PRD: "",
+                      monto_ejecutado: "",
+                      estado: "",
+                  },
+              ],
+          },
+          oferta: [
+              {
+                  monto_ofertado: "",
+                  observacion: "",
+                  ganador: true,
+                  documentacion: true,
+                  beneficiario: [
+                      {
+                          razon_social: "",
+                          cuit: "",
+                      },
+                  ],
+              },
+          ],
+      },
+  ],
+}
+
+const data = {datos, empyData}
 
 export default data;

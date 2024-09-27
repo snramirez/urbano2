@@ -59,14 +59,14 @@
 </template>
 
 <script>
-import Data from "../utils/data";
+import data from "../utils/data";
 import format from "../utils/formatText";
 
 export default {
   data() {
     return {
       search: "",
-      data: Data,
+      data: data.datos,
       formatDate: format,
       pliego:{},
       viewOC: false,
