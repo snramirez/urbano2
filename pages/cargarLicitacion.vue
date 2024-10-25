@@ -125,7 +125,20 @@
                     Renglon {{index + 1}}
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
-                    {{ renglon }}
+                    <v-row>
+                        <v-col cols="12" md="6">
+                            <v-text-field v-model="renglon.descripcion" label="Descripcion"
+                                variant="outlined" clearable></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <currency-field v-model="renglon.monto" label="Monto"></currency-field>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="12">
+                            <contractor-offer/>
+                        </v-col>
+                    </v-row>
                 </v-expansion-panel-text>
             </v-expansion-panel>
         </v-expansion-panels>

@@ -599,7 +599,7 @@ const empyData = {
   renglon: [
       {
           descripcion: "",
-          monto: "",
+          monto: 0,
           orden_compra: {
               num_orden: "",
               monto: "",
