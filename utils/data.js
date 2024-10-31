@@ -598,14 +598,26 @@ const empyData = {
   aprobatoria: "",
   renglon: [
       {
+          _id:"65465438",
           descripcion: "",
           monto: 0,
           orden_compra: {
               num_orden: "",
-              monto: "",
+              monto: 0,
               tipo: "",
-              prorroga: [],
-              ampliatoria: [],
+              prorroga: [
+                {
+                  acta:"",
+                  vencimiento: null
+                }
+              ],
+              ampliatoria: [
+                {
+                  acta:"",
+                  fecha:null,
+                  monto:0,
+                }
+              ],
               orden_compra: [],
               extension: [],
               control: [
@@ -637,6 +649,7 @@ const empyData = {
           },
           oferta: [
               {
+                  _id:"5465688",
                   monto_ofertado: "",
                   observacion: "",
                   ganador: true,
