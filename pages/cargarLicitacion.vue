@@ -228,9 +228,47 @@
               ></currency-field>
             </v-col>
           </v-row>
+
           <v-row>
             <v-col cols="12">
               <contractor-offer :contratistas=contratistas :datostabla="datostabla"/>
+            </v-col>
+          </v-row>
+          
+
+          <v-row>
+            <v-divider></v-divider>
+            <h2>Orden de Compra</h2>
+          </v-row>
+          <v-row>
+            <v-col cols="12" md="3">
+              <v-text-field
+                variant="outlined"
+                label="Numero de Orden"
+                v-model="renglon.orden_compra.num_orden"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-text-field
+                variant="outlined"
+                label="Tipo de Orden"
+                v-model="renglon.orden_compra.tipo"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="3">
+              <currency-field
+                label="Monto"
+                v-model="renglon.orden_compra.monto"
+              ></currency-field>
+            </v-col>            
+          </v-row>
+
+          <v-row>
+            <v-col cols="6">
+              <prorroga :data=prorroga />
+            </v-col>
+            <v-col cols="6">
+              <ampliatoria :data="ampliatoria"></ampliatoria>
             </v-col>
           </v-row>
         </v-expansion-panel-text>
@@ -261,10 +299,23 @@ export default {
           cuit: "33-55541255-4",
         },
       ],
+      prorroga: [
+        {
+          acta: "N2154112",
+          vencimiento: "2024-04-20T00:00:00.000+00:00",
+        }
+      ],
+      ampliatoria: [
+        {
+          acta: "N2154112",
+          fecha: "2024-04-20T00:00:00.000+00:00",
+          monto: 1000
+        }
+      ],
       datostabla: [
         {
           _id:"1234",
-          monto_ofertado: "1000000",
+          monto_ofertado: 1000000,
           observacion: "Muy caro",
           ganador: false,
           documentacion: true,
@@ -277,7 +328,7 @@ export default {
         },
         {
           _id:"1235",
-          monto_ofertado: "1100000",
+          monto_ofertado: 1100000,
           observacion: "Muy muy caro",
           ganador: false,
           documentacion: true,
@@ -299,8 +350,12 @@ export default {
     addRenglon() {
       this.data.renglon.push({
         descripcion: "",
-        monto: "",
-        orden_compra: {},
+        monto: 0,
+        orden_compra: {
+          num_orden:'',
+          monto: '',
+          tipo:'',
+        },
         oferta: [],
       });
     },

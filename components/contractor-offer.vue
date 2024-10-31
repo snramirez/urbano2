@@ -9,6 +9,7 @@
           small
           v-tooltip="'Nueva Oferta'"
         ></v-btn>
+        <h2>Ofertas</h2>
       </v-row>
       <v-row>
         <v-data-table
@@ -73,6 +74,7 @@
                   :items="contratistas"
                   label="Contratista"
                   required
+                  variant="outlined"
                 ></v-select>
               </v-col>
             </v-row>
@@ -89,6 +91,7 @@
                 v-model="observacion"
                 name="Observaciones"
                 label="Observaciones"
+                variant="outlined"
                 auto-grow
                 :counter="300"
               ></v-textarea>
@@ -108,7 +111,7 @@ export default {
   data() {
     return {
       headers: [
-        { title: "razon social", value: "beneficiario.razon_social" },
+        { title: "Razon Social", value: "beneficiario.razon_social" },
         { title: "Oferta", value: "monto_ofertado" },
         // { title: "Diferencia %", value: "Porcentage" },
         { title: "Observaciones", value: "observacion" },
