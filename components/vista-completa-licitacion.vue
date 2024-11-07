@@ -1,5 +1,12 @@
 <template>
     <div>
+        <v-row>
+            <v-col align-self="end">
+                <v-btn @click="close()" color="orange darken-1" prepend-icon="mdi-arrow-left" stacked>
+                    Volver
+                </v-btn>
+            </v-col>
+        </v-row>
         <v-container class="">
             <v-card class="ma-2" cols="12">
                 <v-card-title class="d-flex justify-center">Proceso</v-card-title>
@@ -7,24 +14,25 @@
                     <v-col cols="12" md="6">
                         <v-list>
                             <v-list-item title="Nombre">
-                                <v-list-item-subtitle v-html="data[1].nombre" class="wrap-text"></v-list-item-subtitle>
+                                <v-list-item-subtitle v-html="licitacion.nombre"
+                                    class="wrap-text"></v-list-item-subtitle>
                             </v-list-item>
-                            <v-list-item title="Numero Proceso" :subtitle="data[1].num_proceso"></v-list-item>
-                            <v-list-item title="Expediente" :subtitle="data[1].expediente"></v-list-item>
-                            <v-list-item title="Area" :subtitle="data[1].area"></v-list-item>
-                            <v-list-item title="Modalidad" :subtitle="data[1].modalidad"></v-list-item>
+                            <v-list-item title="Numero Proceso" :subtitle="licitacion.num_proceso"></v-list-item>
+                            <v-list-item title="Expediente" :subtitle="licitacion.expediente"></v-list-item>
+                            <v-list-item title="Area" :subtitle="licitacion.area"></v-list-item>
+                            <v-list-item title="Modalidad" :subtitle="licitacion.modalidad"></v-list-item>
                         </v-list>
                     </v-col>
 
                     <v-col cols="12" md="6">
                         <v-list>
-                            <v-list-item title="Tipo Contrato" :subtitle="data[1].tipo_contrato"></v-list-item>
-                            <v-list-item title="Estado" :subtitle="data[1].estado"></v-list-item>
-                            <v-list-item title="Plazo" :subtitle="data[1].plazo"></v-list-item>
+                            <v-list-item title="Tipo Contrato" :subtitle="licitacion.tipo_contrato"></v-list-item>
+                            <v-list-item title="Estado" :subtitle="licitacion.estado"></v-list-item>
+                            <v-list-item title="Plazo" :subtitle="licitacion.plazo"></v-list-item>
                             <v-list-item title="Inicio"
-                                :subtitle="fortmatDate.formatDate(data[1].inicio)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.inicio)"></v-list-item>
                             <v-list-item title="Vencimiento"
-                                :subtitle="fortmatDate.formatDate(data[1].vencimiento)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.vencimiento)"></v-list-item>
                         </v-list>
                     </v-col>
                 </v-row>
@@ -36,40 +44,40 @@
                     <v-col cols="6">
                         <v-list>
                             <v-list-item title="Ingresos de los Pliego"
-                                :subtitle="fortmatDate.formatDate(data[1].pliego_ingreso)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.pliego_ingreso)"></v-list-item>
                             <v-list-item title="Egresos de los Pliegos"
-                                :subtitle="fortmatDate.formatDate(data[1].pliego_egreso)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.pliego_egreso)"></v-list-item>
                             <v-list-item title="Salida PG"
-                                :subtitle="fortmatDate.formatDate(data[1].salida_pg1)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.salida_pg1)"></v-list-item>
                             <v-list-item title="Vuelta PG"
-                                :subtitle="fortmatDate.formatDate(data[1].vuelta_pg2)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.vuelta_pg2)"></v-list-item>
                             <v-list-item title="Fecha de Llamado"
-                                :subtitle="fortmatDate.formatDate(data[1].fecha_llamado)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.fecha_llamado)"></v-list-item>
                             <v-list-item title="Apertura de Ofertas"
-                                :subtitle="fortmatDate.formatDate(data[1].apertura_ofertas)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.apertura_ofertas)"></v-list-item>
                         </v-list>
                     </v-col>
 
                     <v-col cols="6">
                         <v-list>
                             <v-list-item title="Fecha Acta Preadjudicacion"
-                                :subtitle="fortmatDate.formatDate(data[1].fecha_acta_preadjudicacion)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.fecha_acta_preadjudicacion)"></v-list-item>
                             <v-list-item title="Acta Preadjudicacion"
-                                :subtitle="data[1].acta_preadjudicacion"></v-list-item>
+                                :subtitle="licitacion.acta_preadjudicacion"></v-list-item>
                             <v-list-item title="Salida PG2"
-                                :subtitle="fortmatDate.formatDate(data[1].salida_pg2)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.salida_pg2)"></v-list-item>
                             <v-list-item title="Vuelta PG2"
-                                :subtitle="fortmatDate.formatDate(data[1].vuelta_pg2)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.vuelta_pg2)"></v-list-item>
                             <v-list-item title="Fecha Aprobatoria"
-                                :subtitle="fortmatDate.formatDate(data[1].fecha_aprobatoria)"></v-list-item>
-                            <v-list-item title="Aprobatoria" :subtitle="data[1].aprobatoria"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(licitacion.fecha_aprobatoria)"></v-list-item>
+                            <v-list-item title="Aprobatoria" :subtitle="licitacion.aprobatoria"></v-list-item>
                         </v-list>
                     </v-col>
                 </v-row>
             </v-card>
 
             <v-card class="ma-2" cols="12">
-                <tabs :renglones="data[1].renglon" />
+                <tabs :renglones="licitacion.renglon" />
             </v-card>
 
             <v-card class="ma-2" cols="12">
@@ -82,7 +90,7 @@
 
             <v-card class="ma-2" cols="12">
                 <v-card-title class="d-flex justify-center">Todas las orden de Compra van aca</v-card-title>
-                <v-row v-for="(oc, index) in allOC" :key="index">
+                <v-row v-for="(oc, index) in getAllOC" :key="index">
                     <v-col cols="12">
                         <onlyOneOc :orden_compra="oc" />
                     </v-col>
@@ -103,27 +111,31 @@ export default {
     data() {
         return {
             tab: null,
-            data: data.datos,
             fortmatDate: format,
             allOC: []
         }
     },
-    props:{
+    props: {
         licitacion: Object
     },
     methods: {
+        close() {
+            this.$emit("cerrar");
+        },
+    },
+    computed: {
         getAllOC() {
             let oc = []
-            this.data[1].renglon.forEach(renglon => {
+            this.licitacion.renglon.forEach(renglon => {
                 oc.push(renglon.orden_compra)
                 renglon.orden_compra.orden_compra.forEach(subOC => oc.push(subOC))
             });
             return oc
         }
-    },
-    created() {
-        this.allOC = this.getAllOC()
     }
+    // created() {
+    //     this.allOC = this.getAllOC()
+    // }
 }
 </script>
 

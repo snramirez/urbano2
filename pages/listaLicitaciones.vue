@@ -1,6 +1,6 @@
 <template>
   <div class="px-4">
-    <v-card title="Licitaciones">
+    <v-card title="Licitaciones" v-show="lista">
       <template v-slot:text>
         <v-text-field
           v-model="search"
@@ -51,6 +51,8 @@
           </template>
       </v-data-table>
     </v-card>
+    <vista-completa-licitacion @cerrar="verLista" v-show="vistaUno" :licitacion="unaLicitacion"/>
+
   </div>
 </template>
 
@@ -63,6 +65,9 @@ export default {
       search: "",
       licitaciones: data.datos,
       format: format,
+      unaLicitacion: data.empyData,
+      lista: true,
+      vistaUno: false,
       headers: [
         { title: "Nombre", key: "nombre" },
         { title: "N° Proceso", key: "num_proceso" },
@@ -75,6 +80,19 @@ export default {
       ],
     };
   },
+
+  methods:{
+    verLicitacion(licitacion){
+      this.unaLicitacion = licitacion
+      this.vistaUno = true
+      this.lista = false
+    },
+
+    verLista(){
+      this.vistaUno = false
+      this.lista = true
+    },
+  }
 };
 </script>
 
