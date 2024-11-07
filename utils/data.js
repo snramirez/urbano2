@@ -2,7 +2,7 @@ const datos = [
   {
     nombre:
       "SERVICIO DE MANTENIMIENTO INTEGRAL Y RESIEMBRA DE CÉSPED DEL CAMPO DE GOLF JUAN BAUTISTA SEGURA",
-    num_proceso: "9611-0442-LPU21",
+    num_proceso: "1111-0442-LPU21",
     expediente: "EX-2021-10378435- -GCABA-DGTALAVJG",
     area: "SEC. DEPORTES",
     modalidad: "SIN MODALIDAD",
@@ -606,16 +606,16 @@ const empyData = {
               monto: 0,
               tipo: "",
               prorroga: [
-                {
-                  acta:"",
-                  vencimiento: null
-                }
+                  {
+                    acta: "N2154112",
+                    vencimiento: "2024-04-20T00:00:00.000+00:00",
+                  }
               ],
               ampliatoria: [
                 {
-                  acta:"",
-                  fecha:null,
-                  monto:0,
+                  acta: "N2154112",
+                  fecha: "2024-04-20T00:00:00.000+00:00",
+                  monto: 1000
                 }
               ],
               orden_compra: [],
@@ -649,17 +649,34 @@ const empyData = {
           },
           oferta: [
               {
-                  _id:"5465688",
-                  monto_ofertado: "",
-                  observacion: "",
-                  ganador: true,
-                  documentacion: true,
-                  beneficiario: [
-                      {
-                          razon_social: "",
-                          cuit: "",
-                      },
-                  ],
+                _id:"1234",
+                monto_ofertado: 1000000,
+                observacion: "Muy caro",
+                ganador: false,
+                documentacion: true,
+                beneficiario: [
+                  {
+                    razon_social: "Carlos SRL",
+                    cuit: "23-45452214-2",
+                  },
+                ],
+              },
+              {
+                _id:"1235",
+                monto_ofertado: 1100000,
+                observacion: "Muy muy caro",
+                ganador: false,
+                documentacion: true,
+                beneficiario: [
+                  {
+                    razon_social: "Miguel SRL",
+                    cuit: "33-55484511-8",
+                  },
+                  {
+                    razon_social: "Nakamura Contrstucciones SA",
+                    cuit: "33-55541255-4",
+                  },
+                ],
               },
           ],
       },

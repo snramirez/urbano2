@@ -18,10 +18,10 @@
 
                     <template v-slot:item.actions="{ item }">
                         <v-btn-toggle>
-                            <v-btn justify="space-around" small icon="mdi-pencil" v-tooltip="'Editar'"></v-btn>
+                            <v-btn justify="space-around" small icon="mdi-pencil" v-tooltip="'Editar'" @click="cargarEdit(item)"></v-btn>
 
                             <v-btn justify="space-around" small icon="mdi-file-remove"
-                                v-tooltip="'Borrar Prorroga'"></v-btn>
+                                v-tooltip="'Borrar Prorroga'" @click="borrarProrroga(item)"></v-btn>
                         </v-btn-toggle>
                     </template>
                 </v-data-table>
@@ -42,6 +42,26 @@
 
                         <v-row class="mt-8 mx-auto">
                             <v-btn color="success" class="pa-2" @click="addProrogation()">Agregar</v-btn>
+                        </v-row>
+                    </v-form>
+                </v-card-text>
+            </v-card>
+        </v-dialog>
+
+        <v-dialog v-model="editWindow" max-width="700">
+            <v-card class="my-10 pa-5" max-width="700">
+                <v-card-title class="d-flex justify-center pt-5">Editar Prorroga</v-card-title>
+                <v-divider></v-divider>
+                <v-card-text class="pa-3">
+                    <v-form onSubmit="return false;" @submit="">
+
+                        <v-text-field v-model="acta" label="Acta Prorroga" variant="outlined"></v-text-field>
+
+                        <v-date-input v-model="vencimiento" label="Vencimiento Prorroga" prepend-icon="mdi-calendar"
+                            variant="outlined" clearable></v-date-input>
+
+                        <v-row class="mt-8 mx-auto">
+                            <v-btn color="success" class="pa-2" @click="editProrroga()">Agregar</v-btn>
                         </v-row>
                     </v-form>
                 </v-card-text>
@@ -91,6 +111,27 @@ export default {
 
             this.cleanView();
             this.showAdd();
+        },
+
+        cargarEdit(item){
+            this.showEdit()
+            this.acta = item.acta
+            this.vencimiento = new Date(item.vencimiento)
+            this.editIndex = this.data.indexOf(item)
+        },
+
+        editProrroga(){
+            this.data[this.editIndex] = {
+                acta: this.acta,
+                vencimiento: this.vencimiento,
+            }
+            this.showEdit()
+            this.cleanView()
+        },
+
+        borrarProrroga(item){
+            let index = this.data.indexOf(item)
+            this.data.splice(index, 1)
         },
 
         cleanView() {

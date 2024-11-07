@@ -231,7 +231,7 @@
 
           <v-row>
             <v-col cols="12">
-              <contractor-offer :contratistas=contratistas :datostabla="datostabla"/>
+              <contractor-offer :contratistas=contratistas :datostabla="renglon.oferta"/>
             </v-col>
           </v-row>
           
@@ -265,10 +265,10 @@
 
           <v-row>
             <v-col cols="6">
-              <prorroga :data=prorroga />
+              <prorroga :data=renglon.orden_compra.prorroga />
             </v-col>
             <v-col cols="6">
-              <ampliatoria :data="ampliatoria"></ampliatoria>
+              <ampliatoria :data="renglon.orden_compra.ampliatoria"></ampliatoria>
             </v-col>
           </v-row>
         </v-expansion-panel-text>
@@ -353,8 +353,10 @@ export default {
         monto: 0,
         orden_compra: {
           num_orden:'',
-          monto: '',
+          monto: 0,
           tipo:'',
+          prorroga: [],
+          ampliatoria: []
         },
         oferta: [],
       });

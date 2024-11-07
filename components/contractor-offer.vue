@@ -14,12 +14,25 @@
       <v-row>
         <v-data-table
           :headers="headers"
-          :items="dataTable()"
+          :items="datostabla"
           :row-props="itemRowBackground"
           hide-default-footer
           disable-pagination
           class="elevation-1"
         >
+          <template v-slot:item.beneficiario="{ item }">
+            <v-chip
+              v-for="(contratista, index) in item.beneficiario"
+              :key="index"
+            >
+              {{ contratista.razon_social }}
+            </v-chip>
+          </template>
+
+          <template v-slot:item.monto_ofertado="{ item }">
+            <span>{{ format.priceFormater(item.monto_ofertado) }}</span>
+          </template>
+          
           <template v-slot:item.actions="{ item }">
             <v-btn-toggle>
               <v-btn
@@ -27,6 +40,7 @@
                 small
                 icon="mdi-pencil"
                 v-tooltip="'Editar'"
+                @click="cargarEdit(item)"
               ></v-btn>
 
               <v-btn
@@ -34,6 +48,7 @@
                 small
                 icon="mdi-file-remove"
                 v-tooltip="'Borrar Oferta'"
+                @click="borrarOferta(item)"
               ></v-btn>
 
               <v-btn
@@ -70,6 +85,7 @@
                 <v-select
                   v-model="beneficiario"
                   multiple
+                  chips
                   :item-props="itemProps"
                   :items="contratistas"
                   label="Contratista"
@@ -103,15 +119,64 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+
+    <v-dialog v-model="editWindow" max-width="700">
+      <v-card class="my-10 pa-5" max-width="700">
+        <v-card-title class="d-flex justify-center pt-5"
+          >Editar Oferta</v-card-title
+        >
+        <v-divider></v-divider>
+        <v-card-text class="pa-3">
+          <v-form @submit.lazy="">
+            <v-row>
+              <v-col cols="10">
+                <v-select
+                  v-model="beneficiario"
+                  multiple
+                  :item-props="itemProps"
+                  :items="contratistas"
+                  label="Contratista"
+                  required
+                  variant="outlined"
+                ></v-select>
+              </v-col>
+            </v-row>
+
+            <v-row class="mt-8 mx-auto">
+              <currency-field
+                label="Oferta"
+                v-model="monto_ofertado"
+              ></currency-field>
+            </v-row>
+
+            <v-row>
+              <v-textarea
+                v-model="observacion"
+                name="Observaciones"
+                label="Observaciones"
+                variant="outlined"
+                auto-grow
+                :counter="300"
+              ></v-textarea>
+            </v-row>
+            <v-btn color="success" @Click="editOferta" class="pa-2"
+              >Agregar</v-btn
+            >
+          </v-form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
+import format from "../utils/formatText";
+
 export default {
   data() {
     return {
       headers: [
-        { title: "Razon Social", value: "beneficiario.razon_social" },
+        { title: "Razon Social", value: "beneficiario" },
         { title: "Oferta", value: "monto_ofertado" },
         // { title: "Diferencia %", value: "Porcentage" },
         { title: "Observaciones", value: "observacion" },
@@ -122,17 +187,24 @@ export default {
       monto_ofertado: 0,
       observacion: "",
       beneficiario: [],
+      editIndex: -1,
+      format: format,
     };
   },
-  props:{
+  props: {
     contratistas: Array,
-    datostabla: Array
+    datostabla: Array,
   },
 
   methods: {
     showAdd() {
       this.addWindow = !this.addWindow;
     },
+
+    showEdit() {
+      this.editWindow = !this.editWindow;
+    },
+
     itemRowBackground(item) {
       console.log(item.item.ganador);
       return item.item.ganador ? { class: "style-1" } : { class: "" };
@@ -154,30 +226,6 @@ export default {
       this.showAdd();
       this.limpiarVistaAgregar();
     },
-    dataTable() {
-      let data = [];
-      this.datostabla.forEach((oferta) => {
-        let nombreBeneficiarios = "";
-        oferta.beneficiario.forEach((item) => {
-          nombreBeneficiarios = nombreBeneficiarios.concat(
-            item.razon_social,
-            " - "
-          );
-        });
-
-        data.push({
-          _id:oferta._id,
-          monto_ofertado: oferta.monto_ofertado,
-          observacion: oferta.observacion,
-          ganador: oferta.ganador,
-          documentacion: true,
-          beneficiario: {
-            razon_social: nombreBeneficiarios,
-          },
-        });
-      });
-      return data;
-    },
 
     limpiarVistaAgregar() {
       this.monto_ofertado = 0;
@@ -186,20 +234,45 @@ export default {
     },
 
     ganador(item) {
-        this.datostabla.forEach((element) => {
+      this.datostabla.forEach((element) => {
         if (element._id === item._id) {
           element.ganador = true;
         }
-      })
+      });
     },
 
     noGanador(item) {
-        console.log('item',item)
       this.datostabla.forEach((element) => {
         if (element._id === item._id) {
           element.ganador = false;
         }
       });
+    },
+
+    cargarEdit(item) {
+      this.showEdit();
+      this.beneficiario = [];
+      this.monto_ofertado = item.monto_ofertado;
+      this.observacion = item.observacion;
+      this.beneficiario = item.beneficiario;
+      this.editIndex = this.datostabla.indexOf(item);
+    },
+
+    editOferta() {
+      this.datostabla[this.editIndex] = {
+        monto_ofertado: this.monto_ofertado,
+        observacion: this.observacion,
+        ganador: false,
+        documentacion: true,
+        beneficiario: this.beneficiario,
+      };
+      this.showEdit();
+      this.limpiarVistaAgregar();
+    },
+
+    borrarOferta(item) {
+      let index = this.datostabla.indexOf(item);
+      this.datostabla.splice(index, 1);
     },
   },
 };

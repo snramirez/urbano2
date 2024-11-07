@@ -8,8 +8,12 @@ ctrl.formatDate = (date) => {
     if (!date) return;
     let format = moment(date).format("L");
     return format
-}
+},
 
+ctrl.priceFormater = (num) => {
+    const formatter = new Intl.NumberFormat("es-AR");
+    return formatter.format(num);
+},
 
 
 ctrl.test = () => {

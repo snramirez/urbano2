@@ -34,6 +34,13 @@
               <v-icon icon="mdi-file-certificate"></v-icon>
             </template>
           </v-list-item>
+
+          <v-list-item :to="'/listaLicitaciones'">
+            <v-list-item-title> Lista </v-list-item-title>
+            <template v-slot:prepend>
+              <v-icon icon="mdi-file-certificate"></v-icon>
+            </template>
+          </v-list-item>
         </v-list>
       </v-navigation-drawer>
 
