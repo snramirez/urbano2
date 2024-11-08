@@ -1,0 +1,30 @@
+Cambios pedidos 7/11/2024
+En la seccion Proceso agregar los campos:
+    Area
+    SubArea
+    Firmante
+En la seccion Licitacion:
+    Acta de preadjudicacion -> delete
+    Fecha vencimiento documentacion -> nuevo
+    Fecha vencimiento plazo impugnacion -> nuevo, remplaza fecha preadjudicacion
+En Orden de compra:
+    Monto ejecutado -> Monto devengado
+    Monto pagado -> nuevo campos
+    agregar Monto total de la OC
+    Elegir el destinatario (contratista/s)
+    Campo nuevo de progreso de pagos (sobre los devengados contra el monto total)
+    Campo nuevo que me indique de donde viene esta OC de compra (original, ampliatoria, prorroga)
+    Si tipo de OC es cerrado:
+        Cada nueva prorroga o ampliatoria genera una nueva orden de compra
+    Si tipo de OC es abierta:
+        Cada prorroga o ampliatoria no genera una nueva orden, Se tiene que distingir el monto original
+        y el monto de la ampliatoria. El progeso se calcula en base al total.
+    Agregar redeterminacion de precios seccion nueva dentro de orden de compra (simil ampliatoria) que genera nueva OC
+    por cada redeterminacion.
+
+    Cambios en la estructura. OC de compra va por fuera de todos los renglones y cuando se carga se adjudica a un contratista
+    y se le asignan los renglones que gano. 
+    
+    En vista de la licitacion agregar una nueva seccion donde se ven todas las ofertas ganadoras.
+
+
