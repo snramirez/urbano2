@@ -4,12 +4,9 @@
             <v-card-title class="d-flex justify-center">Orden de Compra</v-card-title>
             <v-card-subtitle class="d-flex justify-center">{{
                 orden_compra.num_orden
-                }}</v-card-subtitle>
-            <v-data-table 
-            :headers="headers" 
-            :items="orden_compra.control" 
-            :row-props="itemRowBackground"
-            hide-default-footer>
+            }}</v-card-subtitle>
+            <v-data-table :headers="headers" :items="orden_compra.control" :row-props="itemRowBackground"
+                hide-default-footer>
                 <template v-slot:item.periodo="{ item }">
                     <span>{{ formatDate.formatDate(item.periodo) }}</span>
                 </template>
@@ -57,9 +54,10 @@ export default {
 
 <style>
 .style-1 {
-  background-color: #E57373;
+    background-color: #E57373;
 }
+
 .style-2 {
-  background-color: rgb(114, 114, 67);
+    background-color: rgb(114, 114, 67);
 }
 </style>

@@ -82,7 +82,7 @@
 
             <v-card class="ma-2" cols="12">
                 <v-card-title class="d-flex justify-center">Todas las orden de Compra van aca</v-card-title>
-                <v-row v-for="(oc, index) in allOC" :key="index">
+                <v-row v-for="(oc, index) in data[1].orden_compra" :key="index">
                     <v-col cols="12">
                         <onlyOneOc :orden_compra="oc" />
                     </v-col>
@@ -112,18 +112,18 @@ export default {
         licitacion: Object
     },
     methods: {
-        getAllOC() {
-            let oc = []
-            this.data[1].renglon.forEach(renglon => {
-                oc.push(renglon.orden_compra)
-                renglon.orden_compra.orden_compra.forEach(subOC => oc.push(subOC))
-            });
-            return oc
-        }
+        // getAllOC() {
+        //     let oc = []
+        //     this.data[1].renglon.forEach(renglon => {
+        //         oc.push(renglon.orden_compra)
+        //         renglon.orden_compra.orden_compra.forEach(subOC => oc.push(subOC))
+        //     });
+        //     return oc
+        // }
     },
-    created() {
-        this.allOC = this.getAllOC()
-    }
+    // created() {
+    //     this.allOC = this.getAllOC()
+    // }
 }
 </script>
 

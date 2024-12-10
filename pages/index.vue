@@ -86,8 +86,8 @@ export default {
     //recorre el pliego y devuelve true si algun control con fecha vencida no fue ejecutado
     itsDue(pliego) {
       //si algun renglon tiene algun control vencido devuelve true.
-      return pliego.renglon.some((renglon) => {
-        return renglon.orden_compra.control.some(this.vencido);
+      return pliego.orden_compra.some((orden) => {
+        return orden.control.some(this.vencido);
       });
     },
 

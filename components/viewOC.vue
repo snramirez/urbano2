@@ -24,19 +24,19 @@
       </v-row>
       <v-row>
         <v-col>
-          <div v-for="(renglon, index) in pliego.renglon" :key="index">
+          <div v-for="(orden, index) in pliego.orden_compra" :key="index">
             <v-container>
-              <p class="text-h5 font-weight-medium p-4 mb-4">
+              <!-- <p class="text-h5 font-weight-medium p-4 mb-4">
                 Renglon: {{ renglon.descripcion }}
-              </p>
+              </p> -->
               <v-card>
                 <v-card-title>Orden de Compra</v-card-title>
                 <v-card-subtitle>{{
-                  renglon.orden_compra.num_orden
+                  orden.num_orden
                 }}</v-card-subtitle>
                 <v-data-table
                   :headers="headers"
-                  :items="renglon.orden_compra.control"
+                  :items="orden.control"
                   :row-props="itemRowBackground"
                 >
                   <template v-slot:item.periodo="{ item }">
@@ -80,21 +80,12 @@ export default {
     },
 
     itemRowBackground(item) {
-      console.log("itemRow")
       return this.vencido(item) ? {class: "style-1"} : {class: ""};
     },
 
     vencido(control) {
-      console.log(control);
-      console.log(control.item);
-      console.log(control.item.estado);
       let currentDate = new Date();
-      console.log("periodo", new Date(control.item.periodo))
-      console.log("current", currentDate)
-      console.log("comparacion", new Date(control.item.periodo) < currentDate)
-      console.log("estado", control.item.estado != "EJECUTADO")
       if ((new Date(control.item.periodo) < currentDate) && (control.item.estado != "EJECUTADO")){
-        console.log("dentro if")
         return true;
       }
     },
