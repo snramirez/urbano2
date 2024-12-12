@@ -8,7 +8,11 @@
                 <v-btn @click="showAdd" justify="space-around" icon="mdi-plus" small
                     v-tooltip="'Nuevo Control'"></v-btn>
             </v-row>
-            <onlyOneOc :orden_compra="orden_compra" />
+            <v-row>
+                <v-col>
+                    <onlyOneOc :orden_compra="orden_compra" />
+                </v-col>
+            </v-row>
         </v-container>
 
         <v-dialog v-model="addWindow" max-width="700">
@@ -32,7 +36,30 @@
                     </v-form>
                 </v-card-text>
             </v-card>
-        </v-dialog>F
+        </v-dialog>
+
+        <v-dialog v-model="editWindow" max-width="700">
+            <v-card class="my-10 pa-5" max-width="700">
+                <v-card-title class="d-flex justify-center pt-5">Editar Certificado</v-card-title>
+                <v-divider></v-divider>
+                <v-card-text class="pa-3">
+                    <v-form onSubmit="return false;" @submit="">
+                        <v-text-field v-model="num_certificado" label="N° Certificado"
+                            variant="outlined"></v-text-field>
+                        <v-date-input v-model="periodo" label="Periodo" prepend-icon="mdi-calendar" variant="outlined"
+                            clearable></v-date-input>
+                        <v-text-field v-model="SPR" label="SPR" variant="outlined"></v-text-field>
+                        <v-text-field v-model="PRD" label="PRD" variant="outlined"></v-text-field>
+                        <currency-field v-model="monto_ejecutado" label="Monto"></currency-field>
+                        <v-select v-model="estado" :items="selectEstados" label="Estado" variant="outlined"></v-select>
+
+                        <v-row class="mt-8 mx-auto">
+                            <v-btn color="success" class="pa-2" @click="editOC()">Agregar</v-btn>
+                        </v-row>
+                    </v-form>
+                </v-card-text>
+            </v-card>
+        </v-dialog>
     </div>
 </template>
 
@@ -72,6 +99,20 @@ export default {
                 monto_ejecutado: this.monto_ejecutado,
                 estado: this.estado,
             });
+        },
+
+        cargarEdit(item) {
+            this.num_certificado = item.num_certificado,
+                this.periodo = item.periodo,
+                this.SPR = item.SPR,
+                this.PRD = item.PRD,
+                this.monto_ejecutado = item.monto_ejecutado,
+                this.estado = item.estado,
+                this.editIndex = this.data.indexOf(item);
+        },
+
+        editOC() {
+
         }
 
     }
