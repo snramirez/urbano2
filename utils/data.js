@@ -578,6 +578,8 @@ const empyData = {
   num_proceso: "",
   expediente: "",
   area: "",
+  subarea: "",
+  firmante: "",
   modalidad: "",
   tipo_contrato: "",
   estado: "",
@@ -591,8 +593,8 @@ const empyData = {
   vuelta_pg1: null,
   fecha_llamado: null,
   apertura_ofertas: null,
-  fecha_acta_preadjudicacion: null,
-  acta_preadjudicacion: "",
+  fecha_vencimiento_plazo_impugnacion: null,
+  fecha_vencimiento_doc: null,
   salida_pg2: null,
   vuelta_pg2: null,
   fecha_aprobatoria: null,
@@ -600,7 +602,7 @@ const empyData = {
   renglon: [
     {
       _id: "65465438",
-      descripcion: "",
+      descripcion: "Predio Este",
       monto: 0,
       oferta: [
         {
@@ -642,7 +644,7 @@ const empyData = {
     tipo: "",
     prorroga: [
       {
-        acta: "N2154112",
+        acta: "p2154112",
         vencimiento: "2024-04-20T00:00:00.000+00:00",
       }
     ],
@@ -653,6 +655,11 @@ const empyData = {
         monto: 1000
       }
     ],
+    destinatario: null,
+    origen:"",
+    ampliatoria_origen: "",
+    prorroga_origen: "",
+    renglon_origen: "",
     orden_compra: [],
     extension: [],
     control: [
@@ -662,6 +669,7 @@ const empyData = {
       //   SPR: "",
       //   PRD: "",
       //   monto_ejecutado: "",
+      //   monto_pagado:"",
       //   estado: "",
       // },
       // {
@@ -670,6 +678,7 @@ const empyData = {
       //   SPR: "",
       //   PRD: "",
       //   monto_ejecutado: "",
+      //   monto_pagado:"",
       //   estado: "",
       // },
       // {
@@ -678,6 +687,7 @@ const empyData = {
       //   SPR: "",
       //   PRD: "",
       //   monto_ejecutado: "",
+      //   monto_pagado:"",
       //   estado: "",
       // },
     ],

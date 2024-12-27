@@ -21,20 +21,27 @@
 
           <v-row>
             <v-col cols="12" md="3">
+              <v-text-field variant="outlined" label="Sub Area" v-model="data.subarea"></v-text-field>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-text-field variant="outlined" label="Firmante" v-model="data.firmante"></v-text-field>
+            </v-col>
+            <v-col cols="12" md="3">
               <v-text-field variant="outlined" label="Modalidad" v-model="data.modalidad"></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field variant="outlined" label="Tipo Contrato" v-model="data.tipo_contrato"></v-text-field>
             </v-col>
+
+          </v-row>
+
+          <v-row>
             <v-col cols="12" md="3">
               <v-text-field variant="outlined" label="Estado" v-model="data.estado"></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field variant="outlined" label="Plazo" v-model="data.plazo"></v-text-field>
             </v-col>
-          </v-row>
-
-          <v-row>
             <v-col cols="12" md="3">
               <v-text-field variant="outlined" label="Inicio" v-model="data.inicio"></v-text-field>
             </v-col>
@@ -77,13 +84,14 @@
                 variant="outlined" clearable></v-date-input>
             </v-col>
             <v-col cols="12" md="3">
-              <v-date-input v-model="data.fecha_acta_preadjudicacion" label="Fecha Preadjudicacion"
+              <v-date-input v-model="data.fecha_vencimiento_plazo_impugnacion" label="Vencimiento Plazo Impugnacion"
                 prepend-icon="mdi-calendar" variant="outlined" clearable></v-date-input>
             </v-col>
             <v-col cols="12" md="3">
-              <v-text-field variant="outlined" label="Acta Preadjudicacion"
-                v-model="data.acta_preadjudicacion"></v-text-field>
+              <v-date-input v-model="data.fecha_vencimiento_doc" label="Vencimiento Documentacion"
+                prepend-icon="mdi-calendar" variant="outlined" clearable></v-date-input>
             </v-col>
+
           </v-row>
 
           <v-row>
@@ -149,12 +157,76 @@
               <v-text-field variant="outlined" label="Numero de Orden" v-model="OC.num_orden"></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
-              <v-text-field variant="outlined" label="Tipo de Orden" v-model="OC.tipo"></v-text-field>
+              <v-select
+                  v-model="OC.tipo"
+                  :items="tipoOC"
+                  label="Tipo Orden"
+                  required
+                  variant="outlined"
+                ></v-select>
             </v-col>
             <v-col cols="12" md="3">
-              <currency-field label="Monto" v-model="OC.monto"></currency-field>
+              <currency-field label="Monto Original" v-model="OC.monto"></currency-field>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-select
+                  v-model="OC.destinatario"
+                  multiple
+                  chips
+                  :item-props="itemProps"
+                  :items="contratistas"
+                  label="Contratista"
+                  required
+                  variant="outlined"
+                ></v-select>
             </v-col>
           </v-row>
+
+          <v-row>
+            <v-col cols="12" md="3">
+              <v-select
+                  v-model="OC.origen"
+                  :items="origenOC"
+                  label="Tipo Orden"
+                  required
+                  variant="outlined"
+                ></v-select>
+            </v-col>
+
+            <v-col v-if="OC.origen === 'AMPLIATORIA'" cols="12" md="3">
+              <v-select
+                  v-model="OC.ampliatoria_origen"
+                  :items="getAmpliatoria()"
+                  label="Ampliatoria origen"
+                  required
+                  clearable
+                  variant="outlined"
+                ></v-select>
+            </v-col>
+
+            <v-col v-if="OC.origen === 'PRORROGA'" cols="12" md="3">
+              <v-select
+                  v-model="OC.prorroga_origen"
+                  :items="getPrroroga()"
+                  label="Prorroga origen"
+                  required
+                  clearable
+                  variant="outlined"
+                ></v-select>
+            </v-col>
+
+            <v-col v-if="OC.origen === 'RENGLON'" cols="12" md="3">
+              <v-select
+                  v-model="OC.renglon_origen"
+                  :items="getRenglon()"
+                  label="Renglon origen"
+                  required
+                  clearable
+                  variant="outlined"
+                ></v-select>
+            </v-col>
+          </v-row>
+
 
           <v-row>
             <v-col cols="6">
@@ -186,6 +258,8 @@ export default {
       panelRenglon: [],
       panelOC: [],
       data: data.empyData,
+      tipoOC: ["ABIERTA", "CERRADA"],
+      origenOC: ["RENGLON", "AMPLIATORIA", "PRORROGA"],
       contratistas: [
         {
           razon_social: "Carlos SRL",
@@ -268,10 +342,48 @@ export default {
         num_orden: '',
         monto: 0,
         tipo: '',
+        destinatario: '',
+        origen:'',
+        ampliatoria_origen: '',
+        prorroga_origen: '',
+        renglon_origen: '',
         prorroga: [],
         ampliatoria: []
       });
     },
+    
+    itemProps(item) {
+      return {
+        title: item.razon_social,
+        subtitle: item.cuit,
+      };
+    },
+
+    getAmpliatoria(){
+      let listAmp = []
+      this.data.orden_compra.forEach(OC => {
+        OC.ampliatoria.forEach(amp => {
+          listAmp.push(amp.acta)
+        })
+      })
+      return listAmp
+    },
+
+    getPrroroga(){
+      let listProrroga = []
+      this.data.orden_compra.forEach(OC => {
+        OC.prorroga.forEach(pro => {
+          listProrroga.push(pro.acta)
+        })
+      })
+      return listProrroga
+    },
+
+    getRenglon(){
+      let listRenglon = []
+      this.data.renglon.forEach(renglon => listRenglon.push(renglon.descripcion))
+      return listRenglon
+    }
   },
 };
 </script>

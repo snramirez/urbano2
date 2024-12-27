@@ -1,15 +1,23 @@
 Cambios pedidos 7/11/2024
+
+################## LISTO  ########################
 En la seccion Proceso agregar los campos:
     Area
     SubArea
     Firmante
+##################################################
+
+################## LISTO  ########################
 En la seccion Licitacion:
     Acta de preadjudicacion -> delete
     Fecha vencimiento documentacion -> nuevo
     Fecha vencimiento plazo impugnacion -> nuevo, remplaza fecha preadjudicacion
+
+######################################################
+
 En Orden de compra:
-    Monto ejecutado -> Monto devengado
-    Monto pagado -> nuevo campos
+    Monto ejecutado -> Monto devengado 
+    Monto pagado -> nuevo campos 
     agregar Monto total de la OC
     Elegir el destinatario (contratista/s)
     Campo nuevo de progreso de pagos (sobre los devengados contra el monto total)
