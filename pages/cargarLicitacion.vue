@@ -187,7 +187,7 @@
               <v-select
                   v-model="OC.origen"
                   :items="origenOC"
-                  label="Tipo Orden"
+                  label="Tipo Origen"
                   required
                   variant="outlined"
                 ></v-select>
@@ -224,6 +224,10 @@
                   clearable
                   variant="outlined"
                 ></v-select>
+            </v-col>
+
+            <v-col cols="12" md="3">
+              <v-text-field variant="outlined" model-value="Mensaje" readonly label="Monto Total"></v-text-field>
             </v-col>
           </v-row>
 
@@ -385,6 +389,10 @@ export default {
       return listRenglon
     }
   },
+
+  computed:{
+    
+  }
 };
 </script>
 

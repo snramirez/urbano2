@@ -16,12 +16,12 @@ En la seccion Licitacion:
 ######################################################
 
 En Orden de compra:
-    Monto ejecutado -> Monto devengado 
-    Monto pagado -> nuevo campos 
+    *Monto ejecutado -> Monto devengado 
+    *Monto pagado -> nuevo campos 
     agregar Monto total de la OC
     Elegir el destinatario (contratista/s)
     Campo nuevo de progreso de pagos (sobre los devengados contra el monto total)
-    Campo nuevo que me indique de donde viene esta OC de compra (original, ampliatoria, prorroga)
+    *Campo nuevo que me indique de donde viene esta OC de compra (original, ampliatoria, prorroga)
     Si tipo de OC es cerrado:
         Cada nueva prorroga o ampliatoria genera una nueva orden de compra
     Si tipo de OC es abierta:
