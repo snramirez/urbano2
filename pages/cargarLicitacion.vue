@@ -187,7 +187,7 @@
               <v-select
                   v-model="OC.origen"
                   :items="origenOC"
-                  label="Tipo Origen"
+                  label="Origen"
                   required
                   variant="outlined"
                 ></v-select>
@@ -227,7 +227,7 @@
             </v-col>
 
             <v-col cols="12" md="3">
-              <v-text-field variant="outlined" model-value="Mensaje" readonly label="Monto Total"></v-text-field>
+              <currency-field variant="outlined" :model-value="getMontoTotal(OC)" readonly label="Monto Total"></currency-field>
             </v-col>
           </v-row>
 
@@ -346,13 +346,14 @@ export default {
         num_orden: '',
         monto: 0,
         tipo: '',
-        destinatario: '',
+        destinatario: null,
         origen:'',
         ampliatoria_origen: '',
         prorroga_origen: '',
         renglon_origen: '',
         prorroga: [],
-        ampliatoria: []
+        ampliatoria: [],
+        control:[]
       });
     },
     
@@ -387,11 +388,17 @@ export default {
       let listRenglon = []
       this.data.renglon.forEach(renglon => listRenglon.push(renglon.descripcion))
       return listRenglon
+    },
+
+    getMontoTotal(orden){
+      let montoTotal = 0
+      orden.ampliatoria.forEach(amp => montoTotal += amp.monto)
+      montoTotal += orden.monto
+      return montoTotal 
     }
   },
 
   computed:{
-    
   }
 };
 </script>

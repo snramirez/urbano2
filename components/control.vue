@@ -15,6 +15,10 @@
                         <v-card-subtitle class="d-flex justify-center">
                             {{ orden_compra.num_orden }}
                         </v-card-subtitle>
+                        <v-divider></v-divider>
+                        <v-card-title>Progreso {{ (montoDevengado() / getMontoTotal() * 100).toFixed(2) }}%</v-card-title>
+                        <v-card-subtitle>Monto Total $ {{ getMontoTotal() }}</v-card-subtitle>
+                        <v-card-subtitle>Monto Devengado $ {{ montoDevengado() }}</v-card-subtitle>
 
                         <v-data-table :headers="headers" :items="orden_compra.control" :row-props="itemRowBackground"
                             hide-default-footer>
@@ -108,7 +112,7 @@ export default {
                 { title: "SPR", value: "SPR" },
                 { title: "PRD", value: "PRD" },
                 { title: "Monto Devengado", value: "monto_ejecutado" },
-                { title: "Monto Pagado", value: "monto_ejecutado" },
+                { title: "Monto Pagado", value: "monto_pagado" },
                 { title: "Estado", value: "estado" },
                 { title: "Accion", value: "actions", sortable: false },
             ],
@@ -188,6 +192,21 @@ export default {
                 return true;
             }
         },
+
+        montoDevengado() {
+            let monto = 0
+            this.orden_compra.control.forEach(certificado => {
+                certificado.estado == 'EJECUTADO' ? monto += certificado.monto_ejecutado : 0
+            });
+            return monto
+        },
+
+        getMontoTotal() {
+            let montoTotal = 0
+            this.orden_compra.ampliatoria.forEach(amp => montoTotal += amp.monto)
+            montoTotal += this.orden_compra.monto
+            return montoTotal
+        }
     },
 }
 
