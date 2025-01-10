@@ -65,7 +65,7 @@ export default {
       search: "",
       licitaciones: data.datos,
       format: format,
-      unaLicitacion: data.empyData,
+      unaLicitacion: data.datos[0],
       lista: true,
       vistaUno: false,
       headers: [

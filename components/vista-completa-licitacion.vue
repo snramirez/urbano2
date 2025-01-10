@@ -90,7 +90,7 @@
 
             <v-card class="ma-2" cols="12">
                 <v-card-title class="d-flex justify-center">Todas las orden de Compra van aca</v-card-title>
-                <v-row v-for="(oc, index) in getAllOC" :key="index">
+                <v-row v-for="(oc, index) in licitacion.orden_compra" :key="index">
                     <v-col cols="12">
                         <onlyOneOc :orden_compra="oc" />
                     </v-col>
