@@ -36,3 +36,20 @@ En Orden de compra:
     En vista de la licitacion agregar una nueva seccion donde se ven todas las ofertas ganadoras.
 
 
+#################################### 28/03/2025 ##################################
+
+En Orden de compra:
+    Al elejir Origen (prorroga, renglon, ampliacion, redeterminacion, continuidad) se tiene que poder elejir varios (como con contratistas)
+    Estados certificacion OC => Pagado, Devengado, No Devengado
+    Prorroga => tiene que tener monto
+    Nuevo OC continuidad => Igual prorroga
+    Nuevo redeterminacion de precio => igual prorroga
+    OC cerrada => (prorroga, renglon, ampliacion, redeterminacion, continuidad) genera nueva OC
+               => Se calcula el progeso de los certificados sobre el monto original
+    OC abierta => (prorroga, renglon,  redeterminacion, continuidad) genera nueva OC, ampliatoria no
+               => Se calcula el progeso de los certificados sobre el monto original + la ampliatoria
+
+    En proceso agregar monto Oficial
+
+    Opcionales: Calcular el tiempo que paso entre fecha de llamado y adjudicacion
+                Calcular la diferencia entre monto oficial y los pago al final de todo.
