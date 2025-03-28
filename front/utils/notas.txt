@@ -22,7 +22,7 @@ En Orden de compra:
     Elegir el destinatario (contratista/s)
     Campo nuevo de progreso de pagos (sobre los devengados contra el monto total)
     *Campo nuevo que me indique de donde viene esta OC de compra (original, ampliatoria, prorroga)
-    Si tipo de OC es cerrado:
+    Si tipoo de OC es cerrad:
         Cada nueva prorroga o ampliatoria genera una nueva orden de compra
     Si tipo de OC es abierta:
         Cada prorroga o ampliatoria no genera una nueva orden, Se tiene que distingir el monto original

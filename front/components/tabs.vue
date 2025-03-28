@@ -16,7 +16,7 @@
 
                         <v-col cols="12" md="6">
                             <v-list>
-                                <v-list-item title="Monto" :subtitle="renglon.monto"></v-list-item>
+                                <v-list-item title="Monto" :subtitle="format.priceFormater(renglon.monto)"></v-list-item>
                             </v-list>
                         </v-col>
                     </v-row>
@@ -30,10 +30,12 @@
 </template>
 
 <script>
+import format from "../utils/formatText";
 export default {
     data() {
         return {
-            tab: null
+            tab: null,
+            format: format,
         }
     },
     props: {

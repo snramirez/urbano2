@@ -12,6 +12,8 @@
                             <v-list-item title="Numero Proceso" :subtitle="data[1].num_proceso"></v-list-item>
                             <v-list-item title="Expediente" :subtitle="data[1].expediente"></v-list-item>
                             <v-list-item title="Area" :subtitle="data[1].area"></v-list-item>
+                            <v-list-item title="Subarea" :subtitle="data[1].subarea"></v-list-item>
+                            <v-list-item title="Firmante" :subtitle="data[1].firmante"></v-list-item>
                             <v-list-item title="Modalidad" :subtitle="data[1].modalidad"></v-list-item>
                         </v-list>
                     </v-col>
@@ -25,6 +27,9 @@
                                 :subtitle="fortmatDate.formatDate(data[1].inicio)"></v-list-item>
                             <v-list-item title="Vencimiento"
                                 :subtitle="fortmatDate.formatDate(data[1].vencimiento)"></v-list-item>
+                            <v-list-item title="Monto"
+                                :subtitle="fortmatDate.priceFormater(data[1].monto)"></v-list-item>
+
                         </v-list>
                     </v-col>
                 </v-row>
@@ -33,7 +38,7 @@
             <v-card class="ma-2" cols="12">
                 <v-card-title class="d-flex justify-center">Licitacion</v-card-title>
                 <v-row class="my-2 mx-2">
-                    <v-col cols="6">
+                    <v-col cols="12" md="6">
                         <v-list>
                             <v-list-item title="Ingresos de los Pliego"
                                 :subtitle="fortmatDate.formatDate(data[1].pliego_ingreso)"></v-list-item>
@@ -42,7 +47,7 @@
                             <v-list-item title="Salida PG"
                                 :subtitle="fortmatDate.formatDate(data[1].salida_pg1)"></v-list-item>
                             <v-list-item title="Vuelta PG"
-                                :subtitle="fortmatDate.formatDate(data[1].vuelta_pg2)"></v-list-item>
+                                :subtitle="fortmatDate.formatDate(data[1].vuelta_pg1)"></v-list-item>
                             <v-list-item title="Fecha de Llamado"
                                 :subtitle="fortmatDate.formatDate(data[1].fecha_llamado)"></v-list-item>
                             <v-list-item title="Apertura de Ofertas"
@@ -50,12 +55,12 @@
                         </v-list>
                     </v-col>
 
-                    <v-col cols="6">
+                    <v-col cols="12" md="6">
                         <v-list>
-                            <v-list-item title="Fecha Acta Preadjudicacion"
-                                :subtitle="fortmatDate.formatDate(data[1].fecha_acta_preadjudicacion)"></v-list-item>
-                            <v-list-item title="Acta Preadjudicacion"
-                                :subtitle="data[1].acta_preadjudicacion"></v-list-item>
+                            <v-list-item title="Vencimiento Plazo Impugnacion"
+                                :subtitle="fortmatDate.formatDate(data[1].fecha_vencimiento_plazo_impugnacion)"></v-list-item>
+                            <v-list-item title="Vencimiento de Documentacion"
+                                :subtitle="fortmatDate.formatDate(data[1].fecha_vencimiento_doc)"></v-list-item>
                             <v-list-item title="Salida PG2"
                                 :subtitle="fortmatDate.formatDate(data[1].salida_pg2)"></v-list-item>
                             <v-list-item title="Vuelta PG2"
@@ -108,7 +113,7 @@ export default {
             allOC: []
         }
     },
-    props:{
+    props: {
         licitacion: Object
     },
     methods: {
