@@ -57,43 +57,43 @@
 </template>
 
 <script>
-import data from "../utils/data";
+import datos from "../utils/data";
 import format from "../utils/formatText";
-export default {
-  data() {
-    return {
-      search: "",
-      licitaciones: data.datos,
-      format: format,
-      unaLicitacion: data.datos[0],
-      lista: true,
-      vistaUno: false,
-      headers: [
-        { title: "Nombre", key: "nombre" },
-        { title: "N° Proceso", key: "num_proceso" },
-        { title: "Expediente", key: "expediente" },
-        { title: "Estado", key: "estado" },
-        { title: "Inicio", key: "inicio" },
-        { title: "Vencimiento", key: "vencimiento" },
-        { title: "Monto", key: "monto" },
-        { title: "Accion", key: "actions", sortable: false },
-      ],
-    };
-  },
 
-  methods:{
-    verLicitacion(licitacion){
-      this.unaLicitacion = licitacion
-      this.vistaUno = true
-      this.lista = false
-    },
 
-    verLista(){
-      this.vistaUno = false
-      this.lista = true
-    },
-  }
-};
+const search= ref("")
+const licitaciones = data.datos
+const format = format
+const unaLicitacion = datos.datos[0]
+const lista = ref(true)
+const vistaUno = ref(false)
+
+headers: [
+  { title: "Nombre", key: "nombre" },
+  { title: "N° Proceso", key: "num_proceso" },
+  { title: "Expediente", key: "expediente" },
+  { title: "Estado", key: "estado" },
+  { title: "Inicio", key: "inicio" },
+  { title: "Vencimiento", key: "vencimiento" },
+  { title: "Monto", key: "monto" },
+  { title: "Accion", key: "actions", sortable: false },
+]
+
+
+
+
+verLicitacion(licitacion){
+this.unaLicitacion = licitacion
+this.vistaUno = true
+this.lista = false
+}
+
+verLista(){
+this.vistaUno = false
+this.lista = true
+}
+
+
 </script>
 
 <style lang="scss" scoped></style>

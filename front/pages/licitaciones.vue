@@ -100,36 +100,37 @@
     </div>
 </template>
 
-<script>
-import data from "../utils/data";
+<script setup>
+import datos from "../utils/data";
 import format from "../utils/formatText";
+import { ref } from 'vue'
 
-export default {
-    data() {
-        return {
-            tab: null,
-            data: data.datos,
-            fortmatDate: format,
-            allOC: []
-        }
-    },
-    props: {
-        licitacion: Object
-    },
-    methods: {
-        // getAllOC() {
-        //     let oc = []
-        //     this.data[1].renglon.forEach(renglon => {
-        //         oc.push(renglon.orden_compra)
-        //         renglon.orden_compra.orden_compra.forEach(subOC => oc.push(subOC))
-        //     });
-        //     return oc
-        // }
-    },
-    // created() {
-    //     this.allOC = this.getAllOC()
-    // }
-}
+const tab = ref(null)
+const data = datos.datos
+const fortmatDate = format
+const allOC = ref([])
+
+// const props = defineProps({
+//     licitacion: {
+//         type: Object,
+//         required: true
+//     }
+// })
+
+
+// getAllOC() {
+//     let oc = []
+//     this.data[1].renglon.forEach(renglon => {
+//         oc.push(renglon.orden_compra)
+//         renglon.orden_compra.orden_compra.forEach(subOC => oc.push(subOC))
+//     });
+//     return oc
+// }
+
+// created() {
+//     this.allOC = this.getAllOC()
+// }
+
 </script>
 
 <style>

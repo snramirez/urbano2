@@ -253,154 +253,103 @@
   </v-container>
 </template>
 
-<script>
-import data from "../utils/data";
-export default {
-  data() {
-    return {
-      panel: [],
-      panelRenglon: [],
-      panelOC: [],
-      data: data.empyData,
-      tipoOC: ["ABIERTA", "CERRADA"],
-      origenOC: ["RENGLON", "AMPLIATORIA", "PRORROGA"],
-      contratistas: [
-        {
-          razon_social: "Carlos SRL",
-          cuit: "23-45452214-2",
-        },
-        {
-          razon_social: "Miguel SRL",
-          cuit: "33-55484511-8",
-        },
-        {
-          razon_social: "Nakamura Contrstucciones SA",
-          cuit: "33-55541255-4",
-        },
-      ],
-      prorroga: [
-        {
-          acta: "N2154112",
-          vencimiento: "2024-04-20T00:00:00.000+00:00",
-        }
-      ],
-      ampliatoria: [
-        {
-          acta: "N2154112",
-          fecha: "2024-04-20T00:00:00.000+00:00",
-          monto: 1000
-        }
-      ],
-      datostabla: [
-        {
-          _id: "1234",
-          monto_ofertado: 1000000,
-          observacion: "Muy caro",
-          ganador: false,
-          documentacion: true,
-          beneficiario: [
-            {
-              razon_social: "Carlos SRL",
-              cuit: "",
-            },
-          ],
-        },
-        {
-          _id: "1235",
-          monto_ofertado: 1100000,
-          observacion: "Muy muy caro",
-          ganador: false,
-          documentacion: true,
-          beneficiario: [
-            {
-              razon_social: "Miguel SRL",
-              cuit: "",
-            },
-            {
-              razon_social: "Nakamura Contrstucciones SA",
-              cuit: "",
-            },
-          ],
-        },
-      ],
-    };
+<script setup>
+import datos from "../utils/data";
+import { ref } from 'vue'
+
+
+const panel = ref([])
+const panelRenglon = ref([])
+const panelOC = ref([])
+const data = datos.empyData
+const tipoOC = ["ABIERTA", "CERRADA"]
+const origenOC = ["RENGLON", "AMPLIATORIA", "PRORROGA"]
+const contratistas = ref([
+  {
+    razon_social: "Carlos SRL",
+    cuit: "23-45452214-2",
   },
-  methods: {
-    addRenglon() {
-      this.data.renglon.push({
-        descripcion: "",
-        monto: 0,
-        orden_compra: {
-          num_orden: '',
-          monto: 0,
-          tipo: '',
-          prorroga: [],
-          ampliatoria: []
-        },
-        oferta: [],
-      });
-    },
-
-    addOC() {
-      this.data.orden_compra.push({
-        num_orden: '',
-        monto: 0,
-        tipo: '',
-        destinatario: null,
-        origen:'',
-        ampliatoria_origen: '',
-        prorroga_origen: '',
-        renglon_origen: '',
-        prorroga: [],
-        ampliatoria: [],
-        control:[]
-      });
-    },
-    
-    itemProps(item) {
-      return {
-        title: item.razon_social,
-        subtitle: item.cuit,
-      };
-    },
-
-    getAmpliatoria(){
-      let listAmp = []
-      this.data.orden_compra.forEach(OC => {
-        OC.ampliatoria.forEach(amp => {
-          listAmp.push(amp.acta)
-        })
-      })
-      return listAmp
-    },
-
-    getPrroroga(){
-      let listProrroga = []
-      this.data.orden_compra.forEach(OC => {
-        OC.prorroga.forEach(pro => {
-          listProrroga.push(pro.acta)
-        })
-      })
-      return listProrroga
-    },
-
-    getRenglon(){
-      let listRenglon = []
-      this.data.renglon.forEach(renglon => listRenglon.push(renglon.descripcion))
-      return listRenglon
-    },
-
-    getMontoTotal(orden){
-      let montoTotal = 0
-      orden.ampliatoria.forEach(amp => montoTotal += amp.monto)
-      montoTotal += orden.monto
-      return montoTotal 
-    }
+  {
+    razon_social: "Miguel SRL",
+    cuit: "33-55484511-8",
   },
+  {
+    razon_social: "Nakamura Contrstucciones SA",
+    cuit: "33-55541255-4",
+  },
+])
 
-  computed:{
-  }
-};
+function addRenglon() {
+  data.renglon.push({
+    descripcion: "",
+    monto: 0,
+    orden_compra: {
+      num_orden: '',
+      monto: 0,
+      tipo: '',
+      prorroga: [],
+      ampliatoria: []
+    },
+    oferta: [],
+  });
+}
+
+function addOC() {
+  data.orden_compra.push({
+    num_orden: '',
+    monto: 0,
+    tipo: '',
+    destinatario: null,
+    origen:'',
+    ampliatoria_origen: '',
+    prorroga_origen: '',
+    renglon_origen: '',
+    prorroga: [],
+    ampliatoria: [],
+    control:[]
+  });
+}
+
+function itemProps(item) {
+  return {
+    title: item.razon_social,
+    subtitle: item.cuit,
+  };
+}
+
+function getAmpliatoria(){
+  let listAmp = []
+  data.orden_compra.forEach(OC => {
+    OC.ampliatoria.forEach(amp => {
+      listAmp.push(amp.acta)
+    })
+  })
+  return listAmp
+}
+
+function getPrroroga(){
+  let listProrroga = []
+  data.orden_compra.forEach(OC => {
+    OC.prorroga.forEach(pro => {
+      listProrroga.push(pro.acta)
+    })
+  })
+  return listProrroga
+}
+
+function getRenglon(){
+  let listRenglon = []
+  data.renglon.forEach(renglon => listRenglon.push(renglon.descripcion))
+  return listRenglon
+}
+
+function getMontoTotal(orden){
+  let montoTotal = 0
+  orden.ampliatoria.forEach(amp => montoTotal += amp.monto)
+  montoTotal += orden.monto
+  return montoTotal 
+}
+
 </script>
 
 <style lang="scss" scoped></style>
