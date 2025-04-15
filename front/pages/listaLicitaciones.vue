@@ -56,19 +56,19 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import datos from "../utils/data";
 import format from "../utils/formatText";
+import { ref } from 'vue'
 
 
 const search= ref("")
-const licitaciones = data.datos
-const format = format
+const licitaciones = datos.datos
 const unaLicitacion = datos.datos[0]
 const lista = ref(true)
 const vistaUno = ref(false)
 
-headers: [
+const headers = [
   { title: "Nombre", key: "nombre" },
   { title: "N° Proceso", key: "num_proceso" },
   { title: "Expediente", key: "expediente" },
@@ -80,19 +80,16 @@ headers: [
 ]
 
 
-
-
-verLicitacion(licitacion){
-this.unaLicitacion = licitacion
-this.vistaUno = true
-this.lista = false
+function verLicitacion(licitacion){
+  unaLicitacion.value = licitacion
+  vistaUno.value = true
+  lista.value = false
 }
 
-verLista(){
-this.vistaUno = false
-this.lista = true
+function verLista(){
+  vistaUno.value = false
+  lista.value = true
 }
-
 
 </script>
 

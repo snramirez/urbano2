@@ -123,82 +123,82 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import format from "../utils/formatText";
-export default {
-  data() {
-    return {
-      headers: [
+import { ref } from 'vue'
+
+
+      const headers = [
         //{ text: "id", value: "_id" },
         { title: "Acta", value: "acta" },
         { title: "Fecha", value: "fecha" },
         { title: "Monto", value: "monto" },
         { title: "Accion", value: "actions", sortable: false },
-      ],
-      addWindow: false,
-      editWindow: false,
-      acta: "",
-      fecha: null,
-      monto: 0,
-      editIndex: -1,
-      format: format,
-    };
-  },
+      ]
+      const addWindow = ref(false)
+      const editWindow = ref(false)
+      const acta = ref("")
+      const fecha = ref(null)
+      const monto = ref(0)
+      const editIndex = ref(-1)
 
-  props: {
-    data: Array,
-  },
-
-  methods: {
-    showAdd() {
-      this.addWindow = !this.addWindow;
+  const props = defineProps({
+    data: {
+      type: Array,
+      required: true,
     },
+  })
 
-    showEdit() {
-      this.editWindow = !this.editWindow;
-    },
+ 
+    function showAdd() {
+      addWindow.value = !addWindow.value;
+    }
 
-    addExtension() {
-      this.data.push({
+    function showEdit() {
+      editWindow.value = !editWindow.value;
+    }
+
+    //Hacerlo un emit como corresponde. 
+    function addExtension() {
+      data.push({
         acta: this.acta,
         fecha: this.fecha,
         monto: this.monto,
       });
 
-      this.cleanView();
-      this.showAdd();
-    },
+      cleanView();
+      showAdd();
+    }
 
-    cargarEdit(item) {
-      this.showEdit();
-      this.acta = item.acta;
-      this.fecha = new Date(item.fecha);
-      this.monto = item.monto;
-      this.editIndex = this.data.indexOf(item);
-    },
+    function cargarEdit(item) {
+      showEdit();
+      acta.value = item.acta;
+      fecha.value = new Date(item.fecha);
+      monto.value = item.monto;
+      editIndex.value = this.data.indexOf(item);
+    }
 
-    editExtension() {
-      this.data[this.editIndex] = {
-        acta: this.acta,
-        fecha: this.fecha,
-        monto: this.monto,
+    function editExtension() {
+      data[editIndex] = {
+        acta: acta.value,
+        fecha: fecha.value,
+        monto: monto.value,
       };
-      this.showEdit();
-      this.cleanView();
-    },
+      showEdit();
+      cleanView();
+    }
 
-    borrarAmpliatoria(item) {
+    function borrarAmpliatoria(item) {
       let index = this.data.indexOf(item);
       this.data.splice(index, 1);
-    },
+    }
 
-    cleanView() {
-      this.acta = "";
-      this.fecha = null;
-      this.monto = 0;
-    },
-  },
-};
+    function cleanView() {
+      acta.value = "";
+      fecha.value = null;
+      monto.value = 0;
+    }
+
 </script>
 
 <style lang="scss" scoped></style>
