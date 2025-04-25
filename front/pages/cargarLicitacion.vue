@@ -237,7 +237,7 @@
               <prorroga :data=OC.prorroga />
             </v-col>
             <v-col cols="6">
-              <ampliatoria :data="OC.ampliatoria"></ampliatoria>
+              <ampliatoria :ampliatoria="OC.ampliatoria"></ampliatoria>
             </v-col>
           </v-row>
 
