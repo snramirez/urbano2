@@ -11,7 +11,6 @@ const orden_compraSchema = new Schema({
     ampliatoria_origen: {type: Schema.Types.ObjectId, ref: 'ampliatoria'},
     prorroga_origen: {type: Schema.Types.ObjectId, ref: 'prorroga'},
     renglon_origen: {type: Schema.Types.ObjectId, ref: 'renglon'},
-    
 }, {timestamps:true})
 
 function getPrice(num){
