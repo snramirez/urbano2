@@ -16,6 +16,21 @@ ctrl.index = async (req, res) => {
     }
 };
 
+ctrl.search = async (req, res) => {
+    try {
+        let contractor = await Contractor.find({Active: true, _id: req.params.id});
+        if(contractor.length === 0){
+            res.status(200).json([{msj: 'contratista no encontrado'}])
+            return
+        }
+        res.status(200).json(contractor);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({msj: 'error al buscar contratista'})
+    }
+};
+
+
 ctrl.create = async (req, res) => {
     try {
         let savedContractor = await new Contractor(req.body.contractor).save();
