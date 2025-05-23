@@ -1,6 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const control = new Schema({
+    num_certificado: {type: String, enum: ['AMPLIATORIA', 'PRORROGA', 'REDETERMINACION', 'CONTINUIDAD']},
+    periodo: {type: Date},
+    SPR: {type: String},
+    PRD: {type: String},
+    monto_ejecutado: {type: Number, get: getPrice, set: setPrice, default: 0},
+    monto_pagado: {type: Number, get: getPrice, set: setPrice, default: 0},
+    estado: {type: String, enum: ['PAGADO', 'DEVENGADO', 'NO DEVENGADO']},
+}, {timestamps:true})
 
 const extencion = new Schema({
     tipo: {type: String, enum: ['AMPLIATORIA', 'PRORROGA', 'REDETERMINACION', 'CONTINUIDAD']},
@@ -25,10 +34,19 @@ const orden_compraSchema = new Schema({
     prorroga: [extencion],
     redeterminacion: [extencion],
     continuidad: [extencion],
+    control: [control],
+    Active: {type: Boolean, default: true},
 }, {timestamps:true})
 
+
+orden_compraSchema.set('toObject', { getters: true });
+extencion.set('toObject', { getters: true });
+orden_compraSchema.set('toJSON', { getters: true });
+extencion.set('toJSON', { getters: true });
+
+
 function getPrice(num){
-    return (num/100).toFixed(2)
+    return (num/100)
 }
 
 function setPrice(num){

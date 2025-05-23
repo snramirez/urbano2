@@ -48,8 +48,14 @@ const licitacionSchema = new Schema({
 },
 {timestamps:true})
 
+licitacionSchema.set('toJSON', { getters: true });
+ofertaSchema.set('toJSON', { getters: true });
+
+licitacionSchema.set('toObject', { getters: true });
+ofertaSchema.set('toObject', { getters: true });
+
 function getPrice(num){
-    return (num/100).toFixed(2)
+    return (num/100)
 }
 
 function setPrice(num){
