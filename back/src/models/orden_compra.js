@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const control = new Schema({
-    num_certificado: {type: String, enum: ['AMPLIATORIA', 'PRORROGA', 'REDETERMINACION', 'CONTINUIDAD']},
+    num_certificado: {type: String},
     periodo: {type: Date},
     SPR: {type: String},
     PRD: {type: String},
@@ -23,7 +23,7 @@ const orden_compraSchema = new Schema({
     num_orden: {type: String},
     monto: {type: Number, get: getPrice, set: setPrice, default: 0},
     tipo: {type: String},
-    destinatario: {type: Schema.Types.ObjectId, ref: 'contractor'},
+    destinatario: [{type: Schema.Types.ObjectId, ref: 'contractor'}],
     origen: {type: String},
     ampliatoria_origen: [{type: Schema.Types.ObjectId, ref: 'extencion'}],
     prorroga_origen: [{type: Schema.Types.ObjectId, ref: 'extencion'}],

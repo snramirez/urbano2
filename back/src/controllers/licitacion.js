@@ -5,7 +5,23 @@ const OrdenCompra = require('../models/orden_compra');
 //Busca todas las licitaciones
 ctrl.index = async (req, res) => {
     try {
-        let licitacion = await Licitacion.find({ Active: true }).populate('orden_compra').sort({ num_proceso: 'asc' });
+        let licitacion = await Licitacion.find({ Active: true })
+            .populate({
+                path: 'renglon',
+                populate: {
+                    path: 'oferta',
+                    populate: {
+                        path: 'beneficiario'
+                    }
+                }
+            })
+            .populate({
+                path: 'orden_compra',
+                populate: {
+                    path: 'destinatario'
+                }
+            })
+            .sort({ num_proceso: 'asc' });
         if (licitacion.length === 0) {
             res.status(200).json([{ msj: 'lista de licitaciones vacia' }])
             return

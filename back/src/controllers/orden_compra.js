@@ -3,7 +3,7 @@ const OrdenCompra = require('../models/orden_compra');
 
 ctrl.index = async (req, res) => {
     try {
-        let ordenCompra = await OrdenCompra.find({ Active: true }).populate('destinatario').sort({ num_orden: 'asc' });
+        let ordenCompra = await OrdenCompra.find({ Active: true }).populate('destinatario').exec();
         if (ordenCompra.length === 0) {
             res.status(200).json([{ msj: 'lista de ordenes de compra vacia' }])
             return
