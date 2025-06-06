@@ -115,7 +115,13 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <v-btn @click="addRenglon">Nuevo Renglon</v-btn>
+    <RenglonCarga
+      v-model:renglones="data.renglon"
+      @update:renglones="data.renglon = $event"
+      :contratistas="contratistas"
+    />
+
+    <!-- <v-btn @click="addRenglon">Nuevo Renglon</v-btn>
 
     <v-expansion-panels v-model="panelRenglon" multiple>
       <v-expansion-panel v-for="(renglon, index) in data.renglon" :key="index">
@@ -141,7 +147,7 @@
 
         </v-expansion-panel-text>
       </v-expansion-panel>
-    </v-expansion-panels>
+    </v-expansion-panels> -->
 
 
     <v-btn @click="addOC">Nueva Orden de Compra</v-btn>
@@ -237,7 +243,7 @@
               <prorroga :data=OC.prorroga />
             </v-col>
             <v-col cols="6">
-              <ampliatoria :ampliatoria="OC.ampliatoria"></ampliatoria>
+              <ampliatoria v-model:ampliatoria="OC.ampliatoria"></ampliatoria>
             </v-col>
           </v-row>
 
@@ -259,7 +265,6 @@ import { ref } from 'vue'
 
 
 const panel = ref([])
-const panelRenglon = ref([])
 const panelOC = ref([])
 const data = datos.empyData
 const tipoOC = ["ABIERTA", "CERRADA"]

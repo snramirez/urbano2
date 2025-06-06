@@ -100,7 +100,10 @@ ctrl.edit = async (req, res) => {
             }
         }
 
-        let savedLicitacion = await Licitacion.findByIdAndUpdate(req.query.id, { ...req.body, orden_compra: ordenesFinalIds }, { new: true }).exec()
+        let savedLicitacion = await Licitacion.findByIdAndUpdate(
+            req.query.id, { ...req.body, orden_compra: ordenesFinalIds }, { new: true })
+            .populate('orden_compra')
+            .exec()
         res.status(200).json(savedLicitacion)
     }
     catch (error) {

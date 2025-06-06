@@ -9,7 +9,7 @@
       </v-row>
 
       <v-row>
-        <v-data-table :headers="headers" :items="data" hide-default-footer disable-pagination class="elevation-1">
+        <v-data-table :headers="headers" :items="ampliatoria" hide-default-footer disable-pagination class="elevation-1">
           <template v-slot:item.fecha="{ item }">
             <span>{{ format.formatDate(item.fecha) }}</span>
           </template>
@@ -101,7 +101,9 @@ const props = defineProps({
   },
 })
 
-const data = computed(() => props.ampliatoria)
+// Creamos una copia local y reactiva
+const ampliatoriaLocal = ref([...props.ampliatoria])
+const emit = defineEmits(['update:ampliatoria'])
 
 function showAdd() {
   addWindow.value = !addWindow.value;
@@ -116,16 +118,14 @@ function addExtension() {
   if (acta.value === "" || fecha.value === null || monto.value === 0) {
     return;
   }
-  console.log(acta.value);
-  console.log(fecha.value);
-  console.log(monto.value);
-  console.log(data.value);
-  data.value.push({
-    acta: acta,
-    fecha: fecha,
-    monto: monto,
-  });
 
+  ampliatoriaLocal.value.push({
+    acta: acta.value,
+    fecha: fecha.value,
+    monto: monto.value,
+  });
+  // Emitimos el evento para actualizar la lista de ampliatorias
+  emit('update:ampliatoria', ampliatoriaLocal.value);
   cleanView();
   showAdd();
 }
@@ -133,26 +133,30 @@ function addExtension() {
 function cargarEdit(item) {
   showEdit();
   console.log(item);
-  console.log(data.value);
+  console.log(ampliatoriaLocal.value);
   acta.value = item.acta;
   fecha.value = new Date(item.fecha);
   monto.value = item.monto;
-  editIndex.value = data.value.indexOf(item);
+  editIndex.value = ampliatoriaLocal.value.indexOf(item);
 }
 
 function editExtension() {
-  data.value[editIndex.value] = {
+  ampliatoriaLocal.value[editIndex.value] = {
     acta: acta.value,
     fecha: fecha.value,
     monto: monto.value,
   };
+  // Emitimos el evento para actualizar la lista de ampliatorias 
+  emit('update:ampliatoria', ampliatoriaLocal.value);
   showEdit();
   cleanView();
 }
 
 function borrarAmpliatoria(item) {
-  let index = props.data.value.indexOf(item);
-  data.value.splice(index, 1);
+  let index = ampliatoriaLocal.value.indexOf(item);
+  ampliatoriaLocal.value.splice(index, 1);
+  // Emitimos el evento para actualizar la lista de ampliatorias
+  emit('update:ampliatoria', ampliatoriaLocal.value);
 }
 
 function cleanView() {
@@ -161,7 +165,6 @@ function cleanView() {
   monto.value = 0;
 }
 
-console.log("data", data);
 </script>
 
 <style lang="scss" scoped></style>
