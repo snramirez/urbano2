@@ -4,7 +4,7 @@
 
     <v-expansion-panels v-model="panelRenglon" multiple>
       <v-expansion-panel
-        v-for="(renglon, index) in renglonesLocal"
+        v-for="(renglon, index) in renglones"
         :key="index"
       >
         <v-expansion-panel-title>
@@ -32,11 +32,7 @@
             <v-col cols="12">
               <OfertaContratistaContractorOffer
                 :contratistas="contratistas"
-                :ofertas="renglon.oferta"
-                @update:ofertas="(newOffers) => {
-                  renglon.oferta = newOffers;
-                  emit('update:renglones', renglonesLocal.value);
-                }"
+                v-model:ofertas="renglon.oferta"
               />
             </v-col>
           </v-row>
@@ -45,6 +41,8 @@
     </v-expansion-panels>
   </div>
 </template>
+
+
 <script setup>
 import { ref } from "vue";
 
@@ -52,27 +50,19 @@ const props = defineProps({
   contratistas: {
     type: Array,
     required: true,
-  },
-  renglones: {
-    type: Array,
-    required: true,
-  },
+  }
 });
 
 const panelRenglon = ref([])
+const renglones = defineModel("renglones");
 
-// Creamos una copia local y reactiva
-const renglonesLocal = ref([...props.renglones]);
-const emit = defineEmits(["update:renglones"]);
 
 function addRenglon() {
-  renglonesLocal.value.push({
+  renglones.value.push({
     descripcion: "",
     monto: 0,
     oferta: [],
   });
-
-  emit("update:renglones", renglonesLocal.value);
 }
 </script>
 

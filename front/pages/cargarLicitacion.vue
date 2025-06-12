@@ -117,40 +117,16 @@
 
     <RenglonCarga
       v-model:renglones="data.renglon"
-      @update:renglones="data.renglon = $event"
       :contratistas="contratistas"
     />
 
-    <!-- <v-btn @click="addRenglon">Nuevo Renglon</v-btn>
+    <OrdenCompraCarga
+      v-model:ordenes_compras="data.orden_compra"
+      :contratistas="contratistas"
+      :renglones="data.renglon"
+    />
 
-    <v-expansion-panels v-model="panelRenglon" multiple>
-      <v-expansion-panel v-for="(renglon, index) in data.renglon" :key="index">
-        <v-expansion-panel-title>
-          Renglon {{ index + 1 }}
-        </v-expansion-panel-title>
-        <v-expansion-panel-text>
-          <v-row>
-            <v-col cols="12" md="6">
-              <v-text-field v-model="renglon.descripcion" label="Descripcion" variant="outlined"
-                clearable></v-text-field>
-            </v-col>
-            <v-col cols="12" md="6">
-              <currency-field v-model="renglon.monto" label="Monto"></currency-field>
-            </v-col>
-          </v-row>
-
-          <v-row>
-            <v-col cols="12">
-              <contractor-offer :contratistas=contratistas :datostabla="renglon.oferta" />
-            </v-col>
-          </v-row>
-
-        </v-expansion-panel-text>
-      </v-expansion-panel>
-    </v-expansion-panels> -->
-
-
-    <v-btn @click="addOC">Nueva Orden de Compra</v-btn>
+    <!-- <v-btn @click="addOC">Nueva Orden de Compra</v-btn>
 
     <v-expansion-panels v-model="panelOC" multiple>
       <v-expansion-panel v-for="(OC, index) in data.orden_compra" :key="index">
@@ -254,7 +230,7 @@
           </v-row>
         </v-expansion-panel-text>
       </v-expansion-panel>
-    </v-expansion-panels>
+    </v-expansion-panels> -->
 
   </v-container>
 </template>
@@ -266,7 +242,7 @@ import { ref } from 'vue'
 
 const panel = ref([])
 const panelOC = ref([])
-const data = datos.empyData
+const data = ref(datos.empyData)
 const tipoOC = ["ABIERTA", "CERRADA"]
 const origenOC = ["RENGLON", "AMPLIATORIA", "PRORROGA"]
 const contratistas = ref([
@@ -284,20 +260,6 @@ const contratistas = ref([
   },
 ])
 
-function addRenglon() {
-  data.renglon.push({
-    descripcion: "",
-    monto: 0,
-    orden_compra: {
-      num_orden: '',
-      monto: 0,
-      tipo: '',
-      prorroga: [],
-      ampliatoria: []
-    },
-    oferta: [],
-  });
-}
 
 function addOC() {
   data.orden_compra.push({

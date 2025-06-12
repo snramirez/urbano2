@@ -14,7 +14,7 @@
       <v-row>
         <v-data-table
           :headers="headers"
-          :items="ofertasLocal"
+          :items="ofertas"
           :row-props="itemRowBackground"
           hide-default-footer
           disable-pagination
@@ -73,10 +73,10 @@
     </v-container>
 
     <OfertaContratistaOfertaDialog
-      v-show="addWindow"
       titulo="Nueva Oferta"
       botonTexto="Agregar"
-      @onSubmit="agregarOferta"
+      @update="agregarOferta"
+      v-model:show="addWindow"
       v-model:beneficiario="beneficiario"
       v-model:monto_ofertado="monto_ofertado"
       v-model:observacion="observacion"
@@ -84,10 +84,10 @@
     />
 
     <OfertaContratistaOfertaDialog
-      v-show="editWindow"
       titulo="Editar Oferta"
       botonTexto="Editar"
-      @onSubmit="editOferta"
+      @update="editOferta"
+      v-model:show="editWindow"
       v-model:beneficiario="beneficiario"
       v-model:monto_ofertado="monto_ofertado"
       v-model:observacion="observacion"
@@ -102,19 +102,9 @@ import { ref, defineEmits, defineProps } from "vue";
 
 const props = defineProps({
   contratistas: Array,
-  ofertas: Array,
 });
 
-const ofertasLocal = ref([...props.ofertas]);
-const emit = defineEmits(["update:ofertas"]);
-
-watch(
-  ofertasLocal,
-  (newVal) => {
-    emit("update:oferta", newVal);
-  },
-  { deep: true }
-);
+const ofertas = defineModel("ofertas");
 
 const headers = [
   { title: "Razon Social", value: "beneficiario" },
@@ -143,7 +133,7 @@ function itemRowBackground(item) {
 }
 
 function agregarOferta() {
-  ofertasLocal.value.push({
+  ofertas.value.push({
     monto_ofertado: monto_ofertado.value,
     observacion: observacion.value,
     ganador: false,
@@ -161,7 +151,7 @@ function limpiarVista() {
 }
 
 function ganador(item) {
-  ofertasLocal.value.forEach((oferta) => {
+  ofertas.value.forEach((oferta) => {
     if (oferta._id === item._id) {
       oferta.ganador = true;
     }
@@ -169,7 +159,7 @@ function ganador(item) {
 }
 
 function noGanador(item) {
-  ofertasLocal.value.forEach((oferta) => {
+  ofertas.value.forEach((oferta) => {
     if (oferta._id === item._id) {
       oferta.ganador = false;
     }
@@ -181,11 +171,11 @@ function cargarEdit(item) {
   monto_ofertado.value = item.monto_ofertado;
   observacion.value = item.observacion;
   beneficiario.value = item.beneficiario;
-  editIndex.value = ofertasLocal.value.indexOf(item);
+  editIndex.value = ofertas.value.indexOf(item);
 }
 
 function editOferta() {
-  ofertasLocal.value[editIndex.value] = {
+  ofertas.value[editIndex.value] = {
     monto_ofertado: monto_ofertado.value,
     observacion: observacion.value,
     ganador: false,
@@ -197,116 +187,12 @@ function editOferta() {
 }
 
 function borrarOferta(item) {
-  const index = ofertasLocal.value.indexOf(item);
+  const index = ofertas.value.indexOf(item);
   if (index !== -1) {
-    ofertasLocal.value.splice(index, 1);
+    ofertas.value.splice(index, 1);
   }
 }
 
-// export default {
-//   data() {
-//     return {
-//       headers: [
-//         { title: "Razon Social", value: "beneficiario" },
-//         { title: "Oferta", value: "monto_ofertado" },
-//         // { title: "Diferencia %", value: "Porcentage" },
-//         { title: "Observaciones", value: "observacion" },
-//         { title: "Accion", value: "actions", sortable: false },
-//       ],
-//       addWindow: false,
-//       editWindow: false,
-//       monto_ofertado: 0,
-//       observacion: "",
-//       beneficiario: [],
-//       editIndex: -1,
-//       format: format,
-//     };
-//   },
-//   props: {
-//     contratistas: Array,
-//     datostabla: Array,
-//   },
-
-//   methods: {
-//     showAdd() {
-//       this.addWindow = !this.addWindow;
-//     },
-
-//     showEdit() {
-//       this.editWindow = !this.editWindow;
-//     },
-
-//     itemRowBackground(item) {
-//       console.log(item.item.ganador);
-//       return item.item.ganador ? { class: "style-1" } : { class: "" };
-//     },
-//     itemProps(item) {
-//       return {
-//         title: item.razon_social,
-//         subtitle: item.cuit,
-//       };
-//     },
-//     agregarOferta() {
-//       this.datostabla.push({
-//         monto_ofertado: this.monto_ofertado,
-//         observacion: this.observacion,
-//         ganador: false,
-//         documentacion: true,
-//         beneficiario: this.beneficiario,
-//       });
-//       this.showAdd();
-//       this.limpiarVistaAgregar();
-//     },
-
-//     limpiarVistaAgregar() {
-//       this.monto_ofertado = 0;
-//       this.observacion = "";
-//       this.beneficiario = [];
-//     },
-
-//     ganador(item) {
-//       this.datostabla.forEach((element) => {
-//         if (element._id === item._id) {
-//           element.ganador = true;
-//         }
-//       });
-//     },
-
-//     noGanador(item) {
-//       this.datostabla.forEach((element) => {
-//         if (element._id === item._id) {
-//           element.ganador = false;
-//         }
-//       });
-//     },
-
-//     cargarEdit(item) {
-//       this.showEdit();
-//       this.beneficiario = [];
-//       this.monto_ofertado = item.monto_ofertado;
-//       this.observacion = item.observacion;
-//       this.beneficiario = item.beneficiario;
-//       this.editIndex = this.datostabla.indexOf(item);
-//     },
-
-//     editOferta() {
-//       this.datostabla[this.editIndex] = {
-//         monto_ofertado: this.monto_ofertado,
-//         observacion: this.observacion,
-//         ganador: false,
-//         documentacion: true,
-//         beneficiario: this.beneficiario,
-//       };
-//       this.showEdit();
-//       this.limpiarVistaAgregar();
-//     },
-
-//     borrarOferta(item) {
-//       let index = this.datostabla.indexOf(item);
-//       this.datostabla.splice(index, 1);
-//     },
-//   },
-// };
 </script>
 
 <style>
