@@ -118,7 +118,7 @@
 
           <v-row>
             <v-col cols="12">
-              <control :orden_compra="OC" />
+              <control v-model:orden_compra="ordenes_compras[index]" />
             </v-col>
           </v-row>
         </v-expansion-panel-text>

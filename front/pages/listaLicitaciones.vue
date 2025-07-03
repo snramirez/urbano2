@@ -64,7 +64,7 @@ import { ref } from 'vue'
 
 const search= ref("")
 const licitaciones = datos.datos
-const unaLicitacion = datos.datos[0]
+const unaLicitacion = ref({})
 const lista = ref(true)
 const vistaUno = ref(false)
 

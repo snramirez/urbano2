@@ -93,9 +93,6 @@
                     </v-col>
                 </v-row>
             </v-card>
-
-
-
         </v-container>
     </div>
 </template>

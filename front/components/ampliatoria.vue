@@ -121,7 +121,7 @@ function editExtension() {
     fecha: fecha.value,
     monto: monto.value,
   };
-  // Emitimos el evento para actualizar la lista de ampliatorias 
+  
   showEdit();
   cleanView();
 }
