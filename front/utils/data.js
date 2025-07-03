@@ -110,6 +110,7 @@ const datos = [
               {
               acta: "p2154112",
               vencimiento: "2024-04-20T00:00:00.000+00:00",
+              monto: 1000
               }
           ],
           ampliatoria: [
@@ -361,6 +362,7 @@ const datos = [
               {
               acta: "p2154112",
               vencimiento: "2024-04-20T00:00:00.000+00:00",
+              monto:2000
               }
           ],
           ampliatoria: [
@@ -581,6 +583,7 @@ const empyData = {
       {
         acta: "p2154112",
         vencimiento: "2024-04-20T00:00:00.000+00:00",
+        monto: 9999
       }
     ],
     ampliatoria: [

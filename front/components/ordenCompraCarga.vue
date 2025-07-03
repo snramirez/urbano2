@@ -101,10 +101,18 @@
 
           <v-row>
             <v-col cols="6">
-              <prorroga :data="OC.prorroga" />
+              <ampliatoria 
+                v-model:extensionData="OC.prorroga" 
+                titulo="Prorroga"
+                tipo="PRORROGA"
+              />
             </v-col>
             <v-col cols="6">
-              <ampliatoria v-model:ampliatoria="OC.ampliatoria"></ampliatoria>
+              <ampliatoria 
+                v-model:extensionData="OC.ampliatoria"
+                titulo="Ampliatoria"
+                tipo="AMPLIATORIA"
+              />
             </v-col>
           </v-row>
 
@@ -124,30 +132,28 @@ import { ref, defineProps } from "vue";
 
 const props = defineProps({
   contratistas: Array,
-  renglones: Array
+  renglones: Array,
 });
 
 const ordenes_compras = defineModel("ordenes_compras");
 
-
-const panelOC = ref([])
-const tipoOC = ["ABIERTA", "CERRADA"]
-const origenOC = ["RENGLON", "AMPLIATORIA", "PRORROGA"]
-
+const panelOC = ref([]);
+const tipoOC = ["ABIERTA", "CERRADA"];
+const origenOC = ["RENGLON", "AMPLIATORIA", "PRORROGA"];
 
 function addOC() {
   ordenes_compras.value.push({
-    num_orden: '',
+    num_orden: "",
     monto: 0,
-    tipo: '',
+    tipo: "",
     destinatario: null,
-    origen:'',
-    ampliatoria_origen: '',
-    prorroga_origen: '',
-    renglon_origen: '',
+    origen: "",
+    ampliatoria_origen: "",
+    prorroga_origen: "",
+    renglon_origen: "",
     prorroga: [],
     ampliatoria: [],
-    control:[]
+    control: [],
   });
 }
 
@@ -158,39 +164,38 @@ function itemProps(item) {
   };
 }
 
-function getAmpliatoria(){
-  let listAmp = []
-  ordenes_compras.value.forEach(OC => {
-    OC.ampliatoria.forEach(amp => {
-      listAmp.push(amp.acta)
-    })
-  })
-  return listAmp
+function getAmpliatoria() {
+  let listAmp = [];
+  ordenes_compras.value.forEach((OC) => {
+    OC.ampliatoria.forEach((amp) => {
+      listAmp.push(amp.acta);
+    });
+  });
+  return listAmp;
 }
 
-function getPrroroga(){
-  let listProrroga = []
-  ordenes_compras.value.forEach(OC => {
-    OC.prorroga.forEach(pro => {
-      listProrroga.push(pro.acta)
-    })
-  })
-  return listProrroga
+function getPrroroga() {
+  let listProrroga = [];
+  ordenes_compras.value.forEach((OC) => {
+    OC.prorroga.forEach((pro) => {
+      listProrroga.push(pro.acta);
+    });
+  });
+  return listProrroga;
 }
 
-function getRenglon(){
-  let listRenglon = []
-  props.renglones.forEach(renglon => listRenglon.push(renglon.descripcion))
-  return listRenglon
+function getRenglon() {
+  let listRenglon = [];
+  props.renglones.forEach((renglon) => listRenglon.push(renglon.descripcion));
+  return listRenglon;
 }
 
-function getMontoTotal(orden){
-  let montoTotal = 0
-  orden.ampliatoria.forEach(amp => montoTotal += amp.monto)
-  montoTotal += orden.monto
-  return montoTotal 
+function getMontoTotal(orden) {
+  let montoTotal = 0;
+  orden.ampliatoria.forEach((amp) => (montoTotal += amp.monto));
+  montoTotal += orden.monto;
+  return montoTotal;
 }
-
 </script>
 
 <style lang="scss" scoped></style>

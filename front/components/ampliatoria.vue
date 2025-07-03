@@ -2,14 +2,14 @@
   <div>
     <v-container>
       <v-row>
-        <h2>Ampliatoria</h2>
+        <h2>{{ titulo }}</h2>
       </v-row>
       <v-row>
-        <v-btn @click="showAdd" justify="space-around" icon="mdi-plus" small v-tooltip="'Nueva Ampliatoria'"></v-btn>
+        <v-btn @click="showAdd" justify="space-around" icon="mdi-plus" small :v-tooltip="`Nueva ${titulo}`"></v-btn>
       </v-row>
 
       <v-row>
-        <v-data-table :headers="headers" :items="ampliatoria" hide-default-footer disable-pagination class="elevation-1">
+        <v-data-table :headers="headers" :items="extensionData" hide-default-footer disable-pagination class="elevation-1">
           <template v-slot:item.fecha="{ item }">
             <span>{{ format.formatDate(item.fecha) }}</span>
           </template>
@@ -19,7 +19,7 @@
               <v-btn justify="space-around" small icon="mdi-pencil" v-tooltip="'Editar'"
                 @click="cargarEdit(item)"></v-btn>
 
-              <v-btn justify="space-around" small icon="mdi-file-remove" v-tooltip="'Borrar Prorroga'"
+              <v-btn justify="space-around" small icon="mdi-file-remove" v-tooltip="'Borrar'"
                 @click="borrarAmpliatoria(item)"></v-btn>
             </v-btn-toggle>
           </template>
@@ -31,47 +31,25 @@
       </v-row>
     </v-container>
 
-    <v-dialog v-model="addWindow" max-width="700">
-      <v-card class="my-10 pa-5" max-width="700">
-        <v-card-title class="d-flex justify-center pt-5">Nueva Ampliatoria</v-card-title>
-        <v-divider></v-divider>
-        <v-card-text class="pa-3">
-          <v-form onSubmit="return false;" @submit="">
-            <v-text-field v-model="acta" label="Acta Ampliatoria" variant="outlined"></v-text-field>
+    <extensionDialog
+      :titulo="titulo"
+      botonTexto="Agregar"
+      @update="addExtension"
+      v-model:show="addWindow"
+      v-model:acta="acta"
+      v-model:fecha="fecha"
+      v-model:monto="monto"
+    />
 
-            <v-date-input v-model="fecha" label="Fecha Ampliatoria" prepend-icon="mdi-calendar" variant="outlined"
-              clearable></v-date-input>
-
-            <currency-field label="Monto" v-model="monto"></currency-field>
-
-            <v-row class="mt-8 mx-auto">
-              <v-btn color="success" class="pa-2" @click="addExtension()">Agregar</v-btn>
-            </v-row>
-          </v-form>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
-
-    <v-dialog v-model="editWindow" max-width="700">
-      <v-card class="my-10 pa-5" max-width="700">
-        <v-card-title class="d-flex justify-center pt-5">Editar Ampliatoria</v-card-title>
-        <v-divider></v-divider>
-        <v-card-text class="pa-3">
-          <v-form onSubmit="return false;" @submit="">
-            <v-text-field v-model="acta" label="Acta Ampliatoria" variant="outlined"></v-text-field>
-
-            <v-date-input v-model="fecha" label="Fecha Ampliatoria" prepend-icon="mdi-calendar" variant="outlined"
-              clearable></v-date-input>
-
-            <currency-field label="Monto" v-model="monto"></currency-field>
-
-            <v-row class="mt-8 mx-auto">
-              <v-btn color="success" class="pa-2" @click="editExtension()">Agregar</v-btn>
-            </v-row>
-          </v-form>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
+    <extensionDialog
+      :titulo="titulo"
+      botonTexto="Editar"
+      @update="editExtension"
+      v-model:show="editWindow"
+      v-model:acta="acta"
+      v-model:fecha="fecha"
+      v-model:monto="monto"
+    />
   </div>
 </template>
 
@@ -80,6 +58,8 @@ import format from "../utils/formatText";
 import { ref, toRef, computed } from 'vue'
 
 
+const extensionData = defineModel("extensionData");
+
 const headers = [
   //{ text: "id", value: "_id" },
   { title: "Acta", value: "acta" },
@@ -87,6 +67,7 @@ const headers = [
   { title: "Monto", value: "monto" },
   { title: "Accion", value: "actions", sortable: false },
 ]
+
 const addWindow = ref(false)
 const editWindow = ref(false)
 const acta = ref("")
@@ -95,17 +76,12 @@ const monto = ref(0)
 const editIndex = ref(-1)
 
 const props = defineProps({
-  ampliatoria: {
-    type: Array,
-    required: true,
-  },
+  titulo: String,
+  tipo: String,
 })
 
-// Creamos una copia local y reactiva
-const ampliatoriaLocal = ref([...props.ampliatoria])
-const emit = defineEmits(['update:ampliatoria'])
-
 function showAdd() {
+  cleanView();
   addWindow.value = !addWindow.value;
 }
 
@@ -115,48 +91,44 @@ function showEdit() {
 
 //Hacerlo un emit como corresponde. 
 function addExtension() {
-  if (acta.value === "" || fecha.value === null || monto.value === 0) {
+  if (acta.value === "" && fecha.value === null && monto.value === 0) {
     return;
   }
 
-  ampliatoriaLocal.value.push({
+   extensionData.value.push({
+    tipo: props.tipo,
     acta: acta.value,
     fecha: fecha.value,
     monto: monto.value,
   });
-  // Emitimos el evento para actualizar la lista de ampliatorias
-  emit('update:ampliatoria', ampliatoriaLocal.value);
   cleanView();
   showAdd();
 }
 
 function cargarEdit(item) {
-  showEdit();
-  console.log(item);
-  console.log(ampliatoriaLocal.value);
+  cleanView();
   acta.value = item.acta;
-  fecha.value = new Date(item.fecha);
+  fecha.value = item.fecha === null ? null : new Date(item.fecha);
   monto.value = item.monto;
-  editIndex.value = ampliatoriaLocal.value.indexOf(item);
+  editIndex.value = extensionData.value.indexOf(item);
+  showEdit()
 }
 
 function editExtension() {
-  ampliatoriaLocal.value[editIndex.value] = {
+  extensionData.value[editIndex.value] = {
+    tipo: props.tipo,
     acta: acta.value,
     fecha: fecha.value,
     monto: monto.value,
   };
   // Emitimos el evento para actualizar la lista de ampliatorias 
-  emit('update:ampliatoria', ampliatoriaLocal.value);
   showEdit();
   cleanView();
 }
 
 function borrarAmpliatoria(item) {
-  let index = ampliatoriaLocal.value.indexOf(item);
-  ampliatoriaLocal.value.splice(index, 1);
-  // Emitimos el evento para actualizar la lista de ampliatorias
-  emit('update:ampliatoria', ampliatoriaLocal.value);
+  let index = extensionData.value.indexOf(item);
+  extensionData.value.splice(index, 1);
 }
 
 function cleanView() {
