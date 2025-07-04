@@ -104,21 +104,23 @@ const datos = [
       orden_compra: [
         {
           num_orden: "",
-          monto: 0,
+          monto: 1000,
           tipo: "",
           prorroga: [
               {
               acta: "p2154112",
-              vencimiento: "2024-04-20T00:00:00.000+00:00",
-              monto: 1000
+              fecha: "2024-04-20T00:00:00.000+00:00",
+              monto: 1000,
+              observaciones: "Prorroga por 1 mes"
               }
           ],
           ampliatoria: [
               {
               acta: "N2154112",
               fecha: "2024-04-20T00:00:00.000+00:00",
-              monto: 1000
-              }
+              monto: 1000,
+              observaciones: "Ampliatoria por 1 mes"
+              },
           ],
           destinatario: null,
           origen:"",
@@ -135,7 +137,7 @@ const datos = [
               PRD: "",
               monto_ejecutado: 1000,
               monto_pagado:"",
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
               },
               {
               num_certificado: "2",
@@ -144,7 +146,7 @@ const datos = [
               PRD: "",
               monto_ejecutado: 1000,
               monto_pagado:"",
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
               },
               {
               num_certificado: "3",
@@ -153,7 +155,7 @@ const datos = [
               PRD: "",
               monto_ejecutado: 0,
               monto_pagado:0,
-              estado: "NO EJECUTADO",
+              estado: "NO DEVENGADO",
               },
           ],
         },
@@ -161,7 +163,6 @@ const datos = [
           num_orden: "353-9605-OC23",
           monto: "",
           tipo: "",
-          
           prorroga: [],
           ampliatoria: [],
           destinatario: null,
@@ -178,7 +179,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
             },
             {
               num_certificado: "2",
@@ -187,7 +188,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
             },
             {
               num_certificado: "3",
@@ -196,7 +197,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
             },
             {
               num_certificado: "4",
@@ -205,7 +206,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
             },
             {
               num_certificado: "5",
@@ -214,7 +215,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "NO EJECUTADO",
+              estado: "NO DEVENGADO",
             },
             {
               num_certificado: "6",
@@ -223,7 +224,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "NO EJECUTADO",
+              estado: "NO DEVENGADO",
             },
             {
               num_certificado: "7",
@@ -232,7 +233,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "NO EJECUTADO",
+              estado: "NO DEVENGADO",
             },
             {
               num_certificado: "8",
@@ -241,7 +242,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "NO EJECUTADO",
+              estado: "NO DEVENGADO",
             },
           ],
         }
@@ -361,7 +362,7 @@ const datos = [
           prorroga: [
               {
               acta: "p2154112",
-              vencimiento: "2024-04-20T00:00:00.000+00:00",
+              fecha: "2024-04-20T00:00:00.000+00:00",
               monto:2000
               }
           ],
@@ -396,7 +397,7 @@ const datos = [
               PRD: "",
               monto_ejecutado: 1000,
               monto_pagado:0,
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
               },
               {
               num_certificado: "2",
@@ -405,7 +406,7 @@ const datos = [
               PRD: "",
               monto_ejecutado: 1000,
               monto_pagado:0,
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
               },
               {
               num_certificado: "3",
@@ -414,7 +415,7 @@ const datos = [
               PRD: "",
               monto_ejecutado: 0,
               monto_pagado:0,
-              estado: "NO EJECUTADO",
+              estado: "NO DEVENGADO",
               },
           ],
         },
@@ -439,7 +440,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
             },
             {
               num_certificado: "2",
@@ -448,7 +449,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
             },
             {
               num_certificado: "3",
@@ -457,7 +458,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
             },
             {
               num_certificado: "4",
@@ -466,7 +467,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "EJECUTADO",
+              estado: "DEVENGADO",
             },
             {
               num_certificado: "5",
@@ -475,7 +476,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "NO EJECUTADO",
+              estado: "NO DEVENGADO",
             },
             {
               num_certificado: "6",
@@ -484,7 +485,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "NO EJECUTADO",
+              estado: "NO DEVENGADO",
             },
             {
               num_certificado: "7",
@@ -493,7 +494,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "NO EJECUTADO",
+              estado: "NO DEVENGADO",
             },
             {
               num_certificado: "8",
@@ -502,7 +503,7 @@ const datos = [
               PRD: "227878-23",
               monto_ejecutado: 2470092,
               monto_pagado:0,
-              estado: "NO EJECUTADO",
+              estado: "NO DEVENGADO",
             },
           ],
         }
@@ -582,7 +583,7 @@ const empyData = {
     prorroga: [
       {
         acta: "p2154112",
-        vencimiento: "2024-04-20T00:00:00.000+00:00",
+        fecha: "2024-04-20T00:00:00.000+00:00",
         monto: 9999
       }
     ],
@@ -608,7 +609,7 @@ const empyData = {
         PRD: "",
         monto_ejecutado: 1000,
         monto_pagado:0,
-        estado: "EJECUTADO",
+        estado: "DEVENGADO",
       },
       {
         num_certificado: "2",
@@ -617,7 +618,7 @@ const empyData = {
         PRD: "",
         monto_ejecutado: 1000,
         monto_pagado:0,
-        estado: "EJECUTADO",
+        estado: "DEVENGADO",
       },
       {
         num_certificado: "3",
@@ -626,7 +627,7 @@ const empyData = {
         PRD: "",
         monto_ejecutado: 0,
         monto_pagado:0,
-        estado: "NO EJECUTADO",
+        estado: "NO DEVENGADO",
       },
     ],
   }],

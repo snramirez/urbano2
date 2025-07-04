@@ -13,8 +13,9 @@
       </v-col>
     </v-row>
     <v-container class="">
-      <v-card class="ma-2" cols="12">
+      <v-card class="ma-2" variant="tonal" cols="12">
         <v-card-title class="d-flex justify-center">Proceso</v-card-title>
+        <v-divider></v-divider>
         <v-row class="my-2 mx-2">
           <v-col cols="12" md="6">
             <v-list>
@@ -82,8 +83,9 @@
         </v-row>
       </v-card>
 
-      <v-card class="ma-2" cols="12">
-        <v-card-title class="d-flex justify-center">Licitacion</v-card-title>
+      <v-card class="ma-2" cols="12" variant="tonal">
+        <v-card-title class="d-flex justify-center" >Licitacion</v-card-title>
+        <v-divider></v-divider>
         <v-row class="my-2 mx-2">
           <v-col cols="6">
             <v-list>
@@ -145,26 +147,18 @@
         </v-row>
       </v-card>
 
-      <v-card class="ma-2" cols="12">
+      <v-card class="ma-2" cols="12" variant="tonal">
         <tabs :renglones="licitacion.renglon" />
       </v-card>
 
-      <v-card class="ma-2" cols="12">
-        <v-card-title class="d-flex justify-center"
-          >Todas las ofertas</v-card-title
-        >
-        <v-card-text>
-          Por si se quiere ver todas las ofertas o ofertas por todo se van a ver
-          aca
-        </v-card-text>
-      </v-card>
 
       <v-card class="ma-2" cols="12">
-        <v-card-title class="d-flex justify-center"
-          >Todas las orden de Compra van aca</v-card-title
-        >
-        <v-row v-for="(oc, index) in licitacion.orden_compra" :key="index">
+        <v-card-title class="d-flex justify-center">
+          Ordenes de Compra
+        </v-card-title>
+        <v-row class="my-2" v-for="(oc, index) in licitacion.orden_compra" :key="index">
           <v-col cols="12">
+            <h3 class="d-flex justify-center">Orden de Compra {{ index + 1 }}</h3>
             <onlyOneOc :orden_compra="oc" />
           </v-col>
         </v-row>

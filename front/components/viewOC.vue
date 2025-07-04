@@ -24,28 +24,17 @@
       </v-row>
       <v-row>
         <v-col>
-          <div v-for="(orden, index) in pliego.orden_compra" :key="index">
-            <v-container>
-              <!-- <p class="text-h5 font-weight-medium p-4 mb-4">
-                Renglon: {{ renglon.descripcion }}
-              </p> -->
-              <v-card>
-                <v-card-title>Orden de Compra</v-card-title>
-                <v-card-subtitle>{{
-                  orden.num_orden
-                }}</v-card-subtitle>
-                <v-data-table
-                  :headers="headers"
-                  :items="orden.control"
-                  :row-props="itemRowBackground"
-                >
-                  <template v-slot:item.periodo="{ item }">
-                    <span>{{ formatDate.formatDate(item.periodo) }}</span>
-                  </template>
-                </v-data-table>
-              </v-card>
-            </v-container>
-          </div>
+          <v-card>
+            <v-card-title>Orden de Compra</v-card-title>
+            <v-row v-for="(orden, index) in pliego.orden_compra" :key="index">
+              <v-col cols="12">
+                <h3 class="d-flex justify-center">
+                  Orden de Compra {{ index + 1 }}
+                </h3>
+                <onlyOneOc :orden_compra="orden" />
+              </v-col>
+            </v-row>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
@@ -80,12 +69,15 @@ export default {
     },
 
     itemRowBackground(item) {
-      return this.vencido(item) ? {class: "style-1"} : {class: ""};
+      return this.vencido(item) ? { class: "style-1" } : { class: "" };
     },
 
     vencido(control) {
       let currentDate = new Date();
-      if ((new Date(control.item.periodo) < currentDate) && (control.item.estado != "EJECUTADO")){
+      if (
+        new Date(control.item.periodo) < currentDate &&
+        control.item.estado != "EJECUTADO"
+      ) {
         return true;
       }
     },
@@ -95,7 +87,7 @@ export default {
 
 <style>
 .style-1 {
-  background-color: #E57373;
+  background-color: #e57373;
 }
 .style-2 {
   background-color: rgb(114, 114, 67);

@@ -15,7 +15,7 @@ const extencion = new Schema({
     tipo: {type: String, enum: ['AMPLIATORIA', 'PRORROGA', 'REDETERMINACION', 'CONTINUIDAD']},
     acta: {type: String},
     monto: {type: Number, get: getPrice, set: setPrice, default: 0},
-    vencimiento: {type: Date},
+    fecha: {type: Date},
     observaciones: {type: String},
 }, {timestamps:true})
 
