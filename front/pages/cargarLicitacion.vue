@@ -235,24 +235,17 @@
 
 <script setup>
 import datos from "../utils/data";
-import { ref } from "vue";
+import { useContratistaStore } from "~/stores/contratistaStore";
+import { ref, onMounted} from "vue";
 
 const panel = ref([]);
 const data = ref(datos.empyData);
-const contratistas = ref([
-  {
-    razon_social: "Carlos SRL",
-    cuit: "23-45452214-2",
-  },
-  {
-    razon_social: "Miguel SRL",
-    cuit: "33-55484511-8",
-  },
-  {
-    razon_social: "Nakamura Contrstucciones SA",
-    cuit: "33-55541255-4",
-  },
-]);
+const contratistas = ref([]);
+
+const contratistaStore = useContratistaStore()
+
+await useAsyncData('contratistas', () => contratistaStore.fetchContratistas())
+
 </script>
 
 <style lang="scss" scoped></style>
