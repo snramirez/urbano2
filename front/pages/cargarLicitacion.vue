@@ -222,12 +222,12 @@
 
     <RenglonCarga
       v-model:renglones="data.renglon"
-      :contratistas="contratistas"
+      :contratistas="contratistaStore.contratistas"
     />
 
     <OrdenCompraCarga
       v-model:ordenes_compras="data.orden_compra"
-      :contratistas="contratistas"
+      :contratistas="contratistaStore.contratistas"
       :renglones="data.renglon"
     />
   </v-container>
@@ -243,8 +243,7 @@ const data = ref(datos.empyData);
 const contratistas = ref([]);
 
 const contratistaStore = useContratistaStore()
-
-await useAsyncData('contratistas', () => contratistaStore.fetchContratistas())
+contratistaStore.fetchContratistas()
 
 </script>
 

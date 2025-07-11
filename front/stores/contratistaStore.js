@@ -1,6 +1,11 @@
-import { defineStore } from 'pinia'
+import { defineStore, createPinia, setActivePinia } from 'pinia'
 import { ref } from 'vue'
 import api from '@/utils/axios'
+
+// creo pinia aca por que por alguna razon no lo hace automaticamente
+
+const pinia = createPinia()
+export default { store: setActivePinia(pinia) }
 
 export const useContratistaStore = defineStore('contratista', () => {
     const contratistas = ref([])
