@@ -9,28 +9,28 @@
               <v-text-field
                 variant="outlined"
                 label="Nombre"
-                v-model="data.nombre"
+                v-model="licitacionStore.licitacionActual.nombre"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field
                 variant="outlined"
                 label="N° Proceso"
-                v-model="data.num_proceso"
+                v-model="licitacionStore.licitacionActual.num_proceso"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field
                 variant="outlined"
                 label="Expediente"
-                v-model="data.expediente"
+                v-model="licitacionStore.licitacionActual.expediente"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field
                 variant="outlined"
                 label="Area"
-                v-model="data.area"
+                v-model="licitacionStore.licitacionActual.area"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -40,28 +40,28 @@
               <v-text-field
                 variant="outlined"
                 label="Sub Area"
-                v-model="data.subarea"
+                v-model="licitacionStore.licitacionActual.subarea"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field
                 variant="outlined"
                 label="Firmante"
-                v-model="data.firmante"
+                v-model="licitacionStore.licitacionActual.firmante"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field
                 variant="outlined"
                 label="Modalidad"
-                v-model="data.modalidad"
+                v-model="licitacionStore.licitacionActual.modalidad"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field
                 variant="outlined"
                 label="Tipo Contrato"
-                v-model="data.tipo_contrato"
+                v-model="licitacionStore.licitacionActual.tipo_contrato"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -71,28 +71,28 @@
               <v-text-field
                 variant="outlined"
                 label="Estado"
-                v-model="data.estado"
+                v-model="licitacionStore.licitacionActual.estado"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field
                 variant="outlined"
                 label="Plazo"
-                v-model="data.plazo"
+                v-model="licitacionStore.licitacionActual.plazo"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field
                 variant="outlined"
                 label="Inicio"
-                v-model="data.inicio"
+                v-model="licitacionStore.licitacionActual.inicio"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field
                 variant="outlined"
                 label="Finalizacion"
-                v-model="data.vencimiento"
+                v-model="licitacionStore.licitacionActual.vencimiento"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -105,7 +105,7 @@
           <v-row>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="data.pliego_ingreso"
+                v-model="licitacionStore.licitacionActual.pliego_ingreso"
                 label="Ingreso Pliego"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -114,7 +114,7 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="data.pliego_egreso"
+                v-model="licitacionStore.licitacionActual.pliego_egreso"
                 label="Egreso Pliego"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -123,7 +123,7 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="data.salida_pg1"
+                v-model="licitacionStore.licitacionActual.salida_pg1"
                 label="Salida PG"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -132,7 +132,7 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="data.vuelta_pg1"
+                v-model="licitacionStore.licitacionActual.vuelta_pg1"
                 label="Vuelta PG"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -144,7 +144,7 @@
           <v-row>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="data.fecha_llamado"
+                v-model="licitacionStore.licitacionActual.fecha_llamado"
                 label="Fecha de Llamado"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -153,7 +153,7 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="data.apertura_ofertas"
+                v-model="licitacionStore.licitacionActual.apertura_ofertas"
                 label="Apertura de Ofertas"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -162,7 +162,7 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="data.fecha_vencimiento_plazo_impugnacion"
+                v-model="licitacionStore.licitacionActual.fecha_vencimiento_plazo_impugnacion"
                 label="Vencimiento Plazo Impugnacion"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -171,7 +171,7 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="data.fecha_vencimiento_doc"
+                v-model="licitacionStore.licitacionActual.fecha_vencimiento_doc"
                 label="Vencimiento Documentacion"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -183,7 +183,7 @@
           <v-row>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="data.salida_pg2"
+                v-model="licitacionStore.licitacionActual.salida_pg2"
                 label="Salida PG2"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -192,7 +192,7 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="data.vuelta_pg2"
+                v-model="licitacionStore.licitacionActual.vuelta_pg2"
                 label="Vuelta PG2"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -201,7 +201,7 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="data.fecha_aprobatoria"
+                v-model="licitacionStore.licitacionActual.fecha_aprobatoria"
                 label="Fecha Aprobatoria"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -212,7 +212,7 @@
               <v-text-field
                 variant="outlined"
                 label="Aprobatoria"
-                v-model="data.aprobatoria"
+                v-model="licitacionStore.licitacionActual.aprobatoria"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -220,27 +220,34 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
+    <v-divider></v-divider>
+
     <RenglonCarga
-      v-model:renglones="data.renglon"
+      class="mt-4"
+      v-model:renglones="licitacionStore.licitacionActual.renglon"
       :contratistas="contratistaStore.contratistas"
     />
 
+    <v-divider></v-divider>
+
     <OrdenCompraCarga
-      v-model:ordenes_compras="data.orden_compra"
+      class="mt-4"
+      v-model:ordenes_compras="licitacionStore.licitacionActual.orden_compra"
       :contratistas="contratistaStore.contratistas"
-      :renglones="data.renglon"
+      :renglones="licitacionStore.licitacionActual.renglon"
     />
   </v-container>
 </template>
 
 <script setup>
-import datos from "../utils/data";
+//import datos from "../utils/data.licitacionActual";
+import { useLicitacionStore } from  "~/stores/licitacionStore";
 import { useContratistaStore } from "~/stores/contratistaStore";
-import { ref, onMounted} from "vue";
+import { ref } from "vue";
 
 const panel = ref([]);
-const data = ref(datos.empyData);
-const contratistas = ref([]);
+//const data = ref(datos.data);
+const licitacionStore = useLicitacionStore();
 
 const contratistaStore = useContratistaStore()
 contratistaStore.fetchContratistas()

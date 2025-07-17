@@ -12,7 +12,7 @@
         ></v-text-field>
       </template>
 
-      <v-data-table :headers="headers" :items="licitaciones" :search="search">
+      <v-data-table :headers="headers" :items="licitacionStore.licitaciones" :search="search">
         <template v-slot:item.inicio="{ item }">
           <span>{{ format.formatDate(item.inicio) }}</span>
         </template>
@@ -57,13 +57,16 @@
 </template>
 
 <script setup>
-import datos from "../utils/data";
+//import datos from "../utils/data";
 import format from "../utils/formatText";
+import { useLicitacionStore } from  "~/stores/licitacionStore";
 import { ref } from 'vue'
 
 
 const search= ref("")
-const licitaciones = datos.datos
+//const licitaciones = datos.datos
+const licitacionStore = useLicitacionStore()
+licitacionStore.fetchLicitaciones()
 const unaLicitacion = ref({})
 const lista = ref(true)
 const vistaUno = ref(false)

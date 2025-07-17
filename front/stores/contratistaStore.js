@@ -2,7 +2,7 @@ import { defineStore, createPinia, setActivePinia } from 'pinia'
 import { ref } from 'vue'
 import api from '@/utils/axios'
 
-// creo pinia aca por que por alguna razon no lo hace automaticamente
+//creo una instancia de Pinia aca porque por alguna razón no lo hace automáticamente ¯\_(ツ)_/¯
 
 const pinia = createPinia()
 export default { store: setActivePinia(pinia) }

@@ -72,7 +72,7 @@
         <v-col cols="12" md="6">
           <v-card class="ml-4" title="Ampliatorias">
             <v-data-table
-              :header="headersExtension"
+              :headers="headersExtension"
               :items="orden_compra.ampliatoria"
               hide-default-footer
             >
@@ -86,7 +86,7 @@
         <v-col cols="12" md="6">
           <v-card class="mr-4" title="Prorrogas">
             <v-data-table
-              :header="headersExtension"
+              :headers="headersExtension"
               :items="orden_compra.prorroga"
               hide-default-footer
             >
