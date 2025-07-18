@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <MensajeAlerta
+      v-model:show="showAlerta"
+      title="Licitación creada"
+      bodyText="La licitación fue guardada correctamente"
+    />
     <v-expansion-panels v-model="panel" multiple>
       <v-expansion-panel>
         <v-expansion-panel-title> Proceso </v-expansion-panel-title>
@@ -162,7 +167,10 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="licitacionStore.licitacionActual.fecha_vencimiento_plazo_impugnacion"
+                v-model="
+                  licitacionStore.licitacionActual
+                    .fecha_vencimiento_plazo_impugnacion
+                "
                 label="Vencimiento Plazo Impugnacion"
                 prepend-icon="mdi-calendar"
                 variant="outlined"
@@ -236,22 +244,38 @@
       :contratistas="contratistaStore.contratistas"
       :renglones="licitacionStore.licitacionActual.renglon"
     />
+
+    <v-divider></v-divider>
+
+    <v-row class="mt-4">
+      <v-col cols="12" md="6">
+        <v-btn color="primary" @click="crearLicitacion()">
+          Crear Licitacion
+        </v-btn>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script setup>
 //import datos from "../utils/data.licitacionActual";
-import { useLicitacionStore } from  "~/stores/licitacionStore";
+import { useLicitacionStore } from "~/stores/licitacionStore";
 import { useContratistaStore } from "~/stores/contratistaStore";
 import { ref } from "vue";
 
+const showAlerta = ref(false)
 const panel = ref([]);
 //const data = ref(datos.data);
 const licitacionStore = useLicitacionStore();
 
-const contratistaStore = useContratistaStore()
-contratistaStore.fetchContratistas()
+const contratistaStore = useContratistaStore();
+contratistaStore.fetchContratistas();
 
+function crearLicitacion() {
+  licitacionStore.createLicitacion(licitacionStore.licitacionActual);
+  licitacionStore.limpiarLicitacionActual();
+  showAlerta.value = true;
+} 
 </script>
 
 <style lang="scss" scoped></style>

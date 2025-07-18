@@ -12,7 +12,11 @@
         ></v-text-field>
       </template>
 
-      <v-data-table :headers="headers" :items="licitacionStore.licitaciones" :search="search">
+      <v-data-table
+        :headers="headers"
+        :items="licitacionStore.licitaciones"
+        :search="search"
+      >
         <template v-slot:item.inicio="{ item }">
           <span>{{ format.formatDate(item.inicio) }}</span>
         </template>
@@ -24,52 +28,71 @@
         </template>
 
         <template v-slot:item.actions="{ item }">
-            <v-btn-toggle>
-              <v-btn
-                justify="space-around"
-                x-small
-                icon="mdi-pencil"
-                v-tooltip="'Editar Licitacion'"
-              ></v-btn>
+          <v-btn-toggle>
+            <v-btn
+              justify="space-around"
+              x-small
+              icon="mdi-pencil"
+              v-tooltip="'Editar Licitacion'"
+            ></v-btn>
 
-              <v-btn
-                justify="space-around"
-                x-small
-                icon="mdi-file-remove"
-                v-tooltip="'Borrar Licitacion'"
-              ></v-btn>
+            <v-btn
+              justify="space-around"
+              x-small
+              icon="mdi-file-remove"
+              v-tooltip="'Borrar Licitacion'"
+              @click="eliminarLicitacion(item)"
+            ></v-btn>
 
-              <v-btn
-                justify="space-around"
-                x-small
-                icon="mdi-file-eye"
-                v-tooltip="'Ver Licitacion'"
-                @click="verLicitacion(item)"
-              ></v-btn>
-
-            </v-btn-toggle>
-          </template>
+            <v-btn
+              justify="space-around"
+              x-small
+              icon="mdi-file-eye"
+              v-tooltip="'Ver Licitacion'"
+              @click="verLicitacion(item)"
+            ></v-btn>
+          </v-btn-toggle>
+        </template>
       </v-data-table>
     </v-card>
-    <vista-completa-licitacion @cerrar="verLista" v-show="vistaUno" :licitacion="unaLicitacion"/>
+    <vista-completa-licitacion
+      @cerrar="verLista"
+      v-show="vistaUno"
+      :licitacion="unaLicitacion"
+    />
 
+    <eliminarDialog
+      v-model:show="viewEliminar"
+      titulo="Eliminar Licitacion"
+      texto="¿Estás seguro de que querés eliminar esta licitación?"
+      @confirm="confirmarEliminacion"
+    />
+
+    <MensajeAlerta
+      v-model:show="showAlerta"
+      title="Licitación eliminada"
+      bodyText="La licitación fue eliminada correctamente"
+    />
   </div>
 </template>
 
 <script setup>
 //import datos from "../utils/data";
 import format from "../utils/formatText";
-import { useLicitacionStore } from  "~/stores/licitacionStore";
-import { ref } from 'vue'
+import { useLicitacionStore } from "~/stores/licitacionStore";
+import { ref } from "vue";
 
-
-const search= ref("")
+const search = ref("");
 //const licitaciones = datos.datos
-const licitacionStore = useLicitacionStore()
-licitacionStore.fetchLicitaciones()
-const unaLicitacion = ref({})
-const lista = ref(true)
-const vistaUno = ref(false)
+const licitacionStore = useLicitacionStore();
+licitacionStore.fetchLicitaciones();
+
+const unaLicitacion = ref({});
+const lista = ref(true);
+const vistaUno = ref(false);
+const viewEliminar = ref(false);
+const idDelete = ref("");
+const showAlerta = ref(false)
 
 const headers = [
   { title: "Nombre", key: "nombre" },
@@ -80,20 +103,31 @@ const headers = [
   { title: "Vencimiento", key: "vencimiento" },
   { title: "Monto", key: "monto" },
   { title: "Accion", key: "actions", sortable: false },
-]
+];
 
-
-function verLicitacion(licitacion){
-  unaLicitacion.value = licitacion
-  vistaUno.value = true
-  lista.value = false
+function eliminarLicitacion(licitacion) {
+  console.log("Eliminar Licitacion", licitacion);
+  viewEliminar.value = true;
+  idDelete.value = licitacion._id;
 }
 
-function verLista(){
-  vistaUno.value = false
-  lista.value = true
+function confirmarEliminacion() {
+  licitacionStore.deleteLicitacion(idDelete.value);
+  viewEliminar.value = false;
+  idDelete.value = "";
+  showAlerta.value = true;
 }
 
+function verLicitacion(licitacion) {
+  unaLicitacion.value = licitacion;
+  vistaUno.value = true;
+  lista.value = false;
+}
+
+function verLista() {
+  vistaUno.value = false;
+  lista.value = true;
+}
 </script>
 
 <style lang="scss" scoped></style>
