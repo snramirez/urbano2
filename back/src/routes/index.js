@@ -5,6 +5,7 @@ const authRoutes = require('./authRoutes');
 const contractor = require('../routes/contractorRoutes');
 const licitacion = require('../routes/licitacionRoutes.js');
 const ordenCompra = require('../routes/ordenCompraRoutes.js');
+const desplegable = require('../routes/desplegablesRoutes.js');
 
 
 
@@ -14,5 +15,6 @@ module.exports = app => {
     app.use('/api/contractor', contractor);
     app.use('/api/licitacion', licitacion);
     app.use('/api/orden_compra', ordenCompra);
+    app.use('/api/desplegables', desplegable);
     app.use(router);
 }

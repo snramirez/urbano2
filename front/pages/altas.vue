@@ -16,7 +16,13 @@
             />
         </v-card>
     </v-tabs-window-item>
-      <v-tabs-window-item value="2"> ventana dos </v-tabs-window-item>
+      <v-tabs-window-item value="2">
+        <v-card color="grey-lighten-2">
+            <altas-desplegables
+            :desplegables="desplegablesStore.estadoLicitacion"  
+            />
+        </v-card>
+      </v-tabs-window-item>
       <v-tabs-window-item value="3"> ventana tres </v-tabs-window-item>
     </v-tabs-window>
   </v-container>
@@ -25,9 +31,13 @@
 <script setup>
 import { ref } from "vue";
 import { useContratistaStore } from "~/stores/contratistaStore";
+import { useDesplegablesStore } from "~/stores/desplegablesStore";
 
 const contratistaStore = useContratistaStore();
 contratistaStore.fetchContratistas();
+
+const desplegablesStore = useDesplegablesStore();
+desplegablesStore.fetchEstadoLicitacion();
 
 const tab = ref(null);
 
