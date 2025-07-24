@@ -71,6 +71,10 @@ export const useLicitacionStore = defineStore("licitacion", () => {
     };
   }
 
+  const setLicitacionActual = async (licitacion) => {
+    licitacionActual.value = licitacion
+  }
+
   const fetchLicitaciones = async () => {
     try {
       loading.value = true;
@@ -126,6 +130,7 @@ export const useLicitacionStore = defineStore("licitacion", () => {
     licitaciones,
     loading,
     licitacionActual,
+    setLicitacionActual,
     limpiarLicitacionActual,
     fetchLicitaciones,
     createLicitacion,

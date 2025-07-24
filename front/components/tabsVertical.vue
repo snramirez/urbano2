@@ -10,9 +10,9 @@
                     <v-row class="my-2 mx-2">
                         <v-col cols="12" md="6">
                             <v-list>
-                                <v-list-item title="Monto Ofertado" :subtitle="format.priceFormater(oferta.monto_ofertado)"></v-list-item>
+                                <v-list-item title="Monto Ofertado" :subtitle="format.priceFormater(oferta.monto_oferta)"></v-list-item>
                                 <v-list-item title="Observacion" >
-                                    <v-list-item-subtitle v-html="oferta.observacion" class="wrap-text"></v-list-item-subtitle>
+                                    <v-list-item-subtitle v-html="oferta.observaciones" class="wrap-text"></v-list-item-subtitle>
                                 </v-list-item>
                                 <v-list-item title="Estado Oferta" :subtitle="oferta.ganador ? 'OFERTA GANADORA' : 'EN REVISION'"></v-list-item>
                             </v-list>

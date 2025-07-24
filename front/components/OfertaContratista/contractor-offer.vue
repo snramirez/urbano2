@@ -29,8 +29,8 @@
             </v-chip>
           </template>
 
-          <template v-slot:item.monto_ofertado="{ item }">
-            <span>{{ format.priceFormater(item.monto_ofertado) }}</span>
+          <template v-slot:item.monto_oferta="{ item }">
+            <span>{{ format.priceFormater(item.monto_oferta) }}</span>
           </template>
 
           <template v-slot:item.actions="{ item }">
@@ -108,8 +108,8 @@ const ofertas = defineModel("ofertas");
 
 const headers = [
   { title: "Razon Social", value: "beneficiario" },
-  { title: "Oferta", value: "monto_ofertado" },
-  { title: "Observaciones", value: "observacion" },
+  { title: "Oferta", value: "monto_oferta" },
+  { title: "Observaciones", value: "observaciones" },
   { title: "Accion", value: "actions", sortable: false },
 ];
 

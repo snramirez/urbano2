@@ -95,7 +95,7 @@ ctrl.edit = async (req, res) => {
   console.log(req.body);
   try {
     // Guardar las órdenes primero (si están embebidas en el body)
-    const ordenesRecibidas = req.body.orden_compra || [];
+    const ordenesRecibidas = req.body.licitacion.orden_compra || [];
 
     // 1. Obtener los IDs actuales en la base de datos
     const licitacionActual = await Licitacion.findById(req.query.id).populate(
@@ -131,7 +131,7 @@ ctrl.edit = async (req, res) => {
 
     let savedLicitacion = await Licitacion.findByIdAndUpdate(
       req.query.id,
-      { ...req.body, orden_compra: ordenesFinalIds },
+      { ...req.body.licitacion, orden_compra: ordenesFinalIds },
       { new: true }
     )
       .populate({
@@ -150,6 +150,7 @@ ctrl.edit = async (req, res) => {
         },
       })
       .exec();
+    console.log('editada', savedLicitacion)
     res.status(200).json(savedLicitacion);
   } catch (error) {
     console.log(error);

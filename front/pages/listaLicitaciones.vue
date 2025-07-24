@@ -1,6 +1,6 @@
 <template>
   <div class="px-4">
-    <v-card title="Licitaciones" v-show="lista">
+    <v-card title="Licitaciones" v-show="vistaLista">
       <template v-slot:text>
         <v-text-field
           v-model="search"
@@ -34,6 +34,7 @@
               x-small
               icon="mdi-pencil"
               v-tooltip="'Editar Licitacion'"
+              @click="verEdit(item)"
             ></v-btn>
 
             <v-btn
@@ -55,23 +56,41 @@
         </template>
       </v-data-table>
     </v-card>
+
     <vista-completa-licitacion
       @cerrar="verLista"
       v-show="vistaUno"
       :licitacion="unaLicitacion"
     />
 
+    <cargaLicitacion
+      v-show="vistaEdit"
+      titulo="Editar Licitacion"
+      textoBoton="Editar Licitacion"
+      :botonVolver="true"
+      :contratistas="contratistaStore.contratistas"
+      v-model:licitacionActual="licitacionStore.licitacionActual"
+      @onSubmit="editarLicitacion"
+      @cerrar="verLista"
+    />
+
     <eliminarDialog
-      v-model:show="viewEliminar"
+      v-model:show="vistaEliminar"
       titulo="Eliminar Licitacion"
       texto="¿Estás seguro de que querés eliminar esta licitación?"
       @confirm="confirmarEliminacion"
     />
 
     <MensajeAlerta
-      v-model:show="showAlerta"
+      v-model:show="alertaEliminar"
       title="Licitación eliminada"
       bodyText="La licitación fue eliminada correctamente"
+    />
+
+    <MensajeAlerta
+      v-model:show="alertaEdit"
+      title="Licitación editada"
+      bodyText="La licitación fue guardada correctamente"
     />
   </div>
 </template>
@@ -80,6 +99,7 @@
 //import datos from "../utils/data";
 import format from "../utils/formatText";
 import { useLicitacionStore } from "~/stores/licitacionStore";
+import { useContratistaStore } from "~/stores/contratistaStore";
 import { ref } from "vue";
 
 const search = ref("");
@@ -87,12 +107,17 @@ const search = ref("");
 const licitacionStore = useLicitacionStore();
 licitacionStore.fetchLicitaciones();
 
+const contratistaStore = useContratistaStore();
+contratistaStore.fetchContratistas();
+
 const unaLicitacion = ref({});
-const lista = ref(true);
+const vistaLista = ref(true);
 const vistaUno = ref(false);
-const viewEliminar = ref(false);
+const vistaEdit = ref(false);
+const vistaEliminar = ref(false);
 const idDelete = ref("");
-const showAlerta = ref(false)
+const alertaEliminar = ref(false);
+const alertaEdit = ref(false);
 
 const headers = [
   { title: "Nombre", key: "nombre" },
@@ -107,26 +132,43 @@ const headers = [
 
 function eliminarLicitacion(licitacion) {
   console.log("Eliminar Licitacion", licitacion);
-  viewEliminar.value = true;
+  vistaEliminar.value = true;
   idDelete.value = licitacion._id;
 }
 
 function confirmarEliminacion() {
   licitacionStore.deleteLicitacion(idDelete.value);
-  viewEliminar.value = false;
+  vistaEliminar.value = false;
   idDelete.value = "";
-  showAlerta.value = true;
+  alertaEliminar.value = true;
+}
+
+function editarLicitacion() {
+  let id = licitacionStore.licitacionActual._id;
+  licitacionStore.updateLicitacion(id, licitacionStore.licitacionActual);
+  licitacionStore.limpiarLicitacionActual();
+  alertaEdit.value = true;
+  verLista()
 }
 
 function verLicitacion(licitacion) {
   unaLicitacion.value = licitacion;
   vistaUno.value = true;
-  lista.value = false;
+  vistaLista.value = false;
+  vistaEdit.value = false;
 }
 
 function verLista() {
   vistaUno.value = false;
-  lista.value = true;
+  vistaLista.value = true;
+  vistaEdit.value = false;
+}
+
+function verEdit(licitacion) {
+  licitacionStore.setLicitacionActual(licitacion);
+  vistaUno.value = false;
+  vistaLista.value = false;
+  vistaEdit.value = true;
 }
 </script>
 
