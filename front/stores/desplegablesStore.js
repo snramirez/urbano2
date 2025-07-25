@@ -23,7 +23,7 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
   const fetchTipoLicitacion = async () => {
     try {
       const res = await api.get("/desplegables?tipo=TIPO_LIC");
-      estadoLicitacion.value = res.data;
+      tipoLicitacion.value = res.data;
     } catch (err) {
       console.error("Error fetching tipo de licitación:", err);
     }
@@ -32,7 +32,7 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
   const fetchTipoContratacion = async () => {
     try {
       const res = await api.get("/desplegables?tipo=TIPO_CONTR");
-      estadoLicitacion.value = res.data;
+      tipoContratacion.value = res.data;
     } catch (err) {
       console.error("Error fetching tipo de contratacion:", err);
     }
@@ -41,7 +41,7 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
   const fetchEstadoOC = async () => {
     try {
       const res = await api.get("/desplegables?tipo=ESTADO_OC");
-      estadoLicitacion.value = res.data;
+      estadoOC.value = res.data;
     } catch (err) {
       console.error("Error fetching estados de orden de compra:", err);
     }
@@ -94,5 +94,7 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
     fetchTipoLicitacion,
     fetchTipoContratacion,
     fetchEstadoOC,
+    createDesplegable,
+    deleteDesplegable
   };
 });

@@ -20,7 +20,7 @@ ctrl.index = async (req, res) => {
 ctrl.create = async (req, res) => {
     console.log(req.body)
     try {
-        let savedDesplegable = await new Desplegables(req.body.desplegable).save();
+        let savedDesplegable = await new Desplegables(req.body).save();
         res.status(200).json(savedDesplegable)
     } 
     catch (error) {

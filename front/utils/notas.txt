@@ -54,3 +54,11 @@ En Orden de compra:
     Opcionales: Calcular el tiempo que paso entre fecha de llamado y adjudicacion
                 Calcular la diferencia entre monto oficial y los pago al final de todo.
 
+
+################################# 25/07/25 #############################
+
+En vista dashboard se tiene que ver ademas de las alertas de impaga/pagado
+Monto total: sumatoria los montos total de todas las OC (con ampliatorias y prorrogas etc)
+Devengado Total: Todo lo devengado
+Pagado Total: Todo lo pagado.
+Poner % y colores para que quede bien informativo. 

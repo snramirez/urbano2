@@ -11,19 +11,42 @@
     <v-tabs-window v-model="tab">
       <v-tabs-window-item value="1">
         <v-card color="grey-lighten-2">
-            <altas-contratistas
-            :contratistas="contratistaStore.contratistas"  
-            />
-        </v-card>
-    </v-tabs-window-item>
-      <v-tabs-window-item value="2">
-        <v-card color="grey-lighten-2">
-            <altas-desplegables
-            :desplegables="desplegablesStore.estadoLicitacion"  
-            />
+          <altas-contratistas :contratistas="contratistaStore.contratistas" />
         </v-card>
       </v-tabs-window-item>
-      <v-tabs-window-item value="3"> ventana tres </v-tabs-window-item>
+
+      <v-tabs-window-item value="2">
+        <v-card color="grey-lighten-2">
+          <altas-desplegables
+            :desplegables="desplegablesStore.estadoLicitacion"
+            @addDesplegable="addEstadoLicitacion"
+            @deleteDesplegable="deleteDesplegable"
+            titulo="Estado Licitacion"
+          />
+        </v-card>
+      </v-tabs-window-item>
+
+      <v-tabs-window-item value="3">
+        <v-card color="grey-lighten-2">
+          <altas-desplegables
+            :desplegables="desplegablesStore.tipoLicitacion"
+            @addDesplegable="addTipoLicitacion"
+            @deleteDesplegable="deleteDesplegable"
+            titulo="Tipo Licitacion"
+          />
+        </v-card>
+      </v-tabs-window-item>
+
+      <v-tabs-window-item value="4">
+        <v-card color="grey-lighten-2">
+          <altas-desplegables
+            :desplegables="desplegablesStore.tipoContratacion"
+            @addDesplegable="addTipoContratacion"
+            @deleteDesplegable="deleteDesplegable"
+            titulo="Tipo Contratacion"
+          />
+        </v-card>
+      </v-tabs-window-item>
     </v-tabs-window>
   </v-container>
 </template>
@@ -38,9 +61,38 @@ contratistaStore.fetchContratistas();
 
 const desplegablesStore = useDesplegablesStore();
 desplegablesStore.fetchEstadoLicitacion();
+desplegablesStore.fetchTipoLicitacion();
+desplegablesStore.fetchTipoContratacion();
 
 const tab = ref(null);
 
+function addEstadoLicitacion(valor) {
+  let desplegable = {
+    valor: valor,
+    tipo: "ESTADO_LIC",
+  };
+  desplegablesStore.createDesplegable(desplegable);
+}
+
+function addTipoLicitacion(valor) {
+  let desplegable = {
+    valor: valor,
+    tipo: "TIPO_LIC",
+  };
+  desplegablesStore.createDesplegable(desplegable);
+}
+
+function addTipoContratacion(valor) {
+  let desplegable = {
+    valor: valor,
+    tipo: "TIPO_CONTR",
+  };
+  desplegablesStore.createDesplegable(desplegable);
+}
+
+function deleteDesplegable(id) {
+  desplegablesStore.deleteDesplegable(id);
+}
 </script>
 
 <style lang="scss" scoped></style>
