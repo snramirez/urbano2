@@ -41,7 +41,7 @@
       v-model:show="deleteView"
       titulo="Eliminar Desplegable"
       texto="¿Estás seguro de que querés eliminar este desplegable?"
-      @confirm="eliminarDesplegable()"
+      @confirm="eliminarDesplegable()" 
     />
   </div>
 </template>

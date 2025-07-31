@@ -21,24 +21,24 @@
             </template>
           </v-list-item>
 
-          <!-- <v-list-item :to="'/licitaciones'">
-            <v-list-item-title> Licitaciones </v-list-item-title>
-            <template v-slot:prepend>
-              <v-icon icon="mdi-form-select"></v-icon>
-            </template>
-          </v-list-item> -->
-
           <v-list-item :to="'/cargarLicitacion'">
             <v-list-item-title> Carga </v-list-item-title>
             <template v-slot:prepend>
               <v-icon icon="mdi-file-certificate"></v-icon>
             </template>
           </v-list-item>
-
+          
           <v-list-item :to="'/listaLicitaciones'">
             <v-list-item-title> Lista </v-list-item-title>
             <template v-slot:prepend>
               <v-icon icon="mdi-file-certificate"></v-icon>
+            </template>
+          </v-list-item>
+
+          <v-list-item :to="'/altas'">
+            <v-list-item-title> Altas </v-list-item-title>
+            <template v-slot:prepend>
+              <v-icon icon="mdi-form-select"></v-icon>
             </template>
           </v-list-item>
         </v-list>

@@ -26,7 +26,7 @@ export const useContratistaStore = defineStore('contratista', () => {
     const createContratista = async (contratista) => {
         try {
             loading.value = true
-            const res = await api.post('/contractor', contratista)
+            const res = await api.post('/contractor', {contractor: contratista})
             contratistas.value.push(res.data)
         } catch (err) {
             console.error('Error creating contratista:', err)
@@ -38,7 +38,7 @@ export const useContratistaStore = defineStore('contratista', () => {
     const updateContratista = async (id, contratista) => {
         try {
             loading.value = true
-            const res = await api.put(`/contractor?id=${id}`, { data: contratista })
+            const res = await api.put(`/contractor?id=${id}`, { contractor: contratista })
             const index = contratistas.value.findIndex(c => c._id === id)
             if (index !== -1) {
                 contratistas.value[index] = res.data

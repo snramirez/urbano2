@@ -1,5 +1,5 @@
 <template>
-  <v-snackbar v-model="show" :timeout="timeout" color="primary" elevation="3">
+  <v-snackbar v-model="show" :timeout="timeout" :color="color" elevation="3">
     <div>
       <strong>{{ title }}</strong>
       <div>{{ bodyText }}</div>
@@ -18,6 +18,10 @@ const props = defineProps({
   bodyText: {
     type: String,
     required: true
+  },
+  color: {
+    type: String,
+    default: 'primary'
   },
   timeout: {
     type: Number,

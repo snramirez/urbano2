@@ -20,6 +20,22 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
     }
   };
 
+  const getEstadoLicitacion = () => {
+    return estadoLicitacion.value.map((item) => item.valor);
+  };
+
+  const getTipoLicitacion = () => {
+    return tipoLicitacion.value.map((item) => item.valor);
+  };
+
+  const getTipoContratacion = () => {
+    return tipoContratacion.value.map((item) => item.valor);
+  };
+
+  const getEstadoOC = () => {
+    return estadoOC.value.map((item) => item.valor);
+  };
+
   const fetchTipoLicitacion = async () => {
     try {
       const res = await api.get("/desplegables?tipo=TIPO_LIC");
@@ -94,7 +110,8 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
     fetchTipoLicitacion,
     fetchTipoContratacion,
     fetchEstadoOC,
+    getEstadoLicitacion,
     createDesplegable,
-    deleteDesplegable
+    deleteDesplegable,
   };
 });

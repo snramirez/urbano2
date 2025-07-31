@@ -1,6 +1,6 @@
 <template>
   <v-container class="mt-4">
-    <v-tabs v-model="tab" bg-color="grey-lighten-2">
+    <v-tabs v-model="tab" bg-color="grey-lighten-2" show-arrows center-active>
       <v-tab value="1"> Contratistas </v-tab>
       <v-tab value="2"> Estado Licitacion </v-tab>
       <v-tab value="3"> Tipo Licitacion </v-tab>
@@ -11,7 +11,13 @@
     <v-tabs-window v-model="tab">
       <v-tabs-window-item value="1">
         <v-card color="grey-lighten-2">
-          <altas-contratistas :contratistas="contratistaStore.contratistas" />
+          <altas-contratistas
+            :contratistas="contratistaStore.contratistas"
+            titulo="Contratista"
+            @addContratista="addContratista"
+            @deleteContratista="deleteContratista"
+            @editContratista="editContratista"
+          />
         </v-card>
       </v-tabs-window-item>
 
@@ -47,7 +53,25 @@
           />
         </v-card>
       </v-tabs-window-item>
+
+      <v-tabs-window-item value="5">
+        <v-card color="grey-lighten-2">
+          <altas-desplegables
+            :desplegables="desplegablesStore.estadoOC"
+            @addDesplegable="addEstadoOC"
+            @deleteDesplegable="deleteDesplegable"
+            titulo="Estado Orden de Compra"
+          />
+        </v-card>
+      </v-tabs-window-item>
     </v-tabs-window>
+
+    <MensajeAlerta
+      v-model:show="showAlerta"
+      :title="tituloAlerta"
+      :bodyText="textoAlerta"
+      :color="color"
+    />
   </v-container>
 </template>
 
@@ -63,8 +87,13 @@ const desplegablesStore = useDesplegablesStore();
 desplegablesStore.fetchEstadoLicitacion();
 desplegablesStore.fetchTipoLicitacion();
 desplegablesStore.fetchTipoContratacion();
+desplegablesStore.fetchEstadoOC();
 
 const tab = ref(null);
+const showAlerta = ref(false);
+const tituloAlerta = ref("");
+const textoAlerta = ref("");
+const color = ref("primary");
 
 function addEstadoLicitacion(valor) {
   let desplegable = {
@@ -90,8 +119,42 @@ function addTipoContratacion(valor) {
   desplegablesStore.createDesplegable(desplegable);
 }
 
+function addEstadoOC(valor) {
+  let desplegable = {
+    valor: valor,
+    tipo: "ESTADO_OC",
+  };
+  desplegablesStore.createDesplegable(desplegable);
+}
+
 function deleteDesplegable(id) {
   desplegablesStore.deleteDesplegable(id);
+  tituloAlerta.value = "Desplegable eliminado";
+  textoAlerta.value = "El desplegable fue eliminado correctamente";
+  color.value = "error";
+  showAlerta.value = true;
+}
+
+function editContratista(contratista) {
+  contratistaStore.updateContratista(contratista._id, contratista);
+  tituloAlerta.value = "Contratista Editado";
+  textoAlerta.value = "El Contratista fue editado correctamente";
+  showAlerta.value = true;
+}
+
+function addContratista(contratista) {
+  contratistaStore.createContratista(contratista);
+  tituloAlerta.value = "Nuevo Contratista";
+  textoAlerta.value = "El Contratista fue agregado correctamente";
+  showAlerta.value = true;
+}
+
+function deleteContratista(id) {
+  contratistaStore.deleteContratista(id);
+  tituloAlerta.value = "Contratista eliminado";
+  textoAlerta.value = "El Contratista fue eliminado correctamente";
+  color.value = "error";
+  showAlerta.value = true;
 }
 </script>
 

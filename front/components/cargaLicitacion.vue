@@ -81,11 +81,12 @@
 
           <v-row>
             <v-col cols="12" md="3">
-              <v-text-field
+              <v-select
                 variant="outlined"
                 label="Estado"
                 v-model="licitacionActual.estado"
-              ></v-text-field>
+                :items="desplegablesStore.getEstadoLicitacion()"
+              ></v-select>
             </v-col>
             <v-col cols="12" md="3">
               <v-text-field
@@ -264,6 +265,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { useDesplegablesStore } from "~/stores/desplegablesStore";
 
 const props = defineProps({
   titulo: String,
@@ -273,9 +275,20 @@ const props = defineProps({
 
 });
 
+const desplegablesStore = useDesplegablesStore();
+desplegablesStore.fetchEstadoLicitacion();
+desplegablesStore.fetchTipoLicitacion();
+desplegablesStore.fetchTipoContratacion();
+desplegablesStore.fetchEstadoOC();
+
+const estadoLicitacion = ref([]);
+const tipoLicitacion = ref([]);
+const tipoContratacion = ref([]);
+const estadoOC = ref([]);
 const panel = ref([]);
 const licitacionActual = defineModel("licitacionActual");
 
+// estadoLicitacion.value = desplegablesStore.estadoLicitacion.map((item) => item.valor);
 const emit = defineEmits(["onSubmit", "cerrar"]);
 
 function close() {
