@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4">
+  <div class="px-4 mt-4">
     <v-card title="Licitaciones" v-show="vistaLista">
       <template v-slot:text>
         <v-text-field
@@ -16,6 +16,8 @@
         :headers="headers"
         :items="licitacionStore.licitaciones"
         :search="search"
+        fixed-header
+        height="600px"
       >
         <template v-slot:item.inicio="{ item }">
           <span>{{ format.formatDate(item.inicio) }}</span>

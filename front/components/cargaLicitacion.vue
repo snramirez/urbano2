@@ -86,6 +86,7 @@
                 label="Estado"
                 v-model="licitacionActual.estado"
                 :items="desplegablesStore.getEstadoLicitacion()"
+                clearable
               ></v-select>
             </v-col>
             <v-col cols="12" md="3">
@@ -277,9 +278,7 @@ const props = defineProps({
 
 const desplegablesStore = useDesplegablesStore();
 desplegablesStore.fetchEstadoLicitacion();
-desplegablesStore.fetchTipoLicitacion();
-desplegablesStore.fetchTipoContratacion();
-desplegablesStore.fetchEstadoOC();
+
 
 const estadoLicitacion = ref([]);
 const tipoLicitacion = ref([]);

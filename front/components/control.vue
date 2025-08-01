@@ -35,6 +35,9 @@
             <v-card-subtitle
               >Monto Devengado $ {{ montoDevengado() }}</v-card-subtitle
             >
+            <v-card-subtitle
+              >Monto Pagado $ {{ montoPagado() }}</v-card-subtitle
+            >
 
             <v-data-table
               :headers="headers"
@@ -218,10 +221,22 @@ function montoDevengado() {
   return monto;
 }
 
+function montoPagado() {
+  let monto = 0;
+  orden_compra.value.control.forEach((certificado) => {
+    certificado.estado == "PAGADO" ? (monto += certificado.monto_pagado) : 0;
+  });
+  return monto;
+}
+
 function getMontoTotal() {
   let montoTotal = 0;
   orden_compra.value.ampliatoria.forEach((amp) => (montoTotal += amp.monto));
   orden_compra.value.prorroga.forEach((amp) => (montoTotal += amp.monto));
+  orden_compra.value.redeterminacion.forEach(
+    (amp) => (montoTotal += amp.monto)
+  );
+  orden_compra.value.continuidad.forEach((amp) => (montoTotal += amp.monto));
   montoTotal += orden_compra.value.monto;
   return montoTotal;
 }

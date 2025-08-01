@@ -111,6 +111,9 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
     fetchTipoContratacion,
     fetchEstadoOC,
     getEstadoLicitacion,
+    getTipoLicitacion,
+    getTipoContratacion,
+    getEstadoOC,
     createDesplegable,
     deleteDesplegable,
   };

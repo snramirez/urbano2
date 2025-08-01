@@ -1,78 +1,86 @@
 <template>
-  <v-container class="mt-4">
-    <v-tabs v-model="tab" bg-color="grey-lighten-2" show-arrows center-active>
-      <v-tab value="1"> Contratistas </v-tab>
-      <v-tab value="2"> Estado Licitacion </v-tab>
-      <v-tab value="3"> Tipo Licitacion </v-tab>
-      <v-tab value="4"> Tipo Contratacion </v-tab>
-      <v-tab value="5"> Estado Orden de Compra </v-tab>
-    </v-tabs>
+  <v-card class="mt-4 mx-2">
+    <v-toolbar color="primary" title="Desplegables"> </v-toolbar>
+    <v-container class="mt-4 d-flex flex-row">
+      <v-tabs
+        v-model="tab"
+        bg-color="grey-lighten-2"
+        show-arrows
+        direction="vertical"
+      >
+        <v-tab value="1"> Contratistas </v-tab>
+        <v-tab value="2"> Estado Licitacion </v-tab>
+        <v-tab value="3"> Tipo Licitacion </v-tab>
+        <v-tab value="4"> Tipo Contratacion </v-tab>
+        <v-tab value="5"> Estado Orden de Compra </v-tab>
+      </v-tabs>
 
-    <v-tabs-window v-model="tab">
-      <v-tabs-window-item value="1">
-        <v-card color="grey-lighten-2">
-          <altas-contratistas
-            :contratistas="contratistaStore.contratistas"
-            titulo="Contratista"
-            @addContratista="addContratista"
-            @deleteContratista="deleteContratista"
-            @editContratista="editContratista"
-          />
-        </v-card>
-      </v-tabs-window-item>
+      <v-tabs-window v-model="tab">
+        <v-tabs-window-item value="1">
+          <v-card color="grey-lighten-2" width="500px">
+            <altas-contratistas
+              :contratistas="contratistaStore.contratistas"
+              titulo="Contratista"
+              @addContratista="addContratista"
+              @deleteContratista="deleteContratista"
+              @editContratista="editContratista"
+            />
+          </v-card>
+        </v-tabs-window-item>
 
-      <v-tabs-window-item value="2">
-        <v-card color="grey-lighten-2">
-          <altas-desplegables
-            :desplegables="desplegablesStore.estadoLicitacion"
-            @addDesplegable="addEstadoLicitacion"
-            @deleteDesplegable="deleteDesplegable"
-            titulo="Estado Licitacion"
-          />
-        </v-card>
-      </v-tabs-window-item>
+        <v-tabs-window-item value="2">
+          <v-card color="grey-lighten-2" width="500px">
+            <altas-desplegables
+              :desplegables="desplegablesStore.estadoLicitacion"
+              @addDesplegable="addEstadoLicitacion"
+              @deleteDesplegable="deleteDesplegable"
+              titulo="Estado Licitacion"
+            />
+          </v-card>
+        </v-tabs-window-item>
 
-      <v-tabs-window-item value="3">
-        <v-card color="grey-lighten-2">
-          <altas-desplegables
-            :desplegables="desplegablesStore.tipoLicitacion"
-            @addDesplegable="addTipoLicitacion"
-            @deleteDesplegable="deleteDesplegable"
-            titulo="Tipo Licitacion"
-          />
-        </v-card>
-      </v-tabs-window-item>
+        <v-tabs-window-item value="3">
+          <v-card color="grey-lighten-2" width="500px">
+            <altas-desplegables
+              :desplegables="desplegablesStore.tipoLicitacion"
+              @addDesplegable="addTipoLicitacion"
+              @deleteDesplegable="deleteDesplegable"
+              titulo="Tipo Licitacion"
+            />
+          </v-card>
+        </v-tabs-window-item>
 
-      <v-tabs-window-item value="4">
-        <v-card color="grey-lighten-2">
-          <altas-desplegables
-            :desplegables="desplegablesStore.tipoContratacion"
-            @addDesplegable="addTipoContratacion"
-            @deleteDesplegable="deleteDesplegable"
-            titulo="Tipo Contratacion"
-          />
-        </v-card>
-      </v-tabs-window-item>
+        <v-tabs-window-item value="4">
+          <v-card color="grey-lighten-2" width="500px">
+            <altas-desplegables
+              :desplegables="desplegablesStore.tipoContratacion"
+              @addDesplegable="addTipoContratacion"
+              @deleteDesplegable="deleteDesplegable"
+              titulo="Tipo Contratacion"
+            />
+          </v-card>
+        </v-tabs-window-item>
 
-      <v-tabs-window-item value="5">
-        <v-card color="grey-lighten-2">
-          <altas-desplegables
-            :desplegables="desplegablesStore.estadoOC"
-            @addDesplegable="addEstadoOC"
-            @deleteDesplegable="deleteDesplegable"
-            titulo="Estado Orden de Compra"
-          />
-        </v-card>
-      </v-tabs-window-item>
-    </v-tabs-window>
+        <v-tabs-window-item value="5">
+          <v-card color="grey-lighten-2" width="500px">
+            <altas-desplegables
+              :desplegables="desplegablesStore.estadoOC"
+              @addDesplegable="addEstadoOC"
+              @deleteDesplegable="deleteDesplegable"
+              titulo="Estado Orden de Compra"
+            />
+          </v-card>
+        </v-tabs-window-item>
+      </v-tabs-window>
 
-    <MensajeAlerta
-      v-model:show="showAlerta"
-      :title="tituloAlerta"
-      :bodyText="textoAlerta"
-      :color="color"
-    />
-  </v-container>
+      <MensajeAlerta
+        v-model:show="showAlerta"
+        :title="tituloAlerta"
+        :bodyText="textoAlerta"
+        :color="color"
+      />
+    </v-container>
+  </v-card>
 </template>
 
 <script setup>

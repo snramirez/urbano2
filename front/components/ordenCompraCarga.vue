@@ -19,7 +19,7 @@
             <v-col cols="12" md="3">
               <v-select
                 v-model="OC.tipo"
-                :items="tipoOC"
+                :items="desplegablesStore.getEstadoOC()"
                 label="Tipo Orden"
                 required
                 variant="outlined"
@@ -101,17 +101,34 @@
 
           <v-row>
             <v-col cols="6">
-              <ampliatoria 
-                v-model:extensionData="OC.prorroga" 
+              <ampliatoria
+                v-model:extensionData="OC.prorroga"
                 titulo="Prorroga"
                 tipo="PRORROGA"
               />
             </v-col>
             <v-col cols="6">
-              <ampliatoria 
+              <ampliatoria
                 v-model:extensionData="OC.ampliatoria"
                 titulo="Ampliatoria"
                 tipo="AMPLIATORIA"
+              />
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="6">
+              <ampliatoria
+                v-model:extensionData="OC.redeterminacion"
+                titulo="Redeterminación"
+                tipo="REDETERMINACION"
+              />
+            </v-col>
+            <v-col cols="6">
+              <ampliatoria
+                v-model:extensionData="OC.continuidad"
+                titulo="Continuidad"
+                tipo="CONTINUIDAD"
               />
             </v-col>
           </v-row>
@@ -128,18 +145,21 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from "vue";
+import { ref } from "vue";
+import { useDesplegablesStore } from "~/stores/desplegablesStore";
 
 const props = defineProps({
   contratistas: Array,
   renglones: Array,
 });
 
+const desplegablesStore = useDesplegablesStore();
+desplegablesStore.fetchEstadoOC();
+
 const ordenes_compras = defineModel("ordenes_compras");
 
 const panelOC = ref([]);
-const tipoOC = ["ABIERTA", "CERRADA"];
-const origenOC = ["RENGLON", "AMPLIATORIA", "PRORROGA"];
+const origenOC = ["RENGLON", "AMPLIATORIA", "PRORROGA", "REDETERMINACION", "CONTINUIDAD"];
 
 function addOC() {
   ordenes_compras.value.push({
@@ -153,6 +173,8 @@ function addOC() {
     renglon_origen: null,
     prorroga: [],
     ampliatoria: [],
+    redeterminacion: [],
+    continuidad: [],
     control: [],
   });
 }
@@ -193,6 +215,9 @@ function getRenglon() {
 function getMontoTotal(orden) {
   let montoTotal = 0;
   orden.ampliatoria.forEach((amp) => (montoTotal += amp.monto));
+  orden.prorroga.forEach((amp) => (montoTotal += amp.monto));
+  orden.redeterminacion.forEach((amp) => (montoTotal += amp.monto));
+  orden.continuidad.forEach((amp) => (montoTotal += amp.monto));
   montoTotal += orden.monto;
   return montoTotal;
 }

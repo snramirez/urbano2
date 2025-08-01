@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-container class="">
-            <v-card class="ma-2" cols="12">
+            <v-card class="ma-2 mt-4" cols="12">
                 <v-card-title class="d-flex justify-center">Proceso</v-card-title>
                 <v-row class="my-2 mx-2">
                     <v-col cols="12" md="6">

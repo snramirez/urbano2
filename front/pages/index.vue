@@ -16,7 +16,15 @@
         </v-card-title>
 
         <v-divider></v-divider>
-        <v-data-table v-model:search="search" :headers="headers" :items="licitacionStore.licitaciones">
+        <v-data-table v-model:search="search" :headers="headers" :items="licitacionStore.licitaciones" show-expand>
+          <template v-slot:expanded-row="{ columns, item}">
+            <v-row>
+              <v-col v-for="(column, index) in columns" :key="index">
+                <div class="text-subtitle-2">{{ column.text }}</div>
+                <div>{{ item[column.value] }}</div>
+              </v-col>
+            </v-row>
+          </template>
           <template v-slot:item.inicio="{ item }">
             <span>{{ formatDate.formatDate(item.inicio) }}</span>
           </template>
@@ -55,7 +63,6 @@
 </template>
 
 <script setup>
-import datos from "../utils/data";
 import { useLicitacionStore } from "~/stores/licitacionStore";
 import format from "../utils/formatText";
 import { ref } from "vue";
@@ -91,7 +98,7 @@ function vencido(control) {
   let currentDate = new Date();
   if (
     new Date(control.periodo) < currentDate &&
-    control.estado != "EJECUTADO"
+    control.estado != "DEVENGADO"
   ) {
     return true;
   }
