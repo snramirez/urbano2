@@ -19,6 +19,7 @@
                   label="Contratista"
                   required
                   variant="outlined"
+                  ref="valorRef"
                 />
               </v-col>
             </v-row>
@@ -38,7 +39,7 @@
               />
             </v-row>
 
-            <v-btn color="success" @click="onSubmit" class="pa-2">{{
+            <v-btn color="success" type="submit" class="pa-2">{{
               botonTexto
             }}</v-btn>
           </v-form>
@@ -63,6 +64,16 @@ const show = defineModel("show");
 const beneficiario = defineModel("beneficiario");
 const monto_ofertado = defineModel("monto_ofertado");
 const observacion = defineModel("observacion");
+const valorRef = ref(null);
+
+// Observar cuando se abre el diálogo
+watch(show, async (nuevoValor) => {
+  if (nuevoValor) {
+    await nextTick()
+    valorRef.value?.focus()
+  }
+})
+
 
 function onSubmit() {
   emit('update');

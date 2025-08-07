@@ -40,42 +40,52 @@
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
-              <v-text-field
+              <v-select
                 variant="outlined"
                 label="Area"
                 v-model="licitacionActual.area"
-              ></v-text-field>
+                :items="desplegablesStore.getArea()"
+                clearable
+              ></v-select>
             </v-col>
           </v-row>
 
           <v-row>
             <v-col cols="12" md="3">
-              <v-text-field
+              <v-select
                 variant="outlined"
                 label="Sub Area"
                 v-model="licitacionActual.subarea"
-              ></v-text-field>
+                :items="desplegablesStore.getSubArea()"
+                clearable
+              ></v-select>
             </v-col>
             <v-col cols="12" md="3">
-              <v-text-field
+              <v-select
                 variant="outlined"
                 label="Firmante"
                 v-model="licitacionActual.firmante"
-              ></v-text-field>
+                :items="desplegablesStore.getFirmante()"
+                clearable
+              ></v-select>
             </v-col>
             <v-col cols="12" md="3">
-              <v-text-field
+              <v-select
                 variant="outlined"
                 label="Modalidad"
                 v-model="licitacionActual.modalidad"
-              ></v-text-field>
+                :items="desplegablesStore.getModalidad()"
+                clearable
+              ></v-select>
             </v-col>
             <v-col cols="12" md="3">
-              <v-text-field
+              <v-select
                 variant="outlined"
-                label="Tipo Contrato"
+                label="Tipo Contratación"
                 v-model="licitacionActual.tipo_contrato"
-              ></v-text-field>
+                :items="desplegablesStore.getTipoContratacion()"
+                clearable
+              ></v-select>
             </v-col>
           </v-row>
 
@@ -97,18 +107,22 @@
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="3">
-              <v-text-field
-                variant="outlined"
-                label="Inicio"
+              <v-date-input
                 v-model="licitacionActual.inicio"
-              ></v-text-field>
+                label="Inicio"
+                prepend-icon="mdi-calendar"
+                variant="outlined"
+                clearable
+              ></v-date-input>
             </v-col>
             <v-col cols="12" md="3">
-              <v-text-field
+              <v-date-input
+                v-model="licitacionActual.vencimiento"
                 variant="outlined"
                 label="Finalizacion"
-                v-model="licitacionActual.vencimiento"
-              ></v-text-field>
+                prepend-icon="mdi-calendar"
+                clearable
+              ></v-date-input>
             </v-col>
           </v-row>
         </v-expansion-panel-text>
@@ -273,12 +287,15 @@ const props = defineProps({
   textoBoton: String,
   contratistas: Array,
   botonVolver: { type: Boolean, default: false },
-
 });
 
 const desplegablesStore = useDesplegablesStore();
 desplegablesStore.fetchEstadoLicitacion();
-
+desplegablesStore.fetchArea();
+desplegablesStore.fetchSubArea();
+desplegablesStore.fetchFirmante();
+desplegablesStore.fetchModalidad();
+desplegablesStore.fetchSubModalidad();
 
 const estadoLicitacion = ref([]);
 const tipoLicitacion = ref([]);

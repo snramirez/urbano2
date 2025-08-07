@@ -13,6 +13,13 @@
         <v-tab value="3"> Tipo Licitacion </v-tab>
         <v-tab value="4"> Tipo Contratacion </v-tab>
         <v-tab value="5"> Estado Orden de Compra </v-tab>
+        <v-tab value="6"> Area </v-tab>
+        <v-tab value="7"> Sub Area </v-tab>
+        <v-tab value="8"> Firmante </v-tab>
+        <v-tab value="9"> Modalidad </v-tab>
+        <v-tab value="10"> Sub Modalidad </v-tab>
+
+        
       </v-tabs>
 
       <v-tabs-window v-model="tab">
@@ -71,7 +78,62 @@
             />
           </v-card>
         </v-tabs-window-item>
-      </v-tabs-window>
+
+      <v-tabs-window-item value="6">
+        <v-card color="grey-lighten-2" width="500px">
+          <altas-desplegables
+            :desplegables="desplegablesStore.area"
+            @addDesplegable="addArea"
+            @deleteDesplegable="deleteDesplegable"
+            titulo="Area"
+          />
+        </v-card>
+      </v-tabs-window-item>
+
+      <v-tabs-window-item value="7">
+        <v-card color="grey-lighten-2" width="500px">
+          <altas-desplegables
+            :desplegables="desplegablesStore.subArea"
+            @addDesplegable="addSubArea"
+            @deleteDesplegable="deleteDesplegable"
+            titulo="Sub Area"
+          />
+        </v-card>
+      </v-tabs-window-item>
+
+      <v-tabs-window-item value="8">
+        <v-card color="grey-lighten-2" width="500px">
+          <altas-desplegables
+            :desplegables="desplegablesStore.firmante"
+            @addDesplegable="addFirmante"
+            @deleteDesplegable="deleteDesplegable"
+            titulo="Firmante"
+          />
+        </v-card>
+      </v-tabs-window-item>
+
+      <v-tabs-window-item value="9">
+        <v-card color="grey-lighten-2" width="500px">
+          <altas-desplegables
+            :desplegables="desplegablesStore.modalidad"
+            @addDesplegable="addModalidad"
+            @deleteDesplegable="deleteDesplegable"
+            titulo="Modalidad"
+          />
+        </v-card>
+      </v-tabs-window-item>
+
+      <v-tabs-window-item value="10">
+        <v-card color="grey-lighten-2" width="500px">
+          <altas-desplegables
+            :desplegables="desplegablesStore.subModalidad"
+            @addDesplegable="addSubModalidad"
+            @deleteDesplegable="deleteDesplegable"
+            titulo="Sub Modalidad"
+          />
+        </v-card>
+      </v-tabs-window-item>
+    </v-tabs-window>
 
       <MensajeAlerta
         v-model:show="showAlerta"
@@ -96,6 +158,12 @@ desplegablesStore.fetchEstadoLicitacion();
 desplegablesStore.fetchTipoLicitacion();
 desplegablesStore.fetchTipoContratacion();
 desplegablesStore.fetchEstadoOC();
+desplegablesStore.fetchArea();
+desplegablesStore.fetchSubArea();
+desplegablesStore.fetchFirmante();
+desplegablesStore.fetchModalidad();
+desplegablesStore.fetchSubModalidad();
+
 
 const tab = ref(null);
 const showAlerta = ref(false);
@@ -131,6 +199,46 @@ function addEstadoOC(valor) {
   let desplegable = {
     valor: valor,
     tipo: "ESTADO_OC",
+  };
+  desplegablesStore.createDesplegable(desplegable);
+}
+
+function addArea(valor) {
+  let desplegable = {
+    valor: valor,
+    tipo: "AREA",
+  };
+  desplegablesStore.createDesplegable(desplegable);
+}
+
+function addSubArea(valor) {
+  let desplegable = {
+    valor: valor,
+    tipo: "SUB_AREA",
+  };
+  desplegablesStore.createDesplegable(desplegable);
+}
+
+function addFirmante(valor) {
+  let desplegable = {
+    valor: valor,
+    tipo: "FIRMANTE",
+  };
+  desplegablesStore.createDesplegable(desplegable);
+}
+
+function addModalidad(valor) {
+  let desplegable = {
+    valor: valor,
+    tipo: "MODALIDAD",
+  };
+  desplegablesStore.createDesplegable(desplegable);
+}
+
+function addSubModalidad(valor) {
+  let desplegable = {
+    valor: valor,
+    tipo: "SUB_MODALIDAD",
   };
   desplegablesStore.createDesplegable(desplegable);
 }

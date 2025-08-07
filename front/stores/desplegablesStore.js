@@ -10,6 +10,11 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
   const tipoLicitacion = ref([]);
   const tipoContratacion = ref([]);
   const estadoOC = ref([]);
+  const area = ref([]);
+  const subArea = ref([]);
+  const firmante = ref([]);
+  const modalidad = ref([]);
+  const subModalidad = ref([]);
 
   const fetchEstadoLicitacion = async () => {
     try {
@@ -18,22 +23,6 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
     } catch (err) {
       console.error("Error fetching estados de licitación:", err);
     }
-  };
-
-  const getEstadoLicitacion = () => {
-    return estadoLicitacion.value.map((item) => item.valor);
-  };
-
-  const getTipoLicitacion = () => {
-    return tipoLicitacion.value.map((item) => item.valor);
-  };
-
-  const getTipoContratacion = () => {
-    return tipoContratacion.value.map((item) => item.valor);
-  };
-
-  const getEstadoOC = () => {
-    return estadoOC.value.map((item) => item.valor);
   };
 
   const fetchTipoLicitacion = async () => {
@@ -57,10 +46,93 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
   const fetchEstadoOC = async () => {
     try {
       const res = await api.get("/desplegables?tipo=ESTADO_OC");
+      console.log("EstadoOC fetched:", res.data);
       estadoOC.value = res.data;
     } catch (err) {
       console.error("Error fetching estados de orden de compra:", err);
     }
+  };
+
+  const fetchArea = async () => {
+    try {
+      const res = await api.get("/desplegables?tipo=AREA");
+      console.log("Areas fetched:", res.data);
+      area.value = res.data;
+    } catch (err) {
+      console.error("Error fetching areas:", err);
+    }
+  };
+
+  const fetchSubArea = async () => {
+    try {
+      const res = await api.get("/desplegables?tipo=SUB_AREA");
+      subArea.value = res.data;
+    } catch (err) {
+      console.error("Error fetching sub areas:", err);
+    }
+  };
+
+  const fetchFirmante = async () => {
+    try {
+      const res = await api.get("/desplegables?tipo=FIRMANTE");
+      firmante.value = res.data;
+    } catch (err) {
+      console.error("Error fetching firmantes:", err);
+    }
+  };
+
+  const fetchModalidad = async () => {
+    try {
+      const res = await api.get("/desplegables?tipo=MODALIDAD");
+      modalidad.value = res.data;
+    } catch (err) {
+      console.error("Error fetching modalidades:", err);
+    }
+  };
+
+  const fetchSubModalidad = async () => {
+    try {
+      const res = await api.get("/desplegables?tipo=SUB_MODALIDAD");
+      subModalidad.value = res.data;
+    } catch (err) {
+      console.error("Error fetching sub modalidades:", err);
+    }
+  };
+
+  const getEstadoLicitacion = () => {
+    return estadoLicitacion.value.map((item) => item.valor);
+  };
+
+  const getTipoLicitacion = () => {
+    return tipoLicitacion.value.map((item) => item.valor);
+  };
+
+  const getTipoContratacion = () => {
+    return tipoContratacion.value.map((item) => item.valor);
+  };
+
+  const getEstadoOC = () => {
+    return estadoOC.value.map((item) => item.valor);
+  };
+
+  const getArea = () => {
+    return area.value.map((item) => item.valor);
+  };
+
+  const getSubArea = () => {
+    return subArea.value.map((item) => item.valor);
+  };
+
+  const getFirmante = () => {
+    return firmante.value.map((item) => item.valor);
+  };
+
+  const getModalidad = () => {
+    return modalidad.value.map((item) => item.valor);
+  };
+
+  const getSubModalidad = () => {
+    return subModalidad.value.map((item) => item.valor);
   };
 
   const createDesplegable = async (desplegable) => {
@@ -78,6 +150,21 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
           break;
         case "ESTADO_OC":
           estadoOC.value.push(res.data);
+          break;
+        case "AREA":
+          area.value.push(res.data);
+          break;
+        case "SUB_AREA":
+          subArea.value.push(res.data);
+          break;
+        case "FIRMANTE":
+          firmante.value.push(res.data);
+          break;
+        case "MODALIDAD":
+          modalidad.value.push(res.data);
+          break;
+        case "SUB_MODALIDAD":
+          subModalidad.value.push(res.data);
           break;
       }
     } catch (err) {
@@ -106,14 +193,29 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
     tipoLicitacion,
     tipoContratacion,
     estadoOC,
+    area,
+    subArea,
+    firmante,
+    modalidad,
+    subModalidad,
     fetchEstadoLicitacion,
     fetchTipoLicitacion,
     fetchTipoContratacion,
     fetchEstadoOC,
+    fetchArea,
+    fetchSubArea,
+    fetchFirmante,
+    fetchModalidad,
+    fetchSubModalidad,
     getEstadoLicitacion,
     getTipoLicitacion,
     getTipoContratacion,
     getEstadoOC,
+    getArea,
+    getSubArea,
+    getFirmante,
+    getModalidad,
+    getSubModalidad,
     createDesplegable,
     deleteDesplegable,
   };

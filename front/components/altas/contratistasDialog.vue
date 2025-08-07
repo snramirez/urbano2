@@ -7,11 +7,12 @@
         >
         <v-divider></v-divider>
         <v-card-text class="pa-3">
-          <v-form>
+          <v-form @submit.prevent="onSubmit">
             <v-text-field
               v-model="razon_social"
               label="Razon Social"
               variant="outlined"
+              ref="valorRef"
             ></v-text-field>
 
             <v-text-field
@@ -21,7 +22,7 @@
             ></v-text-field>
 
             <v-row class="mt-8 mx-auto">
-              <v-btn color="success" class="pa-2" @click="onSubmit()">{{
+              <v-btn type="submit" color="success" class="pa-2" >{{
                 botonTexto
               }}</v-btn>
             </v-row>
@@ -45,6 +46,16 @@ const emit = defineEmits(["update"]);
 const show = defineModel("show");
 const razon_social = defineModel("razon_social");
 const cuit = defineModel("cuit");
+
+const valorRef = ref(null);
+
+// Observar cuando se abre el diálogo
+watch(show, async (nuevoValor) => {
+  if (nuevoValor) {
+    await nextTick()
+    valorRef.value?.focus()
+  }
+})
 
 function onSubmit() {
   emit("update");

@@ -7,15 +7,16 @@
         >
         <v-divider></v-divider>
         <v-card-text class="pa-3">
-          <v-form>
+          <v-form @submit.prevent="onSubmit">
             <v-text-field
               v-model="valor"
+              ref="valorRef"
               :label="`Nuevo ${titulo}`"
               variant="outlined"
             ></v-text-field>
 
             <v-row class="mt-8 mx-auto">
-              <v-btn color="success" class="pa-2" @click="onSubmit()"
+              <v-btn type="submit" color="success" class="pa-2"
                 >{{botonTexto}}</v-btn
               >
             </v-row>
@@ -27,7 +28,7 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { ref, nextTick } from "vue";
 
 const props = defineProps({
   titulo: String,
@@ -38,6 +39,15 @@ const emit = defineEmits(['update'])
 
 const show = defineModel("show");
 const valor = defineModel("valor");
+const valorRef = ref(null);
+
+// Observar cuando se abre el diálogo
+watch(show, async (nuevoValor) => {
+  if (nuevoValor) {
+    await nextTick()
+    valorRef.value?.focus()
+  }
+})
 
 function onSubmit() {
   emit('update');
