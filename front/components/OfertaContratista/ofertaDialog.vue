@@ -25,12 +25,33 @@
             </v-row>
 
             <v-row class="mt-8 mx-auto">
-              <currency-field label="Oferta" v-model="monto_ofertado" />
+              <currency-field label="Oferta" v-model="monto_oferta" />
+            </v-row>
+
+            <v-row>
+              <v-col cols="12" md="4">
+                <v-checkbox
+                v-model="doc_legal"
+                label="Documentación Legal"
+                ></v-checkbox>
+              </v-col>
+              <v-col cols="12" md="4">
+                <v-checkbox
+                v-model="doc_economica"
+                label="Documentación Económica"
+                ></v-checkbox>
+              </v-col>
+              <v-col cols="12" md="4">
+                <v-checkbox
+                v-model="doc_tecnica"
+                label="Documentación Técnica"
+                ></v-checkbox>
+              </v-col>
             </v-row>
 
             <v-row>
               <v-textarea
-                v-model="observacion"
+                v-model="observaciones"
                 name="Observaciones"
                 label="Observaciones"
                 variant="outlined"
@@ -38,6 +59,8 @@
                 :counter="300"
               />
             </v-row>
+
+            
 
             <v-btn color="success" type="submit" class="pa-2">{{
               botonTexto
@@ -62,8 +85,11 @@ const emit = defineEmits(['update'])
 
 const show = defineModel("show");
 const beneficiario = defineModel("beneficiario");
-const monto_ofertado = defineModel("monto_ofertado");
-const observacion = defineModel("observacion");
+const monto_oferta = defineModel("monto_oferta");
+const observaciones = defineModel("observaciones");
+const doc_legal = defineModel("doc_legal");
+const doc_economica = defineModel("doc_economica");
+const doc_tecnica = defineModel("doc_tecnica");
 const valorRef = ref(null);
 
 // Observar cuando se abre el diálogo

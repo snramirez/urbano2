@@ -53,6 +53,7 @@
                 label="Origen"
                 required
                 variant="outlined"
+                clearable
               ></v-select>
             </v-col>
 
@@ -78,6 +79,28 @@
               ></v-select>
             </v-col>
 
+            <v-col v-if="OC.origen === 'REDETERMINACION'" cols="12" md="3">
+              <v-select
+                v-model="OC.redeterminacion_origen"
+                :items="getRedeterminancion()"
+                label="Redeterminacion origen"
+                required
+                clearable
+                variant="outlined"
+              ></v-select>
+            </v-col>
+
+            <v-col v-if="OC.origen === 'CONTINUIDAD'" cols="12" md="3">
+              <v-select
+                v-model="OC.continuidad_origen"
+                :items="getContinuidad()"
+                label="Redeterminacion origen"
+                required
+                clearable
+                variant="outlined"
+              ></v-select>
+            </v-col>
+
             <v-col v-if="OC.origen === 'RENGLON'" cols="12" md="3">
               <v-select
                 v-model="OC.renglon_origen"
@@ -96,6 +119,16 @@
                 readonly
                 label="Monto Total"
               ></currency-field>
+            </v-col>
+
+            <v-col cols="12" md="3">
+              <v-date-input
+                variant="outlined"
+                label="Fecha Vencimiento"
+                v-model="OC.fecha_vencimiento"
+                prepend-icon="mdi-calendar"
+                clearable
+              ></v-date-input>
             </v-col>
           </v-row>
 
@@ -159,7 +192,13 @@ desplegablesStore.fetchEstadoOC();
 const ordenes_compras = defineModel("ordenes_compras");
 
 const panelOC = ref([]);
-const origenOC = ["RENGLON", "AMPLIATORIA", "PRORROGA", "REDETERMINACION", "CONTINUIDAD"];
+const origenOC = [
+  "RENGLON",
+  "AMPLIATORIA",
+  "PRORROGA",
+  "REDETERMINACION",
+  "CONTINUIDAD",
+];
 
 function addOC() {
   ordenes_compras.value.push({
@@ -167,6 +206,7 @@ function addOC() {
     monto: 0,
     tipo: "",
     destinatario: null,
+    fecha_vencimiento: null,
     origen: "",
     ampliatoria_origen: null,
     prorroga_origen: null,
@@ -204,6 +244,26 @@ function getPrroroga() {
     });
   });
   return listProrroga;
+}
+
+function getRedeterminancion() {
+  let listRedeterminacion = [];
+  ordenes_compras.value.forEach((OC) => {
+    OC.redeterminacion.forEach((red) => {
+      listRedeterminacion.push(red.acta);
+    });
+  });
+  return listRedeterminacion;
+}
+
+function getContinuidad() {
+  let listContinuidad = [];
+  ordenes_compras.value.forEach((OC) => {
+    OC.continuidad.forEach((con) => {
+      listContinuidad.push(con.acta);
+    });
+  });
+  return listContinuidad;
 }
 
 function getRenglon() {

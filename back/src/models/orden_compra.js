@@ -24,6 +24,7 @@ const orden_compraSchema = new Schema({
     monto: {type: Number, get: getPrice, set: setPrice, default: 0},
     tipo: {type: String},
     destinatario: [{type: Schema.Types.ObjectId, ref: 'contractor'}],
+    fecha_vencimiento: {type: Date},
     origen: {type: String},
     ampliatoria_origen: [{type: String}],
     prorroga_origen: [{type: String}],

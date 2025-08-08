@@ -72,6 +72,15 @@
             <v-col cols="12" md="3">
               <v-select
                 variant="outlined"
+                label="Tipo Contratación"
+                v-model="licitacionActual.tipo_contrato"
+                :items="desplegablesStore.getTipoContratacion()"
+                clearable
+              ></v-select>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-select
+                variant="outlined"
                 label="Modalidad"
                 v-model="licitacionActual.modalidad"
                 :items="desplegablesStore.getModalidad()"
@@ -80,10 +89,11 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-select
+                v-if="licitacionActual.modalidad === 'CONTRATACION DIRECTA'"
                 variant="outlined"
-                label="Tipo Contratación"
-                v-model="licitacionActual.tipo_contrato"
-                :items="desplegablesStore.getTipoContratacion()"
+                label="Sub Modalidad"
+                v-model="licitacionActual.submodalidad"
+                :items="desplegablesStore.getSubModalidad()"
                 clearable
               ></v-select>
             </v-col>
@@ -180,6 +190,15 @@
                 clearable
               ></v-date-input>
             </v-col>
+
+            <v-col cols="12" md="3">
+              <v-text-field
+                variant="outlined"
+                label="Acta Llamado"
+                v-model="licitacionActual.acta_llamado"
+              ></v-text-field>
+            </v-col>
+
             <v-col cols="12" md="3">
               <v-date-input
                 v-model="licitacionActual.apertura_ofertas"
@@ -198,6 +217,9 @@
                 clearable
               ></v-date-input>
             </v-col>
+          </v-row>
+          
+          <v-row>
             <v-col cols="12" md="3">
               <v-date-input
                 v-model="licitacionActual.fecha_vencimiento_doc"
@@ -207,9 +229,6 @@
                 clearable
               ></v-date-input>
             </v-col>
-          </v-row>
-
-          <v-row>
             <v-col cols="12" md="3">
               <v-date-input
                 v-model="licitacionActual.salida_pg2"
@@ -230,18 +249,20 @@
             </v-col>
             <v-col cols="12" md="3">
               <v-date-input
-                v-model="licitacionActual.fecha_aprobatoria"
-                label="Fecha Aprobatoria"
-                prepend-icon="mdi-calendar"
+                v-model="licitacionActual.adjudicacion"
+                label="Fecha adjudicacion"
                 variant="outlined"
                 clearable
               ></v-date-input>
             </v-col>
+          </v-row>
+          
+          <v-row>
             <v-col cols="12" md="3">
               <v-text-field
                 variant="outlined"
-                label="Aprobatoria"
-                v-model="licitacionActual.aprobatoria"
+                label="Acta Adjudicacion"
+                v-model="licitacionActual.acta_adjudicacion"
               ></v-text-field>
             </v-col>
           </v-row>

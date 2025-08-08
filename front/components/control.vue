@@ -108,7 +108,7 @@
 
 <script setup>
 import format from "../utils/formatText";
-import { ref, defineProps } from "vue";
+import { ref } from "vue";
 
 const orden_compra = defineModel("orden_compra");
 
