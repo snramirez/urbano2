@@ -18,5 +18,11 @@ export default defineNuxtConfig({
       localeMessages: ['es', 'en'],
       labComponents: true
     }
-  }
+  },
+  runtimeConfig: {
+    public: {
+      apiURL: process.env.NUXT_PUBLIC_API_URL,
+      appName: 'My Nuxt App'
+    }
+  },
 })

@@ -1,11 +1,12 @@
 import { defineStore, createPinia, setActivePinia } from "pinia";
 import { ref } from "vue";
-import api from "@/utils/axios";
+import {useAxios} from "~/composables/useAxios";
 
 const pinia = createPinia();
 export default { store: setActivePinia(pinia) };
 
 export const useDesplegablesStore = defineStore("desplegables", () => {
+  const api = useAxios();
   const estadoLicitacion = ref([]);
   const tipoLicitacion = ref([]);
   const tipoContratacion = ref([]);

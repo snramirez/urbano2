@@ -1,6 +1,6 @@
 import { defineStore, createPinia, setActivePinia } from 'pinia'
 import { ref } from 'vue'
-import api from '@/utils/axios'
+import { useAxios } from "~/composables/useAxios";
 
 //creo una instancia de Pinia aca porque por alguna razón no lo hace automáticamente ¯\_(ツ)_/¯
 
@@ -8,6 +8,7 @@ const pinia = createPinia()
 export default { store: setActivePinia(pinia) }
 
 export const useContratistaStore = defineStore('contratista', () => {
+    const api = useAxios();
     const contratistas = ref([])
     const loading = ref(false)
 

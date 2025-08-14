@@ -120,7 +120,7 @@
 <script setup>
 import { useLicitacionStore } from "~/stores/licitacionStore";
 import format from "../utils/formatText";
-import { useEstadidistico } from "~/utils/useEstadidistico";
+import { useEstadidistico } from "~/composables/useEstadidistico";
 import { ref } from "vue";
 
 const search = ref("");
