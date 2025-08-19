@@ -1,20 +1,26 @@
 import axios from 'axios'
+import { useRuntimeConfig } from '#app';
 
-export default function useAxios() {
-  const config = useRuntimeConfig()
+const createAxiosInstance = () => {
+  const config = useRuntimeConfig();
+  
+  // Aquí obtienes la URL de la API
+  const apiURL = config.public.apiURL;
 
-  // Creamos una instancia personalizada de Axios
-  const api = axios.create({
-    baseURL: config.public.apiURL || 'http://localhost:3000/api',
+  const instance = axios.create({
+    baseURL: apiURL,
     headers: {
       'Content-Type': 'application/json',
+      // Otros headers que necesites
     },
-  })
+  });
 
-  return {
-    api,
-  }
-}
+  return instance
+};
+
+export const useAxios = () => {
+  return createAxiosInstance();
+};
 
   // Interceptor: Agrega el token si está presente
   // api.interceptors.request.use(

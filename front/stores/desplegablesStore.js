@@ -47,7 +47,6 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
   const fetchEstadoOC = async () => {
     try {
       const res = await api.get("/desplegables?tipo=ESTADO_OC");
-      console.log("EstadoOC fetched:", res.data);
       estadoOC.value = res.data;
     } catch (err) {
       console.error("Error fetching estados de orden de compra:", err);
@@ -57,7 +56,6 @@ export const useDesplegablesStore = defineStore("desplegables", () => {
   const fetchArea = async () => {
     try {
       const res = await api.get("/desplegables?tipo=AREA");
-      console.log("Areas fetched:", res.data);
       area.value = res.data;
     } catch (err) {
       console.error("Error fetching areas:", err);
