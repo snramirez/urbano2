@@ -1,12 +1,18 @@
-import { defineStore } from 'pinia'
+import { defineStore, createPinia, setActivePinia } from 'pinia'
 import { ref } from 'vue'
-import axios from 'axios'
+import { useAxios } from "~/composables/useAxios";
+
+//creo una instancia de Pinia aca porque por alguna razón no lo hace automáticamente ¯\_(ツ)_/¯
+const pinia = createPinia();
+export default { store: setActivePinia(pinia) };
 
 export const useUserStore = defineStore('user', () => {
+  const api = useAxios();
   const user = ref(null)
   const token = ref(localStorage.getItem('token') || '')
   const isAuthenticated = ref(!!token.value)
   const loading = ref(false)
+  const error = ref(null)
 
   // Configurar token para Axios si ya lo tenemos
   if (token.value) {
@@ -16,14 +22,15 @@ export const useUserStore = defineStore('user', () => {
   const login = async (email, password) => {
     try {
       loading.value = true
-      const res = await axios.post('/api/auth/login', { email, password })
+      const res = await api.post('/auth/login', { userName: email, password })
       token.value = res.data.token
       localStorage.setItem('token', token.value)
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`
-      await fetchUser()
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`
+      // await fetchUser()
       isAuthenticated.value = true
     } catch (err) {
-      throw err
+      console.log(err)
+      error.value = err
     } finally {
       loading.value = false
     }
@@ -31,7 +38,7 @@ export const useUserStore = defineStore('user', () => {
 
   const fetchUser = async () => {
     try {
-      const res = await axios.get('/api/auth/profile')
+      const res = await api.get('/auth/profile')
       user.value = res.data
     } catch (err) {
       logout()

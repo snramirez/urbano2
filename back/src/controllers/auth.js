@@ -8,35 +8,35 @@ const secretKey = 'SecretKey123';
 /* 
     Ejemplo de body para register:
         {
-            "User":{
-                "UserName": "SimonNR",
-                "Password": "12341234",
-                "Cuit": "20360772528",
-                "FullName": "Simon Ramirez",
-                "SecretKey": "secretkey"
+            "user":{
+                "userName": "SimonNR",
+                "password": "12341234",
+                "cuit": "20360772528",
+                "fullName": "Simon Ramirez",
+                "secretKey": "secretkey"
             }
         }
 
     Ejemplo de body para login:
         {
-            "UserName": "SimonNR",  
-            "Password": "12341234"
+            "userName": "SimonNR",  
+            "password": "12341234"
         }
 */
 
 ctrl.login = async (req, res) => {
     console.log(req.body);
-    const userName = req.body.UserName;
-    const password = req.body.Password;
+    const userName = req.body.userName;
+    const password = req.body.password;
     
     try {
-        let userDB = await User.findOne({UserName: userName}).lean();
+        let userDB = await User.findOne({userName: userName}).lean();
         if(!userDB){
             res.json({error: 'USER_NOT_FOUND'})
             return
         }
 
-        if(!await bcrypt.matchPassword(password, userDB.Password)){
+        if(!await bcrypt.matchPassword(password, userDB.password)){
             res.json({error: 'INVALID_PASSWORD'})
             return
         }
@@ -53,20 +53,20 @@ ctrl.login = async (req, res) => {
 
 ctrl.register = async (req, res) => {
     console.log(req.body)
-    let reqUser = req.body.User;    
-    let encryptPassword = await bcrypt.encryptPassword(reqUser.Password);
+    let reqUser = req.body.user;    
+    let encryptPassword = await bcrypt.encryptPassword(reqUser.password);
 
-    if(!(reqUser.SecretKey === 'secretkey')){
+    if(!(reqUser.secretKey === 'secretkey')){
         res.status(400).json({title: 'Clave secreta incorrecta'})
         return
     }
 
     let user = new User({
-        UserName: reqUser.UserName,
-        Password: encryptPassword,
-        Cuit: reqUser.Cuit,
-        FullName: reqUser.FullName,
-        Role: 'USER'
+        userName: reqUser.userName,
+        password: encryptPassword,
+        cuit: reqUser.cuit,
+        fullName: reqUser.fullName,
+        role: 'USER'
     });
 
     try {
