@@ -1,7 +1,18 @@
 <template>
-  <div class="d-flex justify-center align-center" style="height: 100vh;">
+  <div class="d-flex justify-center align-center" style="height: 100vh">
     <v-card width="400" class="pa-6">
       <v-card-title class="text-h5 text-center">Iniciar Sesión</v-card-title>
+
+      <!-- Mostrar error si existe -->
+      <v-alert
+        v-if="userStore.error"
+        type="error"
+        class="text-sm"
+        border="start"
+        variant="tonal"
+      >
+        {{ userStore.error }}
+      </v-alert>
 
       <v-card-text>
         <v-form @submit.prevent="onSubmit">
@@ -21,11 +32,7 @@
             required
           />
 
-          <v-alert
-            v-if="userStore.error"
-            type="error"
-            class="mb-4"
-          >
+          <v-alert v-if="userStore.error" type="error" class="mb-4">
             {{ userStore.error }}
           </v-alert>
 
@@ -44,20 +51,21 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useUserStore } from '~/stores/userStore'
+import { ref } from "vue";
+import { useUserStore } from "~/stores/userStore";
 
-const email = ref('')
-const password = ref('')
-const userStore = useUserStore()
+const email = ref("");
+const password = ref("");
+const userStore = useUserStore();
 
 async function onSubmit() {
-  await userStore.login(email.value, password.value)
-
-  if (!userStore.error && userStore.user) {
-    // si el login fue exitoso, redirigimos
-    const router = useRouter()
-    router.push('/')
+  try {
+    await userStore.login(email.value, password.value);
+    if (!userStore.error){
+      navigateTo("/");
+    }
+  } catch (error) {
+    console.log("Error during login:", error);
   }
 }
 </script>

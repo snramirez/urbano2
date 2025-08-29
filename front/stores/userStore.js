@@ -9,28 +9,29 @@ export default { store: setActivePinia(pinia) };
 export const useUserStore = defineStore('user', () => {
   const api = useAxios();
   const user = ref(null)
-  const token = ref(localStorage.getItem('token') || '')
-  const isAuthenticated = ref(!!token.value)
+  const token = useCookie('token')
+// const isAuthenticated = ref(!!token.value)
   const loading = ref(false)
   const error = ref(null)
 
   // Configurar token para Axios si ya lo tenemos
-  if (token.value) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`
-  }
+  // if (token.value) {
+  //   axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`
+  // }
 
   const login = async (email, password) => {
     try {
       loading.value = true
+      error.value = null
       const res = await api.post('/auth/login', { userName: email, password })
       token.value = res.data.token
-      localStorage.setItem('token', token.value)
+      user.value = res.data
       // axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`
       // await fetchUser()
-      isAuthenticated.value = true
+      // isAuthenticated.value = true
     } catch (err) {
       console.log(err)
-      error.value = err
+      error.value = err.response?.data.error || 'LOGIN_ERROR'
     } finally {
       loading.value = false
     }
@@ -46,11 +47,10 @@ export const useUserStore = defineStore('user', () => {
   }
 
   const logout = () => {
-    token.value = ''
+    token.value = null
     user.value = null
-    isAuthenticated.value = false
-    localStorage.removeItem('token')
-    delete axios.defaults.headers.common['Authorization']
+    // isAuthenticated.value = false
+    // delete axios.defaults.headers.common['Authorization']
   }
 
   const hasRole = (rol) => {
@@ -60,8 +60,9 @@ export const useUserStore = defineStore('user', () => {
   return {
     user,
     token,
-    isAuthenticated,
+    // isAuthenticated,
     loading,
+    error,
     login,
     fetchUser,
     logout,

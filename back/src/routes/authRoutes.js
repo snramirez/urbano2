@@ -9,6 +9,7 @@ const auth = require('../controllers/auth');
 
 router.post('/login', auth.login);
 router.post('/register', auth.register);
+router.get('/profile', auth.profile);
 
 
 //TODO changepassword

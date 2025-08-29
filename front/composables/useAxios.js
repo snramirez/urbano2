@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useRuntimeConfig } from '#app';
+import { useUserStore } from '~/stores/userStore';
 
 const createAxiosInstance = () => {
   const config = useRuntimeConfig();
@@ -15,6 +16,18 @@ const createAxiosInstance = () => {
     },
   });
 
+  // Interceptor para agregar token
+  instance.interceptors.request.use(
+    (req) => {
+      const userStore = useUserStore(); // traigo el store
+      if (userStore.token) {
+        req.headers.Authorization = `Bearer ${userStore.token}`;
+      }
+      return req;
+    },
+    (error) => Promise.reject(error)
+  );
+
   return instance
 };
 
@@ -22,14 +35,3 @@ export const useAxios = () => {
   return createAxiosInstance();
 };
 
-  // Interceptor: Agrega el token si está presente
-  // api.interceptors.request.use(
-  //   (config) => {
-  //     const token = localStorage.getItem('token')
-  //     if (token) {
-  //       config.headers.Authorization = `Bearer ${token}`
-  //     }
-  //     return config
-  //   },
-  //   (error) => Promise.reject(error)
-  // )
