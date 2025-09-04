@@ -42,7 +42,9 @@ ctrl.login = async (req, res) => {
         }
 
         const token = jwt.sign({id: userDB._id, role: userDB.role}, secretKey, {expiresIn: '1d'});
-        res.status(200).json(token);
+        delete userDB.password
+        userDB.token = token
+        res.status(200).json(userDB);
     } 
     catch (err) {
         console.log(err)

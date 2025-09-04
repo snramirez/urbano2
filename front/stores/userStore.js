@@ -10,25 +10,18 @@ export const useUserStore = defineStore('user', () => {
   const api = useAxios();
   const user = ref(null)
   const token = useCookie('token')
-// const isAuthenticated = ref(!!token.value)
   const loading = ref(false)
   const error = ref(null)
-
-  // Configurar token para Axios si ya lo tenemos
-  // if (token.value) {
-  //   axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`
-  // }
 
   const login = async (email, password) => {
     try {
       loading.value = true
       error.value = null
       const res = await api.post('/auth/login', { userName: email, password })
+      console.log(res)
+      console.log(res.data)
       token.value = res.data.token
       user.value = res.data
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`
-      // await fetchUser()
-      // isAuthenticated.value = true
     } catch (err) {
       console.log(err)
       error.value = err.response?.data.error || 'LOGIN_ERROR'
@@ -49,8 +42,6 @@ export const useUserStore = defineStore('user', () => {
   const logout = () => {
     token.value = null
     user.value = null
-    // isAuthenticated.value = false
-    // delete axios.defaults.headers.common['Authorization']
   }
 
   const hasRole = (rol) => {
@@ -60,7 +51,6 @@ export const useUserStore = defineStore('user', () => {
   return {
     user,
     token,
-    // isAuthenticated,
     loading,
     error,
     login,

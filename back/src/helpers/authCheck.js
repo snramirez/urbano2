@@ -1,27 +1,27 @@
 const jwt = require('jsonwebtoken');
 const secretKey = 'SecretKey123';
 
-const isLogIn = (req, res, next) => {
-    let token = req.get('token');
-    jwt.verify(token, secretKey, (err, decoded) => {
-        if(err){
-            return res.status(401).json({title: 'Error token'})
-        }
+const authRequired  = (req, res, next) => {
+    const token = req.headers["authorization"]?.split(" ")[1];
+    if (!token) return res.status(401).json({ msg: "No autorizado" });
 
-        req.user = decoded.userDB;
+    try {
+        const decoded = jwt.verify(token, secretKey);
+        req.user = decoded; // { id, role }
         next();
-    })
+    } 
+    catch (error) {
+        return res.status(401).json({ msg: "Token inválido" });
+    }
 };
 
-const roleCheck = (req, res, next) => {
-    let role = req.user.Role;
-     
-    if(role !== 'ADMIN'){
-        res.status(401).json({title: 'Usuario no autorizado'})
-        return
-    }
-    
-    next();
+const roleCheck = (roles) => {
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {
+            return res.status(403).json({ msg: "Acceso denegado" });
+        }
+        next();
+    };
 }
 
-module.exports = {isLogIn, roleCheck}
+module.exports = {authRequired, roleCheck}

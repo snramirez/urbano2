@@ -118,6 +118,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+  middleware: 'auth-role',
+  roles: ['ADMIN'], // solo ADMIN puede entrar
+})
 import { useLicitacionStore } from "~/stores/licitacionStore";
 import format from "../utils/formatText";
 import { useEstadidistico } from "~/composables/useEstadidistico";

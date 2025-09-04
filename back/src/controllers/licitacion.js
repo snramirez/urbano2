@@ -4,6 +4,7 @@ const OrdenCompra = require("../models/orden_compra");
 
 //Busca todas las licitaciones
 ctrl.index = async (req, res) => {
+  console.log(req.headers);
   try {
     let licitacion = await Licitacion.find({ Active: true })
       .populate({
