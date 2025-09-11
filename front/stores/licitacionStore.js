@@ -3,8 +3,8 @@ import { ref } from "vue";
 import { useAxios } from "~/composables/useAxios";
 
 //creo una instancia de Pinia aca porque por alguna razón no lo hace automáticamente ¯\_(ツ)_/¯
-const pinia = createPinia();
-export default { store: setActivePinia(pinia) };
+// const pinia = createPinia();
+// export default { store: setActivePinia(pinia) };
 
 export const useLicitacionStore = defineStore("licitacion", () => {
   const api = useAxios();

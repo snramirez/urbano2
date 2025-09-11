@@ -11,6 +11,7 @@ export default defineNuxtRouteMiddleware((to) => {
 
   // Chequear roles específicos
   const allowedRoles = to.meta.roles as string[] | undefined;
+  console.log('user role:', userStore.user);
 
   if (allowedRoles && !allowedRoles.includes(userStore.user?.role)) {
     return navigateTo('/noAutorizado'); // página de "no autorizado"

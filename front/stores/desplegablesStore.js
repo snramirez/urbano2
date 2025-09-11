@@ -2,8 +2,8 @@ import { defineStore, createPinia, setActivePinia } from "pinia";
 import { ref } from "vue";
 import {useAxios} from "~/composables/useAxios";
 
-const pinia = createPinia();
-export default { store: setActivePinia(pinia) };
+// const pinia = createPinia();
+// export default { store: setActivePinia(pinia) };
 
 export const useDesplegablesStore = defineStore("desplegables", () => {
   const api = useAxios();

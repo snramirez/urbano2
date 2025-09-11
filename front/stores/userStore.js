@@ -3,8 +3,8 @@ import { ref } from 'vue'
 import { useAxios } from "~/composables/useAxios";
 
 //creo una instancia de Pinia aca porque por alguna razón no lo hace automáticamente ¯\_(ツ)_/¯
-const pinia = createPinia();
-export default { store: setActivePinia(pinia) };
+// const pinia = createPinia();
+// export default { store: setActivePinia(pinia) };
 
 export const useUserStore = defineStore('user', () => {
   const api = useAxios();
@@ -48,6 +48,22 @@ export const useUserStore = defineStore('user', () => {
     return user.value?.rol === rol
   }
 
+  const register = async (userData) => {
+    try {
+      loading.value = true
+      error.value = null
+      const res = await api.post('/auth/register', {user: userData})
+      console.log(res)
+    } 
+    catch (err) {
+      console.log(err)
+      error.value = err.response?.data.error || 'REGISTER_ERROR'
+    } 
+    finally {
+      loading.value = false
+    }
+  }
+
   return {
     user,
     token,
@@ -57,5 +73,6 @@ export const useUserStore = defineStore('user', () => {
     fetchUser,
     logout,
     hasRole,
+    register
   }
 })
