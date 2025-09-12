@@ -4,7 +4,7 @@ import { useUserStore } from '~/stores/userStore';
 
 const createAxiosInstance = () => {
   const config = useRuntimeConfig();
-  const token = useCookie('token')
+  const userStore = useUserStore();
   
   // Aquí obtienes la URL de la API
   const apiURL = config.public.apiURL;
@@ -20,9 +20,8 @@ const createAxiosInstance = () => {
   // Interceptor para agregar token
   instance.interceptors.request.use(
     (req) => {
-      const userStore = useUserStore(); // traigo el store
-      if (token.value) {
-        req.headers.Authorization = `Bearer ${token.value}`;
+      if (userStore.token) {
+        req.headers.Authorization = `Bearer ${userStore.token}`;
       }
       return req;
     },

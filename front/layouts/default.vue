@@ -81,9 +81,11 @@
 import { ref } from "vue";
 import { useUserStore } from "~/stores/userStore";
 
-const userStore = useUserStore();
-userStore.fetchUser(); // Intentar obtener datos del usuario al cargar el layout
 const drawer = ref(false);
+const userStore = useUserStore();
+if(userStore.token){
+  userStore.fetchUser(); // Intentar obtener datos del usuario al cargar el layout
+}
 
 function logout() {
   userStore.logout();

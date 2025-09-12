@@ -1,4 +1,4 @@
-import { defineStore, createPinia, setActivePinia } from 'pinia'
+import { defineStore} from 'pinia'
 import { ref } from 'vue'
 import { useAxios } from "~/composables/useAxios";
 
@@ -9,7 +9,7 @@ import { useAxios } from "~/composables/useAxios";
 export const useUserStore = defineStore('user', () => {
   const api = useAxios();
   const user = ref(null)
-  const token = useCookie('token')
+  const token = useCookie('token', { maxAge: 60 * 60 * 24 }) // 1 día
   const loading = ref(false)
   const error = ref(null)
 
